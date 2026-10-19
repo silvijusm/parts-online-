@@ -61,7 +61,9 @@ export function parseFeatured(env = process.env, day = today(), warn = console.w
 
 export function parseAdsense(env = process.env) {
   const client = str(env.ADSENSE_CLIENT, 40), slot = str(env.ADSENSE_SLOT, 20);
-  return /^ca-pub-\d{10,20}$/.test(client) && /^\d+$/.test(slot) ? { client, slot } : null;
+  // The client id alone loads the AdSense tag (site verification, Auto ads); a slot adds the manual ad units.
+  if (!/^ca-pub-\d{10,20}$/.test(client)) return null;
+  return { client, slot: /^\d+$/.test(slot) ? slot : null };
 }
 
 // Config is rebuilt once per day so FEATURED_SOURCES expiry applies without a restart.

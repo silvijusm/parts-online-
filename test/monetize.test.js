@@ -45,11 +45,11 @@ test("featured sources drop expired and non-https entries", () => {
   assert.deepEqual(parseFeatured({ FEATURED_SOURCES: "{}" }, "2026-10-19", () => {}), []);
 });
 
-test("adsense config needs a valid client and slot", () => {
+test("adsense config needs a valid client; slot is optional", () => {
   assert.deepEqual(parseAdsense(ADS), { client: ADS.ADSENSE_CLIENT, slot: ADS.ADSENSE_SLOT });
   assert.equal(parseAdsense({ ADSENSE_CLIENT: "ca-pub-12", ADSENSE_SLOT: "1" }), null);
-  assert.equal(parseAdsense({ ADSENSE_CLIENT: ADS.ADSENSE_CLIENT }), null);
-  assert.equal(parseAdsense({ ADSENSE_CLIENT: ADS.ADSENSE_CLIENT, ADSENSE_SLOT: "1x" }), null);
+  assert.deepEqual(parseAdsense({ ADSENSE_CLIENT: ADS.ADSENSE_CLIENT }), { client: ADS.ADSENSE_CLIENT, slot: null });
+  assert.deepEqual(parseAdsense({ ADSENSE_CLIENT: ADS.ADSENSE_CLIENT, ADSENSE_SLOT: "1x" }), { client: ADS.ADSENSE_CLIENT, slot: null });
 });
 
 test("config refreshes featured expiry when the day changes", () => {

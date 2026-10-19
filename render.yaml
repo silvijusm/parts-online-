@@ -30,7 +30,7 @@ services:
       - key: FEATURED_SOURCES
         sync: false
       - key: ADSENSE_CLIENT
-        sync: false
+        value: ca-pub-2806401371909261
       - key: ADSENSE_SLOT
         sync: false
       - key: STATS_TOKEN
