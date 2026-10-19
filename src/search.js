@@ -12,13 +12,26 @@ export function createSearch(adapters, { now = Date.now } = {}) {
     if (hit && now() - hit.at < TTL) return hit.result;
 
     await refreshRates();
-    const settled = await Promise.allSettled(adapters.map((a) => a.search(q, { vehicleType })));
+    const timed = (a) => {
+      const t0 = performance.now();
+      const ms = () => Math.round(performance.now() - t0);
+      return a.search(q, { vehicleType }).then((v) => ({ v, ms: ms() }), (e) => { throw { e, ms: ms() }; });
+    };
+    const settled = await Promise.allSettled(adapters.map(timed));
     const items = [];
     const errors = [];
+    const sources = [];
     settled.forEach((s, i) => {
-      if (s.status === "rejected") return errors.push(`${adapters[i].name}: ${s.reason.message}`);
-      items.push(...s.value.items);
-      errors.push(...s.value.errors.map((e) => `${adapters[i].name}: ${e}`));
+      const name = adapters[i].name;
+      if (s.status === "rejected") {
+        const msg = s.reason.e?.message ?? String(s.reason.e);
+        errors.push(`${name}: ${msg}`);
+        return sources.push({ name, count: 0, ms: s.reason.ms, error: msg });
+      }
+      const { items: got = [], errors: errs = [] } = s.value.v;
+      items.push(...got);
+      errors.push(...errs.map((e) => `${name}: ${e}`));
+      sources.push({ name, count: got.length, ms: s.value.ms, ...(errs.length ? { error: errs.join("; ") } : {}) });
     });
 
     const seen = new Set();
@@ -33,7 +46,7 @@ export function createSearch(adapters, { now = Date.now } = {}) {
     // Priced items first, cheapest total first; unpriced keep their order at the end.
     out.sort((a, b) => (a.totalEur ?? Infinity) - (b.totalEur ?? Infinity));
 
-    const result = { q, vehicleType, count: out.length, items: out, errors };
+    const result = { q, vehicleType, count: out.length, items: out, errors, sources };
     cache.set(key, { at: now(), result });
     if (cache.size > 500) cache.delete(cache.keys().next().value);
     return result;

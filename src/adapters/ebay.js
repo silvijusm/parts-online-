@@ -14,7 +14,12 @@ export const MARKETPLACES = [
 // 3000 = Used, 7000 = For parts or not working
 const CONDITIONS = "conditionIds:{3000|7000}";
 
-export function createEbayAdapter({ clientId, clientSecret, deliveryCountry = "LT", fetchImpl = fetch, limit = 30 }) {
+export function createEbayAdapter({ clientId, clientSecret, deliveryCountry = "LT", campaignId, marketplaces, fetchImpl = fetch, limit = 30 }) {
+  const wanted = parseList(marketplaces);
+  const picked = MARKETPLACES.filter(([id]) => wanted.includes(id));
+  const markets = picked.length ? picked : MARKETPLACES;
+  // eBay Partner Network: with affiliateCampaignId the API returns itemAffiliateWebUrl.
+  const ctx = [deliveryCountry && `contextualLocation=${encodeURIComponent(`country=${deliveryCountry}`)}`, campaignId && `affiliateCampaignId=${encodeURIComponent(campaignId)}`].filter(Boolean).join(",");
   let token = null;
   let tokenExpires = 0;
   let pending = null;
@@ -51,7 +56,7 @@ export function createEbayAdapter({ clientId, clientSecret, deliveryCountry = "L
       headers: {
         Authorization: `Bearer ${await getToken()}`,
         "X-EBAY-C-MARKETPLACE-ID": id,
-        ...(deliveryCountry ? { "X-EBAY-C-ENDUSERCTX": `contextualLocation=country=${deliveryCountry}` } : {}),
+        ...(ctx ? { "X-EBAY-C-ENDUSERCTX": ctx } : {}),
       },
       signal: AbortSignal.timeout(8000),
     });
@@ -62,12 +67,17 @@ export function createEbayAdapter({ clientId, clientSecret, deliveryCountry = "L
   return {
     name: "eBay",
     async search(q, { vehicleType } = {}) {
-      const settled = await Promise.allSettled(MARKETPLACES.map((m) => searchMarketplace(m, q, vehicleType)));
+      const settled = await Promise.allSettled(markets.map((m) => searchMarketplace(m, q, vehicleType)));
       const items = settled.flatMap((s) => (s.status === "fulfilled" ? s.value : []));
       const errors = settled.filter((s) => s.status === "rejected").map((s) => s.reason.message);
       return { items, errors };
     },
   };
+}
+
+// "EBAY_DE, ebay_pl" or ["EBAY_DE"] -> ["EBAY_DE", "EBAY_PL"]
+export function parseList(v) {
+  return (Array.isArray(v) ? v : String(v ?? "").split(",")).map((x) => x.trim().toUpperCase()).filter(Boolean);
 }
 
 export function normalizeEbay(data, marketplaceId, cc) {

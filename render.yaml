@@ -1,0 +1,25 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: parts-online
+    runtime: node
+    plan: free
+    buildCommand: echo no build
+    startCommand: node src/server.js
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DELIVERY_COUNTRY
+        value: LT
+      - key: EBAY_CLIENT_ID
+        sync: false
+      - key: EBAY_CLIENT_SECRET
+        sync: false
+      - key: EBAY_CAMPAIGN_ID
+        sync: false
+      - key: EBAY_MARKETPLACES
+        sync: false
+      - key: BRAVE_API_KEY
+        sync: false

@@ -4,7 +4,7 @@ import { createApp } from "../src/server.js";
 import { createDemoAdapter } from "../src/adapters/demo.js";
 
 test("server serves the page, shared modules and demo search results", async (t) => {
-  const app = createApp([createDemoAdapter()]);
+  const app = createApp([createDemoAdapter()], { log: () => {} });
   await new Promise((r) => app.listen(0, r));
   t.after(() => app.close());
   const base = `http://localhost:${app.address().port}`;

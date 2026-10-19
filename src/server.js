@@ -1,7 +1,8 @@
-// HTTP server: serves the page and /api/search. No dependencies, Node 20+.
+// HTTP server: serves public/, /shared/ modules and /api/search. No dependencies, Node 20+.
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
-import { extname, join, normalize } from "node:path";
+import { createHash } from "node:crypto";
+import { extname, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createSearch } from "./search.js";
 import { createEbayAdapter } from "./adapters/ebay.js";
@@ -10,51 +11,134 @@ import { createDemoAdapter } from "./adapters/demo.js";
 import { ratesInfo } from "./currency.js";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
-const STATIC = { "/": "public/index.html" };
-const SHARED_DIR = join(ROOT, "src/shared");
-const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css" };
+const PUBLIC_DIR = resolve(ROOT, "public");
+const SHARED_DIR = resolve(ROOT, "src/shared");
+const TYPES = {
+  ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".ico": "image/x-icon",
+  ".json": "application/json; charset=utf-8", ".txt": "text/plain; charset=utf-8",
+  ".webmanifest": "application/manifest+json", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp",
+  ".woff2": "font/woff2", ".xml": "application/xml; charset=utf-8",
+};
+const TEXT = "text/plain; charset=utf-8";
+
+const BASE_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+};
+
+// Inline <script> blocks are allowed by hash, so the page works without 'unsafe-inline' for scripts.
+export function csp(html = "") {
+  const hashes = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)]
+    .map((m) => `'sha256-${createHash("sha256").update(m[1]).digest("base64")}'`);
+  return [
+    "default-src 'self'",
+    ["script-src 'self'", ...hashes].join(" "),
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    "img-src 'self' https: data:",
+    "connect-src 'self'",
+    "manifest-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+  ].join("; ");
+}
+
+// Maps a URL path to a file inside dir, or null if it escapes dir or names a hidden file.
+export function safePath(dir, urlPath) {
+  let p;
+  try { p = decodeURIComponent(urlPath); } catch { return null; }
+  if (p.includes("\0") || p.split(/[/\\]/).some((seg) => seg.startsWith("."))) return null;
+  const full = resolve(dir, "." + (p.startsWith("/") ? p : "/" + p));
+  return full.startsWith(dir + sep) ? full : null;
+}
+
+// Fixed-window counter per key; returns seconds to wait, or 0 if allowed.
+export function createRateLimiter({ limit = 30, windowMs = 60e3, now = Date.now } = {}) {
+  const hits = new Map();
+  return function check(key) {
+    const t = now();
+    let h = hits.get(key);
+    if (!h || t >= h.reset) {
+      if (hits.size > 10000) for (const [k, v] of hits) if (t >= v.reset) hits.delete(k);
+      h = { count: 0, reset: t + windowMs };
+      hits.set(key, h);
+    }
+    return ++h.count > limit ? Math.ceil((h.reset - t) / 1000) : 0;
+  };
+}
+
+// Behind Render's proxy the client is the last X-Forwarded-For hop: the proxy appends the
+// address it saw, while earlier hops come from the client and can be spoofed.
+export function clientIp(req) {
+  const xff = req.headers["x-forwarded-for"];
+  const last = (Array.isArray(xff) ? xff.at(-1) : xff || "").split(",").at(-1).trim();
+  return last || req.socket.remoteAddress || "?";
+}
 
 export function buildAdapters(env = process.env) {
   const adapters = [];
   if (env.EBAY_CLIENT_ID && env.EBAY_CLIENT_SECRET) {
-    adapters.push(createEbayAdapter({ clientId: env.EBAY_CLIENT_ID, clientSecret: env.EBAY_CLIENT_SECRET, deliveryCountry: env.DELIVERY_COUNTRY ?? "LT" }));
+    adapters.push(createEbayAdapter({
+      clientId: env.EBAY_CLIENT_ID, clientSecret: env.EBAY_CLIENT_SECRET, deliveryCountry: env.DELIVERY_COUNTRY ?? "LT",
+      campaignId: env.EBAY_CAMPAIGN_ID || undefined, marketplaces: env.EBAY_MARKETPLACES,
+    }));
   }
   if (env.BRAVE_API_KEY) adapters.push(createWebAdapter({ apiKey: env.BRAVE_API_KEY }));
   if (!adapters.length) adapters.push(createDemoAdapter());
   return adapters;
 }
 
-export function createApp(adapters = buildAdapters()) {
+export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWindowMs = 60e3, log = console.log } = {}) {
   const search = createSearch(adapters);
   const demo = adapters.length === 1 && adapters[0].name === "Pavyzdžiai";
+  const limited = createRateLimiter({ limit: rateLimit, windowMs: rateWindowMs });
 
   return createServer(async (req, res) => {
     const url = new URL(req.url, "http://localhost");
-    const send = (code, body, type = "application/json; charset=utf-8") => {
-      res.writeHead(code, { "Content-Type": type, "X-Content-Type-Options": "nosniff" });
-      res.end(typeof body === "string" || Buffer.isBuffer(body) ? body : JSON.stringify(body));
+    const send = (code, body, type = "application/json; charset=utf-8", extra = {}) => {
+      const isHtml = type.startsWith("text/html");
+      res.writeHead(code, {
+        ...BASE_HEADERS,
+        "Content-Security-Policy": csp(isHtml ? String(body) : ""),
+        "Content-Type": type,
+        ...extra,
+      });
+      res.end(req.method === "HEAD" ? undefined : typeof body === "string" || Buffer.isBuffer(body) ? body : JSON.stringify(body));
     };
     try {
+      if (req.method !== "GET" && req.method !== "HEAD") return send(405, { error: "Metodas neleidžiamas" }, undefined, { Allow: "GET, HEAD" });
+      if (url.pathname === "/healthz") return send(200, "ok", TEXT, { "Cache-Control": "no-store" });
       if (url.pathname === "/api/search") {
+        const wait = limited(clientIp(req));
+        if (wait) return send(429, { error: "Per daug paieškų. Pabandykite po minutės." }, undefined, { "Retry-After": String(wait) });
         const q = (url.searchParams.get("q") || "").trim().slice(0, 120);
         const vt = ["car", "truck"].includes(url.searchParams.get("vt")) ? url.searchParams.get("vt") : "all";
         if (q.length < 2) return send(400, { error: "Įrašykite bent 2 simbolius." });
-        return send(200, { ...(await search(q, { vehicleType: vt })), demo, rates: ratesInfo() });
+        const t0 = performance.now();
+        const result = await search(q, { vehicleType: vt });
+        log(`search q=${JSON.stringify(q)} vt=${vt} count=${result.count} ms=${Math.round(performance.now() - t0)}`);
+        return send(200, { ...result, demo, rates: ratesInfo() }, undefined, { "Cache-Control": "no-store" });
       }
       if (url.pathname === "/api/status") {
-        return send(200, { demo, adapters: adapters.map((a) => a.name), rates: ratesInfo() });
+        return send(200, { demo, adapters: adapters.map((a) => a.name), rates: ratesInfo() }, undefined, { "Cache-Control": "no-store" });
       }
-      let file = STATIC[url.pathname];
-      if (!file && url.pathname.startsWith("/shared/")) {
-        const p = normalize(join(SHARED_DIR, url.pathname.slice("/shared/".length)));
-        if (p.startsWith(SHARED_DIR + "/")) file = p.slice(ROOT.length);
-      }
-      if (!file) return send(404, "Nerasta", "text/plain; charset=utf-8");
-      send(200, await readFile(join(ROOT, file)), TYPES[extname(file)] || "application/octet-stream");
+      const file = url.pathname.startsWith("/shared/")
+        ? safePath(SHARED_DIR, url.pathname.slice("/shared".length))
+        : safePath(PUBLIC_DIR, url.pathname.endsWith("/") ? url.pathname + "index.html" : url.pathname);
+      if (!file) return send(404, "Nerasta", TEXT);
+      const type = TYPES[extname(file).toLowerCase()] || "application/octet-stream";
+      const body = await readFile(file);
+      send(200, type.startsWith("text/html") ? body.toString() : body, type, {
+        "Cache-Control": type.startsWith("text/html") ? "no-cache" : "public, max-age=600",
+      });
     } catch (e) {
-      if (e.code === "ENOENT") return send(404, "Nerasta", "text/plain; charset=utf-8");
+      if (e.code === "ENOENT" || e.code === "EISDIR" || e.code === "ENOTDIR") return send(404, "Nerasta", TEXT);
       console.error(e);
-      send(500, { error: "Serverio klaida" });
+      if (!res.headersSent) send(500, { error: "Serverio klaida" });
     }
   });
 }
@@ -63,4 +147,12 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const port = Number(process.env.PORT) || 3000;
   const app = createApp();
   app.listen(port, () => console.log(`Parts online.eu: http://localhost:${port}`));
+  const stop = (sig) => {
+    console.log(`${sig}: stabdoma`);
+    app.close(() => process.exit(0));
+    app.closeIdleConnections();
+    setTimeout(() => process.exit(1), 10e3).unref();
+  };
+  process.once("SIGTERM", stop);
+  process.once("SIGINT", stop);
 }

@@ -1,0 +1,14 @@
+{
+  "name": "Parts online.eu – dėvėtų dalių paieška",
+  "short_name": "Parts online",
+  "description": "Dėvėtų automobilių ir sunkvežimių dalių paieška visoje Europoje ir pasaulyje.",
+  "lang": "lt",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eef1f2",
+  "theme_color": "#1b2329",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
