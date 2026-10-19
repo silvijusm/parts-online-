@@ -33,7 +33,7 @@ Aplinkos kintamieji (`.env` arba talpinimo nustatymuose):
 | `BRAVE_API_KEY` | Brave Search API raktas ardymo svetainėms |
 | `PORT` | prievadas, pagal nutylėjimą 3000 |
 
-`/api/search` leidžia 30 užklausų per minutę iš vieno IP (už tarpinio serverio imamas pirmas `X-Forwarded-For` adresas), virš ribos grąžina 429. Atsakyme `sources` rodo kiekvieno šaltinio rezultatų skaičių, trukmę ir klaidą.
+`/api/search` leidžia 30 užklausų per minutę iš vieno IP (už tarpinio serverio imamas paskutinis `X-Forwarded-For` adresas), virš ribos grąžina 429. Atsakyme `sources` rodo kiekvieno šaltinio rezultatų skaičių, trukmę ir klaidą.
 
 ## Talpinimas (Render)
 
