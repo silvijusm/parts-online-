@@ -206,6 +206,17 @@ function renderSources(d) {
 function renderResults() {
   const d = st.data;
   if (!d) return;
+  // Filters only make sense for aggregated results; vehicle-type chips stay because they filter the links.
+  for (const id of ["sort", "src", "max", "priced"]) $(id).closest("label").hidden = !!d.linksOnly;
+  if (d.linksOnly) {
+    $("summary").textContent = "";
+    $("sources").replaceChildren();
+    $("notice").replaceChildren();
+    $("rezultatai").replaceChildren(stateBox("info", "Rinkitės svetainę žemiau",
+      "Bendras kainų sąrašas dar ruošiamas. Kol kas paspauskite svetainę žemiau: ji atsidarys su jūsų paieška, o detalės pavadinimas bus išverstas į tos šalies kalbą.",
+      el("a", { class: "ghost", href: "#links-h" }, "Į svetainių sąrašą")));
+    return;
+  }
   const all = Array.isArray(d.items) ? d.items : [];
   let items = all.slice();
 

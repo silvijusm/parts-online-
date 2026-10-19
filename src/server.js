@@ -88,13 +88,15 @@ export function buildAdapters(env = process.env) {
     }));
   }
   if (env.BRAVE_API_KEY) adapters.push(createWebAdapter({ apiKey: env.BRAVE_API_KEY }));
-  if (!adapters.length) adapters.push(createDemoAdapter());
+  // Without API keys the site only offers direct links; sample data only on request (DEMO=1).
+  if (!adapters.length && env.DEMO === "1") adapters.push(createDemoAdapter());
   return adapters;
 }
 
 export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWindowMs = 60e3, log = console.log } = {}) {
   const search = createSearch(adapters);
   const demo = adapters.length === 1 && adapters[0].name === "Pavyzdžiai";
+  const linksOnly = adapters.length === 0;
   const limited = createRateLimiter({ limit: rateLimit, windowMs: rateWindowMs });
 
   return createServer(async (req, res) => {
@@ -118,13 +120,14 @@ export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWind
         const q = (url.searchParams.get("q") || "").trim().slice(0, 120);
         const vt = ["car", "truck"].includes(url.searchParams.get("vt")) ? url.searchParams.get("vt") : "all";
         if (q.length < 2) return send(400, { error: "Įrašykite bent 2 simbolius." });
+        if (linksOnly) return send(200, { q, vehicleType: vt, count: 0, items: [], errors: [], sources: [], linksOnly }, undefined, { "Cache-Control": "no-store" });
         const t0 = performance.now();
         const result = await search(q, { vehicleType: vt });
         log(`search q=${JSON.stringify(q)} vt=${vt} count=${result.count} ms=${Math.round(performance.now() - t0)}`);
         return send(200, { ...result, demo, rates: ratesInfo() }, undefined, { "Cache-Control": "no-store" });
       }
       if (url.pathname === "/api/status") {
-        return send(200, { demo, adapters: adapters.map((a) => a.name), rates: ratesInfo() }, undefined, { "Cache-Control": "no-store" });
+        return send(200, { demo, linksOnly, adapters: adapters.map((a) => a.name), rates: ratesInfo() }, undefined, { "Cache-Control": "no-store" });
       }
       const file = url.pathname.startsWith("/shared/")
         ? safePath(SHARED_DIR, url.pathname.slice("/shared".length))

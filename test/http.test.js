@@ -107,5 +107,16 @@ test("search results include per-source info and are logged", async (t) => {
 test("buildAdapters passes eBay affiliate and marketplace settings", () => {
   const [ebay] = buildAdapters({ EBAY_CLIENT_ID: "a", EBAY_CLIENT_SECRET: "b", EBAY_CAMPAIGN_ID: "5338" });
   assert.equal(ebay.name, "eBay");
-  assert.equal(buildAdapters({})[0].name, "Pavyzdžiai");
+  assert.equal(buildAdapters({ DEMO: "1" })[0].name, "Pavyzdžiai");
+});
+
+test("without API keys the search answers in links-only mode", async (t) => {
+  assert.deepEqual(buildAdapters({}), []);
+  assert.equal(buildAdapters({ DEMO: "1" }).length, 1);
+  const app = createApp([], { log: () => {} });
+  await new Promise((r) => app.listen(0, r));
+  t.after(() => app.close());
+  const data = await (await fetch(`http://localhost:${app.address().port}/api/search?q=starteris`)).json();
+  assert.equal(data.linksOnly, true);
+  assert.deepEqual(data.items, []);
 });
