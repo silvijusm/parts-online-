@@ -1,0 +1,12 @@
+{
+  "name": "parts-online",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Meta-search for used car and truck parts across European and world marketplaces",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "node --test test/*.test.js"
+  }
+}

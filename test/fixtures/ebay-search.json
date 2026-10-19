@@ -1,0 +1,6 @@
+{"total":2,"itemSummaries":[
+ {"itemId":"v1|1234|0","title":"VW Golf V 1.9 TDI Anlasser 02Z911023F","price":{"value":"64.90","currency":"EUR"},
+  "image":{"imageUrl":"https://i.ebayimg.com/images/g/abc/s-l225.jpg"},"itemWebUrl":"https://www.ebay.de/itm/1234",
+  "condition":"Gebraucht","itemLocation":{"country":"DE"},"shippingOptions":[{"shippingCost":{"value":"9.90","currency":"EUR"}}]},
+ {"itemId":"v1|5678|0","title":"Anlasser Golf 5","price":{"value":"249.00","currency":"PLN"},"itemWebUrl":"https://www.ebay.pl/itm/5678","itemLocation":{"country":"PL"}}
+]}

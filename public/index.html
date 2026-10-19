@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parts online.eu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#eef1f2; --surface:#ffffff; --fg:#1b2329; --muted:#5b6770; --line:#d3dade;
+  --accent:#0b5cad; --accent-fg:#ffffff; --tag:#f2c230; --tag-fg:#1b2329; --soft:#e2e8ec; --warn:#a15c00;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif; --body:"Barlow","Segoe UI",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#12171b; --surface:#1a2127; --fg:#e4e9ec; --muted:#9aa6ae; --line:#2c363e;
+  --accent:#5aa7f0; --accent-fg:#0d1418; --tag:#e0b22a; --tag-fg:#14181b; --soft:#232c33; --warn:#e3a54a; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.45}
+.wrap{max-width:1120px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right)) 56px max(16px,env(safe-area-inset-left));display:grid;gap:20px}
+.brand{font-family:var(--display);font-weight:700;font-size:2.4rem;line-height:1}
+.brand span{background:var(--tag);color:var(--tag-fg);padding:0 .25em;border-radius:3px}
+.sub{color:var(--muted);max-width:65ch;margin:4px 0 0}
+form{display:flex;flex-wrap:wrap;gap:10px}
+form input{flex:1 1 320px;min-width:0;font:500 1.15rem var(--body);padding:14px 16px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+form input:focus{outline:none;border-color:var(--accent)}
+button,.btn{font:600 1rem var(--body);border:0;border-radius:8px;padding:14px 22px;background:var(--accent);color:var(--accent-fg);cursor:pointer;text-decoration:none}
+:focus-visible{outline:3px solid var(--tag);outline-offset:2px}
+.bar{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 .92rem var(--body);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+select{font:500 .92rem var(--body);padding:6px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.notice{padding:10px 14px;border-radius:8px;background:var(--soft);font-size:.92rem;color:var(--muted)}
+.notice.demo{border-left:4px solid var(--tag);color:var(--fg)}
+.summary{font-size:.95rem;color:var(--muted)}
+.list{display:grid;gap:8px}
+.item{display:grid;grid-template-columns:84px 1fr auto;gap:14px;align-items:center;padding:10px 14px 10px 10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;color:var(--fg);text-decoration:none}
+.item:hover{border-color:var(--accent)}
+.thumb{width:84px;height:64px;border-radius:5px;background:var(--soft);object-fit:cover;display:grid;place-items:center;color:var(--muted);font-size:.75rem}
+.ti{min-width:0;display:grid;gap:3px}
+.ti .t{font-weight:600;overflow-wrap:anywhere}
+.ti .m{font-size:.84rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px}
+.cc{font-family:var(--mono);font-size:.75rem;background:var(--tag);color:var(--tag-fg);border-radius:3px;padding:1px 5px}
+.pr{text-align:right;font-variant-numeric:tabular-nums}
+.pr .eur{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1}
+.pr .orig{font-size:.8rem;color:var(--muted)}
+.pr .na{color:var(--muted);font-size:.9rem}
+h2{font-family:var(--display);font-size:1.35rem;margin:8px 0 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+a.src{display:flex;gap:10px;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;color:var(--fg);text-decoration:none;min-width:0}
+a.src:hover{border-color:var(--accent)}
+a.src span:last-child{overflow-wrap:anywhere;min-width:0}
+.err{font-size:.82rem;color:var(--warn)}
+@media (max-width:560px){.item{grid-template-columns:64px 1fr}.thumb{width:64px;height:52px}.pr{grid-column:2;text-align:left}button{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Parts <span>online</span>.eu</div>
+    <p class="sub">Dėvėtos automobilių ir sunkvežimių dalys iš visos Europos ir pasaulio vienoje vietoje. Kainos perskaičiuotos į eurus.</p>
+  </header>
+
+  <form id="f">
+    <input id="q" type="search" autocomplete="off" placeholder="pvz. Golf 5 starteris arba 03L903023F" aria-label="Paieška" value="Golf 5 starteris">
+    <button type="submit">Ieškoti</button>
+  </form>
+
+  <div class="bar">
+    <div class="chips" id="vt"></div>
+    <label>Rikiuoti
+      <select id="sort"><option value="price">pigiausi su pristatymu</option><option value="price-desc">brangiausi</option><option value="source">pagal šaltinį</option></select>
+    </label>
+    <label>Šaltinis <select id="src"><option value="">visi</option></select></label>
+  </div>
+
+  <div id="notice"></div>
+  <div class="summary" id="summary"></div>
+  <div class="list" id="list"></div>
+
+  <h2>Ieškoti tiesiogiai svetainėse</h2>
+  <div class="grid" id="links"></div>
+</div>
+
+<script type="module">
+import { SOURCES, VT } from "/shared/sources.js";
+import { translate } from "/shared/translate.js";
+
+const $ = (id) => document.getElementById(id);
+const st = { vt: "all", data: null };
+const fmt = (n, c) => new Intl.NumberFormat("lt-LT", { style: "currency", currency: c }).format(n);
+
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) k === "class" ? (e.className = v) : e.setAttribute(k, v);
+  for (const k of kids) if (k != null) e.append(k);
+  return e;
+}
+
+function renderChips() {
+  $("vt").replaceChildren(...VT.map(([k, v]) => {
+    const b = el("button", { type: "button", class: "chip", "aria-pressed": String(st.vt === k) }, v);
+    b.onclick = () => { st.vt = k; renderChips(); run(); };
+    return b;
+  }));
+}
+
+function renderLinks(q) {
+  const list = SOURCES.filter((s) => st.vt === "all" || s.t === "both" || s.t === st.vt);
+  $("links").replaceChildren(...list.map((s) =>
+    el("a", { class: "src", href: s.u(translate(q, s.l)), target: "_blank", rel: "noopener" }, el("span", { class: "cc" }, s.cc), el("span", {}, s.n))));
+}
+
+function renderResults() {
+  const d = st.data;
+  if (!d) return;
+  let items = d.items.slice();
+  const src = $("src").value;
+  if (src) items = items.filter((i) => i.source === src);
+  const s = $("sort").value;
+  if (s === "price-desc") items.sort((a, b) => (b.totalEur ?? -1) - (a.totalEur ?? -1));
+  if (s === "source") items.sort((a, b) => a.source.localeCompare(b.source));
+
+  const sources = [...new Set(d.items.map((i) => i.source))].sort();
+  $("src").replaceChildren(el("option", { value: "" }, "visi"), ...sources.map((x) => { const o = el("option", { value: x }, x); if (x === src) o.selected = true; return o; }));
+
+  const priced = items.filter((i) => i.totalEur != null);
+  $("summary").textContent = items.length
+    ? `Rasta ${items.length} skelbimų iš ${sources.length} šaltinių` + (priced.length ? `, pigiausias ${fmt(priced[0].totalEur, "EUR")} su pristatymu.` : ".")
+    : "Nieko nerasta. Pabandykite trumpesnę užklausą arba OEM numerį.";
+
+  $("list").replaceChildren(...items.map((i) => {
+    const thumb = i.image ? el("img", { class: "thumb", src: i.image, alt: "", loading: "lazy" }) : el("div", { class: "thumb" }, "be nuotr.");
+    const meta = el("div", { class: "m" },
+      i.country ? el("span", { class: "cc" }, i.country) : null,
+      el("span", {}, i.source),
+      i.condition ? el("span", {}, i.condition) : null,
+      i.location && i.location !== i.country ? el("span", {}, "siunčia iš " + i.location) : null);
+    const price = i.priceEur != null
+      ? el("div", { class: "pr" },
+          el("div", { class: "eur" }, fmt(i.totalEur, "EUR")),
+          el("div", { class: "orig" }, i.shippingEur ? `${fmt(i.priceEur, "EUR")} + ${fmt(i.shippingEur, "EUR")} pristatymas` : i.shipping === 0 ? "nemokamas pristatymas" : "pristatymas nenurodytas"),
+          i.currency !== "EUR" ? el("div", { class: "orig" }, fmt(i.price, i.currency)) : null)
+      : el("div", { class: "pr" }, el("span", { class: "na" }, "kaina svetainėje"));
+    return el("a", { class: "item", href: i.url, target: "_blank", rel: "noopener" }, thumb,
+      el("div", { class: "ti" }, el("div", { class: "t" }, i.title), i.snippet ? el("div", { class: "m" }, i.snippet.slice(0, 160)) : null, meta), price);
+  }));
+
+  const notes = [];
+  if (d.demo) notes.push(el("div", { class: "notice demo" }, "Rodomi pavyzdiniai duomenys: serveris dar neprijungtas prie eBay ir paieškos API. Kainos ir skelbimai nėra tikri."));
+  if (d.rates?.source === "fallback") notes.push(el("div", { class: "notice" }, "Valiutų kursai apytiksliai: nepavyko gauti šios dienos ECB kursų."));
+  if (d.errors?.length) notes.push(el("div", { class: "err" }, "Kai kurie šaltiniai neatsakė: " + d.errors.join("; ")));
+  $("notice").replaceChildren(...notes);
+}
+
+async function run() {
+  const q = $("q").value.trim();
+  renderLinks(q);
+  if (q.length < 2) return;
+  $("summary").textContent = "Ieškoma…";
+  try {
+    const res = await fetch(`/api/search?` + new URLSearchParams({ q, vt: st.vt }));
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    st.data = data;
+    renderResults();
+  } catch (e) {
+    $("summary").textContent = "Paieška nepavyko: " + e.message;
+  }
+}
+
+$("f").onsubmit = (e) => { e.preventDefault(); run(); };
+$("sort").onchange = renderResults;
+$("src").onchange = renderResults;
+renderChips();
+run();
+</script>
+</body>
+</html>
