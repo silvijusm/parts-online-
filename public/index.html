@@ -23,37 +23,37 @@
 <link rel="stylesheet" href="/style.css">
 <script type="module" src="/app.js"></script>
 </head>
-<body>
-<a class="skip" href="#rezultatai">Pereiti prie rezultatų</a>
+<body data-page="home">
+<a class="skip" href="#rezultatai" data-i18n="skip">Pereiti prie rezultatų</a>
 <div class="wrap">
   <header>
     <a class="brand" href="/">Parts-dalys<span>.eu</span></a>
-    <p class="sub">Dėvėtos automobilių ir sunkvežimių dalys daugiau nei 60 svetainių visoje Europoje – viena paieška, užklausa išverčiama į kiekvienos šalies kalbą.</p>
+    <p class="sub" data-i18n="sub">Dėvėtos automobilių ir sunkvežimių dalys daugiau nei 60 svetainių visoje Europoje – viena paieška, užklausa išverčiama į kiekvienos šalies kalbą.</p>
   </header>
 
   <main class="wrap-inner" id="main">
     <form class="search" id="f" role="search">
-      <label class="sr" for="q">Detalės pavadinimas, automobilis arba OEM numeris</label>
-      <input id="q" name="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="pvz. Golf 5 starteris arba 03L903023F" value="Golf 5 starteris">
-      <button type="submit">Ieškoti</button>
+      <label class="sr" for="q" data-i18n="q.label">Detalės pavadinimas, automobilis arba OEM numeris</label>
+      <input id="q" name="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="pvz. Golf 5 starteris arba 03L903023F" value="Golf 5 starteris" data-i18n-attr="placeholder:q.ph;value:q.default">
+      <button type="submit" data-i18n="search">Ieškoti</button>
     </form>
 
-    <div class="bar" role="group" aria-label="Filtrai">
-      <div class="chips" id="vt" role="group" aria-label="Transporto tipas"></div>
-      <label class="field" for="sort">Rikiuoti
+    <div class="bar" role="group" aria-label="Filtrai" data-i18n-attr="aria-label:filters">
+      <div class="chips" id="vt" role="group" aria-label="Transporto tipas" data-i18n-attr="aria-label:vt.aria"></div>
+      <label class="field" for="sort"><span data-i18n="sort">Rikiuoti</span>
         <select id="sort">
-          <option value="price">pigiausi su pristatymu</option>
-          <option value="price-desc">brangiausi</option>
-          <option value="source">pagal šaltinį</option>
+          <option value="price" data-i18n="sort.price">pigiausi su pristatymu</option>
+          <option value="price-desc" data-i18n="sort.desc">brangiausi</option>
+          <option value="source" data-i18n="sort.source">pagal šaltinį</option>
         </select>
       </label>
-      <label class="field" for="src">Šaltinis <select id="src"><option value="">visi</option></select></label>
-      <label class="field" for="max">Iki <input id="max" type="number" inputmode="decimal" min="0" step="1" placeholder="be ribos"> €</label>
-      <label class="field check" for="priced"><input id="priced" type="checkbox"> tik su kaina</label>
+      <label class="field" for="src"><span data-i18n="src">Šaltinis</span> <select id="src"><option value="" data-i18n="src.all">visi</option></select></label>
+      <label class="field" for="max"><span data-i18n="max">Iki</span> <input id="max" type="number" inputmode="decimal" min="0" step="1" placeholder="be ribos" data-i18n-attr="placeholder:max.ph"> €</label>
+      <label class="field check" for="priced"><input id="priced" type="checkbox"> <span data-i18n="priced">tik su kaina</span></label>
     </div>
 
     <details class="how" id="how" hidden>
-      <summary>Kaip ieškome</summary>
+      <summary data-i18n="how">Kaip ieškome</summary>
       <ul id="how-list"></ul>
     </details>
 
@@ -61,27 +61,27 @@
 
     <div class="head">
       <p class="summary" id="summary" role="status" aria-live="polite" aria-atomic="true"></p>
-      <div><button type="button" class="ghost" id="copy" hidden>Kopijuoti nuorodą</button><span class="copied" id="copied" aria-live="polite"></span></div>
+      <div><button type="button" class="ghost" id="copy" hidden data-i18n="copy">Kopijuoti nuorodą</button><span class="copied" id="copied" aria-live="polite"></span></div>
     </div>
     <p class="sources" id="sources"></p>
     <div class="list" id="rezultatai" tabindex="-1" aria-busy="false"></div>
 
-    <aside class="ad-slot" hidden aria-label="Reklama"><span class="adlabel">Reklama</span></aside>
+    <aside class="ad-slot" hidden aria-label="Reklama" data-i18n-attr="aria-label:ad"><span class="adlabel" data-i18n="ad">Reklama</span></aside>
 
-    <h2 id="links-h">Ieškoti tiesiogiai svetainėse</h2>
-    <p class="hint">Užklausa automatiškai išverčiama į svetainės kalbą. Nuorodos atsidaro naujame skirtuke.</p>
+    <h2 id="links-h" data-i18n="links.h">Ieškoti tiesiogiai svetainėse</h2>
+    <p class="hint" data-i18n="links.hint">Užklausa automatiškai išverčiama į svetainės kalbą. Nuorodos atsidaro naujame skirtuke.</p>
     <section class="featured" id="featured" aria-labelledby="featured-h" hidden>
-      <h3 id="featured-h">Rekomenduojami pardavėjai</h3>
+      <h3 id="featured-h" data-i18n="featured">Rekomenduojami pardavėjai</h3>
       <div class="fgrid" id="featured-list"></div>
     </section>
     <div class="regions" id="links" aria-labelledby="links-h"></div>
-    <aside class="ad-slot" hidden aria-label="Reklama"><span class="adlabel">Reklama</span></aside>
+    <aside class="ad-slot" hidden aria-label="Reklama" data-i18n-attr="aria-label:ad"><span class="adlabel" data-i18n="ad">Reklama</span></aside>
     <div class="regions" id="links-b" aria-labelledby="links-h"></div>
   </main>
 
   <footer>
-    <span>© Parts-dalys.eu · kainos orientacinės, pirkimas vyksta pardavėjo svetainėje</span>
-    <nav aria-label="Papildoma"><a href="/apie.html">Apie</a><a href="/verslui.html">Verslui</a><a href="/privatumas.html">Privatumas</a><a href="/dalys">Visos detalės</a></nav>
+    <span data-i18n="foot.note">© Parts-dalys.eu · kainos orientacinės, pirkimas vyksta pardavėjo svetainėje</span>
+    <nav aria-label="Papildoma" data-i18n-attr="aria-label:nav.aria"><a href="/apie.html" data-i18n="nav.about">Apie</a><a href="/verslui.html" data-i18n="nav.business">Verslui</a><a href="/privatumas.html" data-i18n="nav.privacy">Privatumas</a><a href="/dalys" data-i18n="nav.parts">Visos detalės</a></nav>
   </footer>
 </div>
 </body>

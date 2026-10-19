@@ -19,85 +19,836 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/style.css">
+<script type="module" src="/i18n.js"></script>
 <script type="module" src="/page.js"></script>
 </head>
-<body>
+<body data-page="biz">
 <div class="wrap">
   <header>
     <a class="brand" href="/">Parts-dalys<span>.eu</span></a>
   </header>
 
   <main class="prose wide">
-    <h1>Verslui</h1>
-    <p class="lead">Parts-dalys.eu lankytojai jau ieško konkrečios detalės – pagal pavadinimą, automobilį arba OEM numerį. Jei ardote automobilius ar sunkvežimius, prekiaujate naudotomis dalimis Lietuvoje ar kitoje Europos šalyje, galite atsidurti tiesiai prieš juos.</p>
+    <div data-lang="lt">
+      <h1>Verslui</h1>
+      <p class="lead">Parts-dalys.eu lankytojai jau ieško konkrečios detalės – pagal pavadinimą, automobilį arba OEM numerį. Jei ardote automobilius ar sunkvežimius, prekiaujate naudotomis dalimis Lietuvoje ar kitoje Europos šalyje, galite atsidurti tiesiai prieš juos.</p>
 
-    <h2>Kam tai skirta</h2>
-    <ul>
-      <li><strong>Lietuvos ardymo įmonėms</strong> – lengvųjų ir krovininių automobilių dalių ardytuvėms, kurios nori daugiau pirkėjų iš Lietuvos ir kaimyninių šalių.</li>
-      <li><strong>Europos dalių pardavėjams</strong> – ardymo įmonėms, sandėliams ir platformoms, kurios siunčia dalis į Baltijos šalis.</li>
-    </ul>
+      <h2>Kam tai skirta</h2>
+      <ul>
+        <li><strong>Lietuvos ardymo įmonėms</strong> – lengvųjų ir krovininių automobilių dalių ardytuvėms, kurios nori daugiau pirkėjų iš Lietuvos ir kaimyninių šalių.</li>
+        <li><strong>Europos dalių pardavėjams</strong> – ardymo įmonėms, sandėliams ir platformoms, kurios siunčia dalis į Baltijos šalis.</li>
+      </ul>
 
-    <h2>Ką siūlome</h2>
-    <ul class="offer">
-      <li><strong>Rekomenduojama vieta virš sąrašo.</strong> Jūsų įmonės kortelė rodoma bloke „Rekomenduojami pardavėjai“ virš visų svetainių sąrašo, su pavadinimu, šalimi ir trumpu aprašymu. Kortelė visada pažymėta žodžiu „Reklama“.</li>
-      <li><strong>Jūsų paieška tarp šaltinių.</strong> Jei jūsų svetainėje yra paieška, pridedame ją prie šaltinių sąrašo: pirkėjo užklausa atsidaro tiesiai jūsų svetainėje, išversta į jūsų kalbą.</li>
-      <li><strong>Reklama dalių puslapiuose.</strong> Vieta konkrečių detalių ar markių puslapiuose (pvz. „Golf 5 starteris“), kur pirkėjai ateina iš paieškos sistemų.</li>
-    </ul>
+      <h2>Ką siūlome</h2>
+      <ul class="offer">
+        <li><strong>Rekomenduojama vieta virš sąrašo.</strong> Jūsų įmonės kortelė rodoma bloke „Rekomenduojami pardavėjai“ virš visų svetainių sąrašo, su pavadinimu, šalimi ir trumpu aprašymu. Kortelė visada pažymėta žodžiu „Reklama“.</li>
+        <li><strong>Jūsų paieška tarp šaltinių.</strong> Jei jūsų svetainėje yra paieška, pridedame ją prie šaltinių sąrašo: pirkėjo užklausa atsidaro tiesiai jūsų svetainėje, išversta į jūsų kalbą.</li>
+        <li><strong>Reklama dalių puslapiuose.</strong> Vieta konkrečių detalių ar markių puslapiuose (pvz. „Golf 5 starteris“), kur pirkėjai ateina iš paieškos sistemų.</li>
+      </ul>
 
-    <h2>Paketai</h2>
-    <p class="note">Kainos <strong>orientacinės</strong> ir nurodytos „nuo“, be PVM. Galutinė kaina priklauso nuo šalių, kategorijų ir laikotarpio – susitariame individualiai.</p>
-    <div class="pkgs">
-      <section class="pkg" aria-labelledby="p1">
-        <h3 id="p1">Pradinis</h3>
-        <div class="price">nuo 19 € <small>/ mėn.</small></div>
-        <ul>
-          <li>Jūsų paieška tarp šaltinių savo regione</li>
-          <li>Įmonės aprašymas ir šalies žymė</li>
-          <li>Mėnesio paspaudimų ataskaita</li>
-        </ul>
-      </section>
-      <section class="pkg hl" aria-labelledby="p2">
-        <h3 id="p2">Standartinis</h3>
-        <div class="price">nuo 49 € <small>/ mėn.</small></div>
-        <ul>
-          <li>Viskas iš „Pradinio“</li>
-          <li>Kortelė bloke „Rekomenduojami pardavėjai“ virš sąrašo</li>
-          <li>Rodoma lengvųjų arba krovininių paieškose</li>
-        </ul>
-      </section>
-      <section class="pkg" aria-labelledby="p3">
-        <h3 id="p3">Premium</h3>
-        <div class="price">nuo 99 € <small>/ mėn.</small></div>
-        <ul>
-          <li>Viskas iš „Standartinio“</li>
-          <li>Pirmoji vieta tarp rekomenduojamų</li>
-          <li>Reklama pasirinktų markių ar detalių puslapiuose</li>
-        </ul>
-      </section>
+      <h2>Paketai</h2>
+      <p class="note">Kainos <strong>orientacinės</strong> ir nurodytos „nuo“, be PVM. Galutinė kaina priklauso nuo šalių, kategorijų ir laikotarpio – susitariame individualiai.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1">
+          <h3 id="p1">Pradinis</h3>
+          <div class="price">nuo 19 € <small>/ mėn.</small></div>
+          <ul>
+            <li>Jūsų paieška tarp šaltinių savo regione</li>
+            <li>Įmonės aprašymas ir šalies žymė</li>
+            <li>Mėnesio paspaudimų ataskaita</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2">
+          <h3 id="p2">Standartinis</h3>
+          <div class="price">nuo 49 € <small>/ mėn.</small></div>
+          <ul>
+            <li>Viskas iš „Pradinio“</li>
+            <li>Kortelė bloke „Rekomenduojami pardavėjai“ virš sąrašo</li>
+            <li>Rodoma lengvųjų arba krovininių paieškose</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3">
+          <h3 id="p3">Premium</h3>
+          <div class="price">nuo 99 € <small>/ mėn.</small></div>
+          <ul>
+            <li>Viskas iš „Standartinio“</li>
+            <li>Pirmoji vieta tarp rekomenduojamų</li>
+            <li>Reklama pasirinktų markių ar detalių puslapiuose</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Kaip tai veikia</h2>
+      <ol>
+        <li>Parašykite mums: įmonės pavadinimas, svetainė, šalis ir kokias dalis parduodate.</li>
+        <li>Per kelias darbo dienas atsiųsime pasiūlymą ir pavyzdį, kaip atrodys jūsų kortelė.</li>
+        <li>Patvirtinus, kortelę ar paiešką įjungiame per vieną dieną. Mokama kas mėnesį pagal sąskaitą, be ilgalaikių įsipareigojimų.</li>
+        <li>Kiekvieną mėnesį gaunate paspaudimų į jūsų svetainę skaičių.</li>
+      </ol>
+      <p>Visa mokama vieta aiškiai pažymima „Reklama“. Neranguojame ir nekeičiame kitų svetainių nuorodų dėl apmokėjimo – pirkėjas visada mato visus šaltinius.</p>
+
+      <h2 id="kontaktai">Kontaktai</h2>
+      <div class="contact">
+        <code id="email">info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out" hidden>Kopijuoti adresą</button>
+        <span class="copied" id="copy-out" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Grįžti į paiešką</a></p>
     </div>
 
-    <h2>Kaip tai veikia</h2>
-    <ol>
-      <li>Parašykite mums: įmonės pavadinimas, svetainė, šalis ir kokias dalis parduodate.</li>
-      <li>Per kelias darbo dienas atsiųsime pasiūlymą ir pavyzdį, kaip atrodys jūsų kortelė.</li>
-      <li>Patvirtinus, kortelę ar paiešką įjungiame per vieną dieną. Mokama kas mėnesį pagal sąskaitą, be ilgalaikių įsipareigojimų.</li>
-      <li>Kiekvieną mėnesį gaunate paspaudimų į jūsų svetainę skaičių.</li>
-    </ol>
-    <p>Visa mokama vieta aiškiai pažymima „Reklama“. Neranguojame ir nekeičiame kitų svetainių nuorodų dėl apmokėjimo – pirkėjas visada mato visus šaltinius.</p>
+    <div data-lang="en" lang="en" hidden>
+      <h1>For business</h1>
+      <p class="lead">Visitors to Parts-dalys.eu are already looking for a specific part – by name, vehicle or OEM number. If you dismantle cars or trucks, or sell used parts in Lithuania or elsewhere in Europe, you can be right in front of them.</p>
 
-    <h2 id="kontaktai">Kontaktai</h2>
-    <div class="contact">
-      <code id="email">info@parts-dalys.eu</code>
-      <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out" hidden>Kopijuoti adresą</button>
-      <span class="copied" id="copy-out" aria-live="polite"></span>
+      <h2>Who it is for</h2>
+      <ul>
+        <li><strong>Vehicle dismantlers in Lithuania</strong> – car and truck breakers looking for more buyers from Lithuania and neighbouring countries.</li>
+        <li><strong>Parts sellers across Europe</strong> – dismantlers, warehouses and platforms that ship parts to the Baltic states.</li>
+      </ul>
+
+      <h2>What we offer</h2>
+      <ul class="offer">
+        <li><strong>A featured spot above the list.</strong> Your company card appears in the “Featured sellers” block above the full list of websites, with your name, country and a short description. The card is always labelled “Advertisement”.</li>
+        <li><strong>Your search among our sources.</strong> If your website has a search function, we add it to our list of sources: the buyer's query opens directly on your website, translated into your language.</li>
+        <li><strong>Advertising on part pages.</strong> A spot on pages for specific parts or makes (e.g. “Golf 5 starter motor”), where buyers arrive from search engines.</li>
+      </ul>
+
+      <h2>Packages</h2>
+      <p class="note">Prices are <strong>indicative</strong>, quoted as “from” and exclusive of VAT. The final price depends on the countries, categories and period – we agree on it individually.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-en">
+          <h3 id="p1-en">Starter</h3>
+          <div class="price">from €19 <small>/ month</small></div>
+          <ul>
+            <li>Your search among the sources for your region</li>
+            <li>Company description and country badge</li>
+            <li>Monthly click report</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-en">
+          <h3 id="p2-en">Standard</h3>
+          <div class="price">from €49 <small>/ month</small></div>
+          <ul>
+            <li>Everything in “Starter”</li>
+            <li>A card in the “Featured sellers” block above the list</li>
+            <li>Shown in car or truck searches</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-en">
+          <h3 id="p3-en">Premium</h3>
+          <div class="price">from €99 <small>/ month</small></div>
+          <ul>
+            <li>Everything in “Standard”</li>
+            <li>Top position among featured sellers</li>
+            <li>Advertising on pages for selected makes or parts</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>How it works</h2>
+      <ol>
+        <li>Write to us with your company name, website, country and the parts you sell.</li>
+        <li>Within a few working days we will send you an offer and a preview of your card.</li>
+        <li>Once approved, we activate your card or search within one day. Billing is monthly by invoice, with no long-term commitment.</li>
+        <li>Every month you receive the number of clicks through to your website.</li>
+      </ol>
+      <p>All paid placements are clearly labelled “Advertisement”. We do not rank or alter other websites' links in exchange for payment – buyers always see all sources.</p>
+
+      <h2>Contact</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-en" hidden>Copy address</button>
+        <span class="copied" id="copy-out-en" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Back to search</a></p>
     </div>
 
-    <p><a href="/">← Grįžti į paiešką</a></p>
+    <div data-lang="de" lang="de" hidden>
+      <h1>Für Unternehmen</h1>
+      <p class="lead">Die Besucher von Parts-dalys.eu suchen bereits nach einem bestimmten Teil – nach Bezeichnung, Fahrzeug oder OE-Nummer. Wenn Sie Pkw oder Lkw verwerten oder gebrauchte Teile in Litauen oder einem anderen europäischen Land verkaufen, können Sie genau dort präsent sein.</p>
+
+      <h2>Für wen das Angebot gedacht ist</h2>
+      <ul>
+        <li><strong>Autoverwerter in Litauen</strong> – Pkw- und Lkw-Verwerter, die mehr Käufer aus Litauen und den Nachbarländern gewinnen möchten.</li>
+        <li><strong>Teilehändler in ganz Europa</strong> – Verwerter, Lager und Plattformen, die Teile ins Baltikum versenden.</li>
+      </ul>
+
+      <h2>Was wir bieten</h2>
+      <ul class="offer">
+        <li><strong>Ein empfohlener Platz über der Liste.</strong> Ihre Firmenkarte erscheint im Block „Empfohlene Verkäufer“ über der gesamten Liste der Websites – mit Name, Land und einer kurzen Beschreibung. Die Karte ist stets mit „Anzeige“ gekennzeichnet.</li>
+        <li><strong>Ihre Suche unter unseren Quellen.</strong> Wenn Ihre Website eine Suchfunktion hat, nehmen wir sie in die Liste der Quellen auf: Die Anfrage des Käufers öffnet sich direkt auf Ihrer Website, übersetzt in Ihre Sprache.</li>
+        <li><strong>Werbung auf Teileseiten.</strong> Ein Platz auf Seiten zu bestimmten Teilen oder Marken (z. B. „Golf 5 Anlasser“), auf die Käufer über Suchmaschinen gelangen.</li>
+      </ul>
+
+      <h2>Pakete</h2>
+      <p class="note">Die Preise sind <strong>Richtwerte</strong>, verstehen sich „ab“ und zuzüglich MwSt. Der endgültige Preis hängt von Ländern, Kategorien und Laufzeit ab – wir vereinbaren ihn individuell.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-de">
+          <h3 id="p1-de">Basis</h3>
+          <div class="price">ab 19 € <small>/ Monat</small></div>
+          <ul>
+            <li>Ihre Suche unter den Quellen Ihrer Region</li>
+            <li>Firmenbeschreibung und Länderkennzeichen</li>
+            <li>Monatlicher Klickbericht</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-de">
+          <h3 id="p2-de">Standard</h3>
+          <div class="price">ab 49 € <small>/ Monat</small></div>
+          <ul>
+            <li>Alles aus „Basis“</li>
+            <li>Karte im Block „Empfohlene Verkäufer“ über der Liste</li>
+            <li>Anzeige bei Pkw- oder Lkw-Suchen</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-de">
+          <h3 id="p3-de">Premium</h3>
+          <div class="price">ab 99 € <small>/ Monat</small></div>
+          <ul>
+            <li>Alles aus „Standard“</li>
+            <li>Erster Platz unter den empfohlenen Verkäufern</li>
+            <li>Werbung auf Seiten ausgewählter Marken oder Teile</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>So funktioniert es</h2>
+      <ol>
+        <li>Schreiben Sie uns: Firmenname, Website, Land und welche Teile Sie verkaufen.</li>
+        <li>Innerhalb weniger Werktage senden wir Ihnen ein Angebot und eine Vorschau Ihrer Karte.</li>
+        <li>Nach Ihrer Freigabe schalten wir Karte oder Suche innerhalb eines Tages frei. Abgerechnet wird monatlich per Rechnung, ohne langfristige Bindung.</li>
+        <li>Jeden Monat erhalten Sie die Anzahl der Klicks auf Ihre Website.</li>
+      </ol>
+      <p>Alle bezahlten Platzierungen sind deutlich mit „Anzeige“ gekennzeichnet. Wir ranken oder verändern die Links anderer Websites nicht gegen Bezahlung – Käufer sehen immer alle Quellen.</p>
+
+      <h2>Kontakt</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-de" hidden>Adresse kopieren</button>
+        <span class="copied" id="copy-out-de" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Zurück zur Suche</a></p>
+    </div>
+
+    <div data-lang="fr" lang="fr" hidden>
+      <h1>Professionnels</h1>
+      <p class="lead">Les visiteurs de Parts-dalys.eu cherchent déjà une pièce précise – par son nom, le véhicule ou la référence OEM. Si vous démontez des voitures ou des poids lourds, ou vendez des pièces d'occasion en Lituanie ou ailleurs en Europe, vous pouvez apparaître juste sous leurs yeux.</p>
+
+      <h2>À qui s'adresse cette offre</h2>
+      <ul>
+        <li><strong>Casses automobiles en Lituanie</strong> – démolisseurs de voitures et de poids lourds qui souhaitent davantage d'acheteurs en Lituanie et dans les pays voisins.</li>
+        <li><strong>Vendeurs de pièces dans toute l'Europe</strong> – casses, entrepôts et plateformes qui expédient des pièces vers les pays baltes.</li>
+      </ul>
+
+      <h2>Ce que nous proposons</h2>
+      <ul class="offer">
+        <li><strong>Un emplacement recommandé au-dessus de la liste.</strong> La fiche de votre entreprise apparaît dans le bloc « Vendeurs recommandés », au-dessus de la liste complète des sites, avec votre nom, votre pays et une courte description. Elle porte toujours la mention « Publicité ».</li>
+        <li><strong>Votre recherche parmi nos sources.</strong> Si votre site dispose d'une fonction de recherche, nous l'ajoutons à la liste des sources : la requête de l'acheteur s'ouvre directement sur votre site, traduite dans votre langue.</li>
+        <li><strong>Publicité sur les pages pièces.</strong> Un emplacement sur les pages consacrées à des pièces ou marques précises (par ex. « Golf 5 démarreur »), où les acheteurs arrivent depuis les moteurs de recherche.</li>
+      </ul>
+
+      <h2>Formules</h2>
+      <p class="note">Les prix sont <strong>indicatifs</strong>, exprimés « à partir de » et hors TVA. Le prix final dépend des pays, des catégories et de la durée – nous le fixons au cas par cas.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-fr">
+          <h3 id="p1-fr">Essentiel</h3>
+          <div class="price">à partir de 19 € <small>/ mois</small></div>
+          <ul>
+            <li>Votre recherche parmi les sources de votre région</li>
+            <li>Description de l'entreprise et indication du pays</li>
+            <li>Rapport mensuel des clics</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-fr">
+          <h3 id="p2-fr">Standard</h3>
+          <div class="price">à partir de 49 € <small>/ mois</small></div>
+          <ul>
+            <li>Tout le contenu de « Essentiel »</li>
+            <li>Une fiche dans le bloc « Vendeurs recommandés » au-dessus de la liste</li>
+            <li>Affichage dans les recherches voitures ou poids lourds</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-fr">
+          <h3 id="p3-fr">Premium</h3>
+          <div class="price">à partir de 99 € <small>/ mois</small></div>
+          <ul>
+            <li>Tout le contenu de « Standard »</li>
+            <li>Première position parmi les vendeurs recommandés</li>
+            <li>Publicité sur les pages de marques ou de pièces choisies</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Comment cela fonctionne</h2>
+      <ol>
+        <li>Écrivez-nous en indiquant le nom de votre entreprise, votre site, votre pays et les pièces que vous vendez.</li>
+        <li>Sous quelques jours ouvrés, nous vous envoyons une proposition et un aperçu de votre fiche.</li>
+        <li>Après validation, nous activons votre fiche ou votre recherche en un jour. La facturation est mensuelle, sans engagement de longue durée.</li>
+        <li>Chaque mois, vous recevez le nombre de clics vers votre site.</li>
+      </ol>
+      <p>Tous les emplacements payants portent clairement la mention « Publicité ». Nous ne classons ni ne modifions les liens des autres sites en échange d'un paiement – l'acheteur voit toujours toutes les sources.</p>
+
+      <h2>Contact</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-fr" hidden>Copier l'adresse</button>
+        <span class="copied" id="copy-out-fr" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Retour à la recherche</a></p>
+    </div>
+
+    <div data-lang="fi" lang="fi" hidden>
+      <h1>Yrityksille</h1>
+      <p class="lead">Parts-dalys.eu:n kävijät etsivät jo tiettyä osaa – nimen, ajoneuvon tai OEM-numeron perusteella. Jos purat henkilö- tai kuorma-autoja tai myyt käytettyjä osia Liettuassa tai muualla Euroopassa, voit olla suoraan heidän näkyvillään.</p>
+
+      <h2>Kenelle palvelu on tarkoitettu</h2>
+      <ul>
+        <li><strong>Liettualaisille autopurkamoille</strong> – henkilö- ja kuorma-autojen purkamoille, jotka haluavat lisää ostajia Liettuasta ja sen naapurimaista.</li>
+        <li><strong>Osamyyjille eri puolilla Eurooppaa</strong> – purkamoille, varastoille ja alustoille, jotka toimittavat osia Baltian maihin.</li>
+      </ul>
+
+      <h2>Mitä tarjoamme</h2>
+      <ul class="offer">
+        <li><strong>Suositeltu paikka listan yläpuolella.</strong> Yrityksesi kortti näkyy ”Suositellut myyjät” -lohkossa koko sivustoluettelon yläpuolella nimen, maan ja lyhyen kuvauksen kera. Kortti on aina merkitty sanalla ”Mainos”.</li>
+        <li><strong>Oma hakusi lähteidemme joukossa.</strong> Jos sivustollasi on hakutoiminto, lisäämme sen lähteiden luetteloon: ostajan haku avautuu suoraan sivustollesi käännettynä sinun kielellesi.</li>
+        <li><strong>Mainonta osasivuilla.</strong> Paikka tiettyjen osien tai merkkien sivuilla (esim. ”Golf 5 starter motor”), joille ostajat tulevat hakukoneista.</li>
+      </ul>
+
+      <h2>Paketit</h2>
+      <p class="note">Hinnat ovat <strong>suuntaa-antavia</strong>, ”alkaen”-hintoja ja ilman arvonlisäveroa. Lopullinen hinta riippuu maista, kategorioista ja kestosta – sovimme siitä tapauskohtaisesti.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-fi">
+          <h3 id="p1-fi">Perus</h3>
+          <div class="price">alk. 19 € <small>/ kk</small></div>
+          <ul>
+            <li>Oma hakusi oman alueesi lähteiden joukossa</li>
+            <li>Yrityksen kuvaus ja maatunnus</li>
+            <li>Kuukausittainen napsautusraportti</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-fi">
+          <h3 id="p2-fi">Vakio</h3>
+          <div class="price">alk. 49 € <small>/ kk</small></div>
+          <ul>
+            <li>Kaikki Perus-paketin sisältö</li>
+            <li>Kortti ”Suositellut myyjät” -lohkossa listan yläpuolella</li>
+            <li>Näkyy henkilö- tai kuorma-autohauissa</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-fi">
+          <h3 id="p3-fi">Premium</h3>
+          <div class="price">alk. 99 € <small>/ kk</small></div>
+          <ul>
+            <li>Kaikki Vakio-paketin sisältö</li>
+            <li>Ensimmäinen sija suositeltujen joukossa</li>
+            <li>Mainonta valittujen merkkien tai osien sivuilla</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Näin se toimii</h2>
+      <ol>
+        <li>Kirjoita meille: yrityksen nimi, sivusto, maa ja mitä osia myyt.</li>
+        <li>Muutaman arkipäivän kuluessa lähetämme tarjouksen ja esimerkin korttisi ulkoasusta.</li>
+        <li>Hyväksynnän jälkeen otamme kortin tai haun käyttöön yhden päivän kuluessa. Laskutus tapahtuu kuukausittain, ilman pitkäaikaista sitoutumista.</li>
+        <li>Saat joka kuukausi tiedon sivustollesi tulleiden napsautusten määrästä.</li>
+      </ol>
+      <p>Kaikki maksetut paikat on selvästi merkitty sanalla ”Mainos”. Emme järjestä tai muuta muiden sivustojen linkkejä maksua vastaan – ostaja näkee aina kaikki lähteet.</p>
+
+      <h2>Yhteystiedot</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-fi" hidden>Kopioi osoite</button>
+        <span class="copied" id="copy-out-fi" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Takaisin hakuun</a></p>
+    </div>
+
+    <div data-lang="lv" lang="lv" hidden>
+      <h1>Uzņēmumiem</h1>
+      <p class="lead">Parts-dalys.eu apmeklētāji jau meklē konkrētu detaļu – pēc nosaukuma, automašīnas vai OEM numura. Ja jūs izjaucat vieglās vai kravas automašīnas vai tirgojat lietotas daļas Lietuvā vai citā Eiropas valstī, varat atrasties tieši viņu redzeslokā.</p>
+
+      <h2>Kam tas paredzēts</h2>
+      <ul>
+        <li><strong>Lietuvas auto demontāžas uzņēmumiem</strong> – vieglo un kravas automašīnu demontāžas uzņēmumiem, kas vēlas vairāk pircēju no Lietuvas un kaimiņvalstīm.</li>
+        <li><strong>Eiropas daļu pārdevējiem</strong> – demontāžas uzņēmumiem, noliktavām un platformām, kas sūta daļas uz Baltijas valstīm.</li>
+      </ul>
+
+      <h2>Ko mēs piedāvājam</h2>
+      <ul class="offer">
+        <li><strong>Ieteicamā vieta virs saraksta.</strong> Jūsu uzņēmuma kartīte tiek rādīta blokā “Ieteicamie pārdevēji” virs visa vietņu saraksta – ar nosaukumu, valsti un īsu aprakstu. Kartīte vienmēr ir apzīmēta ar vārdu “Reklāma”.</li>
+        <li><strong>Jūsu meklēšana starp avotiem.</strong> Ja jūsu vietnē ir meklēšanas funkcija, mēs to pievienojam avotu sarakstam: pircēja vaicājums atveras tieši jūsu vietnē, pārtulkots jūsu valodā.</li>
+        <li><strong>Reklāma daļu lapās.</strong> Vieta konkrētu detaļu vai marku lapās (piem., “Golf 5 starteris”), uz kurām pircēji nonāk no meklētājprogrammām.</li>
+      </ul>
+
+      <h2>Paketes</h2>
+      <p class="note">Cenas ir <strong>orientējošas</strong>, norādītas “no” un bez PVN. Galīgā cena ir atkarīga no valstīm, kategorijām un perioda – vienojamies individuāli.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-lv">
+          <h3 id="p1-lv">Pamata</h3>
+          <div class="price">no 19 € <small>/ mēn.</small></div>
+          <ul>
+            <li>Jūsu meklēšana starp jūsu reģiona avotiem</li>
+            <li>Uzņēmuma apraksts un valsts apzīmējums</li>
+            <li>Ikmēneša klikšķu pārskats</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-lv">
+          <h3 id="p2-lv">Standarta</h3>
+          <div class="price">no 49 € <small>/ mēn.</small></div>
+          <ul>
+            <li>Viss, kas iekļauts paketē “Pamata”</li>
+            <li>Kartīte blokā “Ieteicamie pārdevēji” virs saraksta</li>
+            <li>Tiek rādīta vieglo vai kravas auto meklējumos</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-lv">
+          <h3 id="p3-lv">Premium</h3>
+          <div class="price">no 99 € <small>/ mēn.</small></div>
+          <ul>
+            <li>Viss, kas iekļauts paketē “Standarta”</li>
+            <li>Pirmā vieta starp ieteicamajiem</li>
+            <li>Reklāma izvēlēto marku vai detaļu lapās</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Kā tas darbojas</h2>
+      <ol>
+        <li>Uzrakstiet mums: uzņēmuma nosaukums, vietne, valsts un kādas daļas pārdodat.</li>
+        <li>Dažu darba dienu laikā atsūtīsim piedāvājumu un paraugu, kā izskatīsies jūsu kartīte.</li>
+        <li>Pēc apstiprināšanas kartīti vai meklēšanu ieslēdzam vienas dienas laikā. Apmaksa notiek katru mēnesi pēc rēķina, bez ilgtermiņa saistībām.</li>
+        <li>Katru mēnesi saņemat klikšķu skaitu uz jūsu vietni.</li>
+      </ol>
+      <p>Visas apmaksātās vietas ir skaidri apzīmētas ar vārdu “Reklāma”. Mēs nemainām citu vietņu saišu secību vai saturu apmaiņā pret samaksu – pircējs vienmēr redz visus avotus.</p>
+
+      <h2>Kontakti</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-lv" hidden>Kopēt adresi</button>
+        <span class="copied" id="copy-out-lv" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Atpakaļ uz meklēšanu</a></p>
+    </div>
+
+    <div data-lang="et" lang="et" hidden>
+      <h1>Ettevõtetele</h1>
+      <p class="lead">Parts-dalys.eu külastajad otsivad juba konkreetset varuosa – nimetuse, sõiduki või OEM-numbri järgi. Kui lammutate sõiduautosid või veokeid või müüte kasutatud varuosi Leedus või mujal Euroopas, võite olla otse nende silme ees.</p>
+
+      <h2>Kellele see on mõeldud</h2>
+      <ul>
+        <li><strong>Leedu autolammutustele</strong> – sõiduautode ja veokite lammutustele, kes soovivad rohkem ostjaid Leedust ja naaberriikidest.</li>
+        <li><strong>Varuosamüüjatele üle Euroopa</strong> – lammutustele, ladudele ja platvormidele, kes saadavad varuosi Balti riikidesse.</li>
+      </ul>
+
+      <h2>Mida me pakume</h2>
+      <ul class="offer">
+        <li><strong>Soovitatud koht loendi kohal.</strong> Teie ettevõtte kaart kuvatakse plokis „Soovitatud müüjad“ kogu veebisaitide loendi kohal – nime, riigi ja lühikirjeldusega. Kaart on alati tähistatud sõnaga „Reklaam“.</li>
+        <li><strong>Teie otsing meie allikate seas.</strong> Kui teie veebisaidil on otsingufunktsioon, lisame selle allikate loendisse: ostja päring avaneb otse teie saidil, tõlgituna teie keelde.</li>
+        <li><strong>Reklaam varuosalehtedel.</strong> Koht konkreetsete varuosade või automarkide lehtedel (nt „Golf 5 starter motor“), kuhu ostjad jõuavad otsingumootoritest.</li>
+      </ul>
+
+      <h2>Paketid</h2>
+      <p class="note">Hinnad on <strong>orienteeruvad</strong>, alates-hinnad ja ilma käibemaksuta. Lõplik hind sõltub riikidest, kategooriatest ja perioodist – lepime selle kokku individuaalselt.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-et">
+          <h3 id="p1-et">Algus</h3>
+          <div class="price">alates 19 € <small>/ kuu</small></div>
+          <ul>
+            <li>Teie otsing oma piirkonna allikate seas</li>
+            <li>Ettevõtte kirjeldus ja riigitähis</li>
+            <li>Igakuine klõpsuaruanne</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-et">
+          <h3 id="p2-et">Standard</h3>
+          <div class="price">alates 49 € <small>/ kuu</small></div>
+          <ul>
+            <li>Kõik, mis sisaldub paketis „Algus“</li>
+            <li>Kaart plokis „Soovitatud müüjad“ loendi kohal</li>
+            <li>Kuvatakse sõiduautode või veokite otsingutes</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-et">
+          <h3 id="p3-et">Premium</h3>
+          <div class="price">alates 99 € <small>/ kuu</small></div>
+          <ul>
+            <li>Kõik, mis sisaldub paketis „Standard“</li>
+            <li>Esimene koht soovitatud müüjate seas</li>
+            <li>Reklaam valitud automarkide või varuosade lehtedel</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Kuidas see toimib</h2>
+      <ol>
+        <li>Kirjutage meile: ettevõtte nimi, veebisait, riik ja milliseid varuosi müüte.</li>
+        <li>Mõne tööpäeva jooksul saadame teile pakkumise ja näite, kuidas teie kaart välja näeb.</li>
+        <li>Pärast kinnitamist aktiveerime kaardi või otsingu ühe päeva jooksul. Arveldame igakuiselt arve alusel, ilma pikaajalise kohustuseta.</li>
+        <li>Iga kuu saate teada, mitu klõpsu teie veebisaidile tehti.</li>
+      </ol>
+      <p>Kõik tasulised kohad on selgelt tähistatud sõnaga „Reklaam“. Me ei järjesta ega muuda teiste veebisaitide linke tasu eest – ostja näeb alati kõiki allikaid.</p>
+
+      <h2>Kontakt</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-et" hidden>Kopeeri aadress</button>
+        <span class="copied" id="copy-out-et" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Tagasi otsingusse</a></p>
+    </div>
+
+    <div data-lang="ru" lang="ru" hidden>
+      <h1>Для бизнеса</h1>
+      <p class="lead">Посетители Parts-dalys.eu уже ищут конкретную деталь – по названию, автомобилю или OEM-номеру. Если вы разбираете легковые или грузовые автомобили либо продаёте б/у запчасти в Литве или другой европейской стране, вы можете оказаться прямо перед ними.</p>
+
+      <h2>Для кого это</h2>
+      <ul>
+        <li><strong>Авторазборкам Литвы</strong> – разборкам легковых и грузовых автомобилей, которые хотят больше покупателей из Литвы и соседних стран.</li>
+        <li><strong>Продавцам запчастей по всей Европе</strong> – разборкам, складам и площадкам, которые отправляют запчасти в страны Балтии.</li>
+      </ul>
+
+      <h2>Что мы предлагаем</h2>
+      <ul class="offer">
+        <li><strong>Рекомендуемое место над списком.</strong> Карточка вашей компании показывается в блоке «Рекомендуемые продавцы» над всем списком сайтов – с названием, страной и кратким описанием. Карточка всегда помечена словом «Реклама».</li>
+        <li><strong>Ваш поиск среди источников.</strong> Если на вашем сайте есть поиск, мы добавим его в список источников: запрос покупателя откроется прямо на вашем сайте, переведённый на ваш язык.</li>
+        <li><strong>Реклама на страницах запчастей.</strong> Место на страницах конкретных деталей или марок (например, «Golf 5 стартер»), куда покупатели приходят из поисковых систем.</li>
+      </ul>
+
+      <h2>Пакеты</h2>
+      <p class="note">Цены <strong>ориентировочные</strong>, указаны «от» и без НДС. Итоговая цена зависит от стран, категорий и срока – договариваемся индивидуально.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-ru">
+          <h3 id="p1-ru">Базовый</h3>
+          <div class="price">от 19 € <small>/ мес.</small></div>
+          <ul>
+            <li>Ваш поиск среди источников вашего региона</li>
+            <li>Описание компании и обозначение страны</li>
+            <li>Ежемесячный отчёт о переходах</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-ru">
+          <h3 id="p2-ru">Стандартный</h3>
+          <div class="price">от 49 € <small>/ мес.</small></div>
+          <ul>
+            <li>Всё из пакета «Базовый»</li>
+            <li>Карточка в блоке «Рекомендуемые продавцы» над списком</li>
+            <li>Показ в поиске легковых или грузовых запчастей</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-ru">
+          <h3 id="p3-ru">Премиум</h3>
+          <div class="price">от 99 € <small>/ мес.</small></div>
+          <ul>
+            <li>Всё из пакета «Стандартный»</li>
+            <li>Первое место среди рекомендуемых</li>
+            <li>Реклама на страницах выбранных марок или деталей</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Как это работает</h2>
+      <ol>
+        <li>Напишите нам: название компании, сайт, страна и какие запчасти вы продаёте.</li>
+        <li>В течение нескольких рабочих дней мы пришлём предложение и пример того, как будет выглядеть ваша карточка.</li>
+        <li>После согласования мы включим карточку или поиск в течение одного дня. Оплата ежемесячно по счёту, без долгосрочных обязательств.</li>
+        <li>Каждый месяц вы получаете количество переходов на ваш сайт.</li>
+      </ol>
+      <p>Все платные места чётко помечены словом «Реклама». Мы не ранжируем и не меняем ссылки других сайтов за оплату – покупатель всегда видит все источники.</p>
+
+      <h2>Контакты</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-ru" hidden>Копировать адрес</button>
+        <span class="copied" id="copy-out-ru" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Вернуться к поиску</a></p>
+    </div>
+
+    <div data-lang="uk" lang="uk" hidden>
+      <h1>Для бізнесу</h1>
+      <p class="lead">Відвідувачі Parts-dalys.eu вже шукають конкретну деталь – за назвою, автомобілем або OEM-номером. Якщо ви розбираєте легкові чи вантажні автомобілі або продаєте вживані запчастини в Литві чи іншій європейській країні, ви можете опинитися просто перед ними.</p>
+
+      <h2>Для кого це</h2>
+      <ul>
+        <li><strong>Авторозборкам Литви</strong> – розборкам легкових і вантажних автомобілів, які хочуть більше покупців із Литви та сусідніх країн.</li>
+        <li><strong>Продавцям запчастин по всій Європі</strong> – розборкам, складам і майданчикам, що відправляють запчастини до країн Балтії.</li>
+      </ul>
+
+      <h2>Що ми пропонуємо</h2>
+      <ul class="offer">
+        <li><strong>Рекомендоване місце над списком.</strong> Картка вашої компанії показується в блоці «Рекомендовані продавці» над усім списком сайтів – із назвою, країною та коротким описом. Картка завжди позначена словом «Реклама».</li>
+        <li><strong>Ваш пошук серед джерел.</strong> Якщо на вашому сайті є пошук, ми додамо його до списку джерел: запит покупця відкриється безпосередньо на вашому сайті, перекладений вашою мовою.</li>
+        <li><strong>Реклама на сторінках запчастин.</strong> Місце на сторінках конкретних деталей або марок (наприклад, «Golf 5 стартер»), куди покупці приходять із пошукових систем.</li>
+      </ul>
+
+      <h2>Пакети</h2>
+      <p class="note">Ціни <strong>орієнтовні</strong>, вказані «від» і без ПДВ. Остаточна ціна залежить від країн, категорій і терміну – домовляємося індивідуально.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-uk">
+          <h3 id="p1-uk">Базовий</h3>
+          <div class="price">від 19 € <small>/ міс.</small></div>
+          <ul>
+            <li>Ваш пошук серед джерел вашого регіону</li>
+            <li>Опис компанії та позначка країни</li>
+            <li>Щомісячний звіт про переходи</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-uk">
+          <h3 id="p2-uk">Стандартний</h3>
+          <div class="price">від 49 € <small>/ міс.</small></div>
+          <ul>
+            <li>Усе з пакета «Базовий»</li>
+            <li>Картка в блоці «Рекомендовані продавці» над списком</li>
+            <li>Показ у пошуку легкових або вантажних запчастин</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-uk">
+          <h3 id="p3-uk">Преміум</h3>
+          <div class="price">від 99 € <small>/ міс.</small></div>
+          <ul>
+            <li>Усе з пакета «Стандартний»</li>
+            <li>Перше місце серед рекомендованих</li>
+            <li>Реклама на сторінках вибраних марок або деталей</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Як це працює</h2>
+      <ol>
+        <li>Напишіть нам: назва компанії, сайт, країна та які запчастини ви продаєте.</li>
+        <li>Протягом кількох робочих днів ми надішлемо пропозицію та приклад того, як виглядатиме ваша картка.</li>
+        <li>Після погодження ми ввімкнемо картку або пошук протягом одного дня. Оплата щомісяця за рахунком, без довгострокових зобов'язань.</li>
+        <li>Щомісяця ви отримуєте кількість переходів на ваш сайт.</li>
+      </ol>
+      <p>Усі платні місця чітко позначено словом «Реклама». Ми не ранжуємо й не змінюємо посилання інших сайтів за оплату – покупець завжди бачить усі джерела.</p>
+
+      <h2>Контакти</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-uk" hidden>Копіювати адресу</button>
+        <span class="copied" id="copy-out-uk" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Повернутися до пошуку</a></p>
+    </div>
+
+    <div data-lang="tr" lang="tr" hidden>
+      <h1>Kurumsal</h1>
+      <p class="lead">Parts-dalys.eu ziyaretçileri zaten belirli bir parçayı arıyor – adına, aracına veya OEM numarasına göre. Otomobil ya da kamyon söküyor veya Litvanya'da ya da başka bir Avrupa ülkesinde ikinci el parça satıyorsanız, tam onların karşısında yer alabilirsiniz.</p>
+
+      <h2>Kimler için</h2>
+      <ul>
+        <li><strong>Litvanya'daki oto sökümcüler</strong> – Litvanya ve komşu ülkelerden daha fazla alıcıya ulaşmak isteyen otomobil ve kamyon sökümcüleri.</li>
+        <li><strong>Avrupa genelindeki parça satıcıları</strong> – Baltık ülkelerine parça gönderen sökümcüler, depolar ve platformlar.</li>
+      </ul>
+
+      <h2>Neler sunuyoruz</h2>
+      <ul class="offer">
+        <li><strong>Listenin üstünde öne çıkan yer.</strong> Şirket kartınız, tüm site listesinin üstündeki “Önerilen satıcılar” bloğunda adınız, ülkeniz ve kısa bir açıklamayla gösterilir. Kart her zaman “Reklam” ibaresiyle işaretlenir.</li>
+        <li><strong>Kaynaklarımız arasında kendi aramanız.</strong> Sitenizde arama özelliği varsa onu kaynak listemize ekleriz: alıcının sorgusu, sizin dilinize çevrilmiş olarak doğrudan sitenizde açılır.</li>
+        <li><strong>Parça sayfalarında reklam.</strong> Alıcıların arama motorlarından geldiği belirli parça veya marka sayfalarında (örn. “Golf 5 starter motor”) bir yer.</li>
+      </ul>
+
+      <h2>Paketler</h2>
+      <p class="note">Fiyatlar <strong>yaklaşıktır</strong>, “başlangıç” fiyatı olarak ve KDV hariç verilmiştir. Nihai fiyat ülkelere, kategorilere ve süreye göre değişir – bireysel olarak belirlenir.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-tr">
+          <h3 id="p1-tr">Başlangıç</h3>
+          <div class="price">19 €'dan başlayan <small>/ ay</small></div>
+          <ul>
+            <li>Bölgenizin kaynakları arasında kendi aramanız</li>
+            <li>Şirket açıklaması ve ülke etiketi</li>
+            <li>Aylık tıklama raporu</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-tr">
+          <h3 id="p2-tr">Standart</h3>
+          <div class="price">49 €'dan başlayan <small>/ ay</small></div>
+          <ul>
+            <li>“Başlangıç” paketindeki her şey</li>
+            <li>Listenin üstündeki “Önerilen satıcılar” bloğunda kart</li>
+            <li>Otomobil veya kamyon aramalarında gösterim</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-tr">
+          <h3 id="p3-tr">Premium</h3>
+          <div class="price">99 €'dan başlayan <small>/ ay</small></div>
+          <ul>
+            <li>“Standart” paketindeki her şey</li>
+            <li>Önerilen satıcılar arasında ilk sıra</li>
+            <li>Seçilen marka veya parça sayfalarında reklam</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Nasıl işler</h2>
+      <ol>
+        <li>Bize şirket adınızı, web sitenizi, ülkenizi ve hangi parçaları sattığınızı yazın.</li>
+        <li>Birkaç iş günü içinde size bir teklif ve kartınızın nasıl görüneceğine dair bir örnek göndeririz.</li>
+        <li>Onayınızın ardından kartınızı veya aramanızı bir gün içinde yayına alırız. Faturalandırma aylıktır; uzun vadeli taahhüt yoktur.</li>
+        <li>Her ay sitenize yapılan tıklama sayısını alırsınız.</li>
+      </ol>
+      <p>Tüm ücretli yerleşimler açıkça “Reklam” olarak işaretlenir. Ödeme karşılığında diğer sitelerin bağlantılarını sıralamaz veya değiştirmeyiz – alıcı her zaman tüm kaynakları görür.</p>
+
+      <h2>İletişim</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-tr" hidden>Adresi kopyala</button>
+        <span class="copied" id="copy-out-tr" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Aramaya dön</a></p>
+    </div>
+
+    <div data-lang="sv" lang="sv" hidden>
+      <h1>För företag</h1>
+      <p class="lead">Besökarna på Parts-dalys.eu letar redan efter en viss del – efter namn, fordon eller OEM-nummer. Om ni demonterar bilar eller lastbilar, eller säljer begagnade delar i Litauen eller i ett annat europeiskt land, kan ni synas precis framför dem.</p>
+
+      <h2>Vem det passar</h2>
+      <ul>
+        <li><strong>Bildemonteringar i Litauen</strong> – demonteringar av personbilar och lastbilar som vill nå fler köpare i Litauen och grannländerna.</li>
+        <li><strong>Delhandlare i hela Europa</strong> – demonteringar, lager och plattformar som skickar delar till Baltikum.</li>
+      </ul>
+
+      <h2>Vad vi erbjuder</h2>
+      <ul class="offer">
+        <li><strong>En rekommenderad plats ovanför listan.</strong> Ert företagskort visas i blocket ”Rekommenderade säljare” ovanför hela listan över webbplatser, med namn, land och en kort beskrivning. Kortet är alltid märkt ”Annons”.</li>
+        <li><strong>Er sökning bland våra källor.</strong> Om er webbplats har en sökfunktion lägger vi till den i listan över källor: köparens sökning öppnas direkt på er webbplats, översatt till ert språk.</li>
+        <li><strong>Annonser på delsidor.</strong> En plats på sidor för specifika delar eller bilmärken (t.ex. ”Golf 5 starter motor”), dit köpare kommer från sökmotorer.</li>
+      </ul>
+
+      <h2>Paket</h2>
+      <p class="note">Priserna är <strong>vägledande</strong>, anges som ”från” och exklusive moms. Slutpriset beror på länder, kategorier och period – vi kommer överens individuellt.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-sv">
+          <h3 id="p1-sv">Bas</h3>
+          <div class="price">från 19 € <small>/ mån</small></div>
+          <ul>
+            <li>Er sökning bland källorna i er region</li>
+            <li>Företagsbeskrivning och landsmärkning</li>
+            <li>Månatlig klickrapport</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-sv">
+          <h3 id="p2-sv">Standard</h3>
+          <div class="price">från 49 € <small>/ mån</small></div>
+          <ul>
+            <li>Allt i ”Bas”</li>
+            <li>Ett kort i blocket ”Rekommenderade säljare” ovanför listan</li>
+            <li>Visas i sökningar efter bil- eller lastbilsdelar</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-sv">
+          <h3 id="p3-sv">Premium</h3>
+          <div class="price">från 99 € <small>/ mån</small></div>
+          <ul>
+            <li>Allt i ”Standard”</li>
+            <li>Förstaplats bland de rekommenderade</li>
+            <li>Annonser på sidor för utvalda märken eller delar</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Så fungerar det</h2>
+      <ol>
+        <li>Skriv till oss med företagsnamn, webbplats, land och vilka delar ni säljer.</li>
+        <li>Inom några arbetsdagar skickar vi ett erbjudande och ett exempel på hur ert kort kommer att se ut.</li>
+        <li>Efter godkännande aktiverar vi kortet eller sökningen inom en dag. Fakturering sker månadsvis, utan långsiktiga åtaganden.</li>
+        <li>Varje månad får ni antalet klick till er webbplats.</li>
+      </ol>
+      <p>Alla betalda placeringar är tydligt märkta ”Annons”. Vi rangordnar eller ändrar inte andra webbplatsers länkar mot betalning – köparen ser alltid alla källor.</p>
+
+      <h2>Kontakt</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-sv" hidden>Kopiera adress</button>
+        <span class="copied" id="copy-out-sv" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Tillbaka till sökningen</a></p>
+    </div>
+
+    <div data-lang="no" lang="no" hidden>
+      <h1>For bedrifter</h1>
+      <p class="lead">Besøkende på Parts-dalys.eu leter allerede etter en bestemt del – etter navn, kjøretøy eller OEM-nummer. Hvis dere hugger biler eller lastebiler, eller selger brukte deler i Litauen eller et annet europeisk land, kan dere vises rett foran dem.</p>
+
+      <h2>Hvem det passer for</h2>
+      <ul>
+        <li><strong>Bilopphuggerier i Litauen</strong> – opphuggerier for personbiler og lastebiler som ønsker flere kjøpere fra Litauen og nabolandene.</li>
+        <li><strong>Delehandlere i hele Europa</strong> – opphuggerier, lagre og plattformer som sender deler til Baltikum.</li>
+      </ul>
+
+      <h2>Hva vi tilbyr</h2>
+      <ul class="offer">
+        <li><strong>En anbefalt plass over listen.</strong> Bedriftskortet deres vises i blokken «Anbefalte selgere» over hele listen med nettsteder, med navn, land og en kort beskrivelse. Kortet er alltid merket «Annonse».</li>
+        <li><strong>Deres søk blant våre kilder.</strong> Hvis nettstedet deres har en søkefunksjon, legger vi den til i listen over kilder: kjøperens søk åpnes direkte på nettstedet deres, oversatt til deres språk.</li>
+        <li><strong>Annonser på delesider.</strong> En plass på sider for bestemte deler eller bilmerker (f.eks. «Golf 5 starter motor»), der kjøpere kommer fra søkemotorer.</li>
+      </ul>
+
+      <h2>Pakker</h2>
+      <p class="note">Prisene er <strong>veiledende</strong>, oppgitt som «fra» og eksklusive mva. Endelig pris avhenger av land, kategorier og periode – vi avtaler den individuelt.</p>
+      <div class="pkgs">
+        <section class="pkg" aria-labelledby="p1-no">
+          <h3 id="p1-no">Basis</h3>
+          <div class="price">fra 19 € <small>/ mnd.</small></div>
+          <ul>
+            <li>Deres søk blant kildene i deres region</li>
+            <li>Bedriftsbeskrivelse og landsmerke</li>
+            <li>Månedlig klikkrapport</li>
+          </ul>
+        </section>
+        <section class="pkg hl" aria-labelledby="p2-no">
+          <h3 id="p2-no">Standard</h3>
+          <div class="price">fra 49 € <small>/ mnd.</small></div>
+          <ul>
+            <li>Alt i «Basis»</li>
+            <li>Et kort i blokken «Anbefalte selgere» over listen</li>
+            <li>Vises i søk etter bil- eller lastebildeler</li>
+          </ul>
+        </section>
+        <section class="pkg" aria-labelledby="p3-no">
+          <h3 id="p3-no">Premium</h3>
+          <div class="price">fra 99 € <small>/ mnd.</small></div>
+          <ul>
+            <li>Alt i «Standard»</li>
+            <li>Førsteplass blant de anbefalte</li>
+            <li>Annonser på sider for utvalgte merker eller deler</li>
+          </ul>
+        </section>
+      </div>
+
+      <h2>Slik fungerer det</h2>
+      <ol>
+        <li>Skriv til oss med firmanavn, nettsted, land og hvilke deler dere selger.</li>
+        <li>Innen noen få virkedager sender vi et tilbud og et eksempel på hvordan kortet deres vil se ut.</li>
+        <li>Etter godkjenning aktiverer vi kortet eller søket innen én dag. Fakturering skjer månedlig, uten langsiktig binding.</li>
+        <li>Hver måned får dere antall klikk til nettstedet deres.</li>
+      </ol>
+      <p>Alle betalte plasseringer er tydelig merket «Annonse». Vi rangerer eller endrer ikke andre nettsteders lenker mot betaling – kjøperen ser alltid alle kildene.</p>
+
+      <h2>Kontakt</h2>
+      <div class="contact">
+        <code>info@parts-dalys.eu</code>
+        <button type="button" class="ghost" data-copy="info@parts-dalys.eu" aria-describedby="copy-out-no" hidden>Kopier adresse</button>
+        <span class="copied" id="copy-out-no" aria-live="polite"></span>
+      </div>
+
+      <p><a href="/">← Tilbake til søket</a></p>
+    </div>
   </main>
 
   <footer>
-    <span>© Parts-dalys.eu · kainos orientacinės, pirkimas vyksta pardavėjo svetainėje</span>
-    <nav aria-label="Papildoma"><a href="/apie.html">Apie</a><a href="/verslui.html">Verslui</a><a href="/privatumas.html">Privatumas</a><a href="/dalys">Visos detalės</a></nav>
+    <span data-i18n="foot.note">© Parts-dalys.eu · kainos orientacinės, pirkimas vyksta pardavėjo svetainėje</span>
+    <nav aria-label="Papildoma" data-i18n-attr="aria-label:nav.aria"><a href="/apie.html" data-i18n="nav.about">Apie</a><a href="/verslui.html" data-i18n="nav.business">Verslui</a><a href="/privatumas.html" data-i18n="nav.privacy">Privatumas</a><a href="/dalys" data-i18n="nav.parts">Visos detalės</a></nav>
   </footer>
 </div>
 </body>

@@ -1,28 +1,32 @@
 // Page script for Parts-dalys.eu. Loaded as a module so it works under a strict CSP.
 import { SOURCES, REGIONS, VT } from "/shared/sources.js";
 import { translate, LANGS } from "/shared/translate.js";
+import { sourceLabel } from "/shared/i18n.js";
+import { t, lang, onSwitch } from "/i18n.js";
 
 const $ = (id) => document.getElementById(id);
 const VT_KEYS = VT.map(([k]) => k);
-const LANG_NAMES = { lt: "lietuviškai", en: "angliškai", de: "vokiškai", pl: "lenkiškai", fr: "prancūziškai", it: "itališkai", es: "ispaniškai", nl: "olandiškai" };
+const LANG_NAMES_LT = { lt: "lietuviškai", en: "angliškai", de: "vokiškai", pl: "lenkiškai", fr: "prancūziškai", it: "itališkai", es: "ispaniškai", nl: "olandiškai" };
+const langName = (l) => {
+  if (lang === "lt") return LANG_NAMES_LT[l] || l;
+  try { return new Intl.DisplayNames([t.locale], { type: "language" }).of(l); } catch { return l; }
+};
+const regionName = (cc) => {
+  try { return new Intl.DisplayNames([t.locale], { type: "region" }).of(cc === "UK" ? "GB" : cc); } catch { return cc; }
+};
 const st = { vt: "all", data: null, req: 0, lastQ: "", pageQ: "", cfg: { affiliate: {}, featured: [], adsense: null } };
 
 const nf = new Map();
 const fmt = (n, c) => {
   if (!nf.has(c)) {
-    try { nf.set(c, new Intl.NumberFormat("lt-LT", { style: "currency", currency: c })); }
+    try { nf.set(c, new Intl.NumberFormat(t.locale, { style: "currency", currency: c })); }
     catch { nf.set(c, { format: (x) => `${x} ${c}` }); }
   }
   return nf.get(c).format(n);
 };
 
-// Lithuanian plural forms: 1 skelbimas, 2 skelbimai, 10 skelbimų.
-function plural(n, one, few, many) {
-  const m10 = n % 10, m100 = n % 100;
-  if (m10 === 1 && m100 !== 11) return one;
-  if (m10 >= 2 && m10 <= 9 && (m100 < 11 || m100 > 19)) return few;
-  return many;
-}
+// t() text whose {placeholders} become the given nodes or strings, e.g. <strong> counts.
+const tNodes = (key, vars) => t(key).split(/\{(\w+)\}/).map((p, i) => (i % 2 ? vars[p] ?? "" : p)).filter((p) => p !== "");
 
 function el(tag, attrs = {}, ...kids) {
   const e = document.createElement(tag);
@@ -93,8 +97,10 @@ function shareUrl(q) {
   u.hash = "";
   // On a /dalys/<slug> page the path already carries its own query; keep that URL clean.
   const own = u.pathname.startsWith("/dalys/") && q === st.pageQ;
+  const lp = new URLSearchParams(location.search).get("lang");
   if (q && !own) u.searchParams.set("q", q);
   if (st.vt !== "all") u.searchParams.set("vt", st.vt);
+  if (lp) u.searchParams.set("lang", lp);
   return u.toString();
 }
 
@@ -114,8 +120,8 @@ async function copyLink() {
     try { ok = document.execCommand("copy"); } catch { ok = false; }
     ta.remove();
   }
-  if (!ok) window.prompt("Nukopijuokite nuorodą:", url);
-  $("copied").textContent = ok ? "Nuoroda nukopijuota" : "";
+  if (!ok) window.prompt(t("copy.prompt"), url);
+  $("copied").textContent = ok ? t("copy.done") : "";
   clearTimeout(copyLink.t);
   copyLink.t = setTimeout(() => ($("copied").textContent = ""), 2500);
 }
@@ -123,11 +129,11 @@ async function copyLink() {
 /* ---------- Static parts: chips, translations, links ---------- */
 
 function renderChips() {
-  $("vt").replaceChildren(...VT.map(([k, v]) =>
+  $("vt").replaceChildren(...VT.map(([k]) =>
     el("button", {
       type: "button", class: "chip", "aria-pressed": String(st.vt === k),
       onclick: () => { if (st.vt === k) return; st.vt = k; renderChips(); run(); },
-    }, v)));
+    }, t("vt." + k))));
 }
 
 function renderHow(q) {
@@ -136,12 +142,12 @@ function renderHow(q) {
   const rows = [];
   for (const l of LANGS) {
     const t = translate(q, l);
-    rows.push(el("li", {}, el("b", { title: LANG_NAMES[l] || l }, l), el("span", { lang: l }, t)));
+    rows.push(el("li", {}, el("b", { title: langName(l) }, l), el("span", { lang: l }, t)));
     seen.add(t.toLowerCase());
   }
   $("how-list").replaceChildren(...rows);
   $("how").querySelector("summary").textContent =
-    seen.size > 1 ? `Kaip ieškome: užklausa išversta į ${LANGS.length - 1} kalbas` : "Kaip ieškome: vertimo nėra, ieškoma originaliu tekstu";
+    seen.size > 1 ? t("how.translated", { n: LANGS.length - 1 }) : t("how.none");
   $("how").hidden = false;
 }
 
@@ -149,7 +155,8 @@ function renderLinks(q) {
   const term = q || "";
   st.linksQ = term;
   const ok = (s) => st.vt === "all" || s.t === "both" || s.t === st.vt;
-  const groups = REGIONS.map(([key, name]) => {
+  const groups = REGIONS.map(([key]) => {
+    const name = t("region." + key);
     const list = SOURCES.filter((s) => s.r === key && ok(s));
     if (!list.length) return null;
     return el("section", { class: "region", "aria-label": name },
@@ -157,8 +164,8 @@ function renderLinks(q) {
       el("div", { class: "grid" }, ...list.map((s) =>
         el("a", {
           class: "src", href: goHref(s.u(translate(term, s.l)), s.n), target: "_blank", rel: "noopener nofollow",
-          title: s.info || s.d,
-        }, el("span", { class: "cc" }, s.cc), el("span", {}, s.n)))));
+          title: sourceInfo(s) || s.d,
+        }, el("span", { class: "cc" }, s.cc), el("span", {}, sourceLabel(s.n, t))))));
   });
   const list = groups.filter(Boolean);
   const half = Math.ceil(list.length / 2);
@@ -168,6 +175,12 @@ function renderLinks(q) {
   renderFeatured(term);
 }
 
+// Lithuanian info text as written; other languages join the source's info.<key> strings.
+function sourceInfo(s) {
+  if (lang === "lt" || !s.i) return lang === "lt" ? s.info : "";
+  return s.i.split(" ").map((k) => t("info." + k, { c: regionName(s.cc) })).join("; ");
+}
+
 function renderFeatured(q) {
   const f = st.cfg.featured;
   $("featured").hidden = !f.length;
@@ -175,7 +188,7 @@ function renderFeatured(q) {
   $("featured-list").replaceChildren(...f.map((x) => {
     const url = String(x.url).replace(/\{q\}/g, encodeURIComponent(q || ""));
     return el("a", { class: "fcard", href: goHref(url, x.n), target: "_blank", rel: "noopener sponsored" },
-      el("span", { class: "adlabel" }, "Reklama"),
+      el("span", { class: "adlabel" }, t("ad")),
       el("span", { class: "fn" }, x.cc ? el("span", { class: "cc" }, String(x.cc)) : null, el("strong", {}, String(x.n))),
       x.info ? el("span", { class: "fi" }, String(x.info)) : null);
   }));
@@ -212,16 +225,11 @@ function stateBox(kind, title, text, extra) {
 
 function emptyState(filtered) {
   if (filtered) {
-    return stateBox("empty", "Pagal filtrus nieko neliko",
-      "Paieška rado skelbimų, bet jie neatitinka pasirinktų filtrų.",
-      el("button", { type: "button", class: "ghost", onclick: resetFilters }, "Rodyti visus"));
+    return stateBox("empty", t("empty.filtered.h"), t("empty.filtered.p"),
+      el("button", { type: "button", class: "ghost", onclick: resetFilters }, t("empty.showAll")));
   }
-  return stateBox("empty", "Nieko nerasta", "Keli patarimai:",
-    el("ul", {},
-      el("li", {}, "Įrašykite originalų (OEM) detalės numerį, pvz. 03L903023F – jis vienodas visose šalyse."),
-      el("li", {}, "Trumpinkite užklausą: markė, modelis ir detalė, be metų ar variklio kodo."),
-      el("li", {}, "Pabandykite kitą transporto tipą arba „Visi“."),
-      el("li", {}, "Pasinaudokite tiesioginėmis nuorodomis į svetaines žemiau.")));
+  return stateBox("empty", t("empty.h"), t("empty.tips"),
+    el("ul", {}, ...["empty.tip1", "empty.tip2", "empty.tip3", "empty.tip4"].map((k) => el("li", {}, t(k)))));
 }
 
 function resetFilters() {
@@ -232,17 +240,17 @@ function resetFilters() {
 }
 
 function thumb(i) {
-  if (!i.image) return el("div", { class: "thumb", "aria-hidden": "true" }, "be nuotr.");
+  if (!i.image) return el("div", { class: "thumb", "aria-hidden": "true" }, t("nophoto"));
   const img = el("img", { class: "thumb", src: i.image, alt: "", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
-  img.addEventListener("error", () => img.replaceWith(el("div", { class: "thumb", "aria-hidden": "true" }, "be nuotr.")), { once: true });
+  img.addEventListener("error", () => img.replaceWith(el("div", { class: "thumb", "aria-hidden": "true" }, t("nophoto"))), { once: true });
   return img;
 }
 
 function priceBox(i) {
-  if (i.priceEur == null) return el("div", { class: "pr" }, el("span", { class: "na" }, "kaina svetainėje"));
+  if (i.priceEur == null) return el("div", { class: "pr" }, el("span", { class: "na" }, t("price.onSite")));
   const ship = i.shippingEur
-    ? `${fmt(i.priceEur, "EUR")} + ${fmt(i.shippingEur, "EUR")} pristatymas`
-    : i.shipping === 0 ? "nemokamas pristatymas" : "pristatymas nenurodytas";
+    ? t("price.ship", { p: fmt(i.priceEur, "EUR"), s: fmt(i.shippingEur, "EUR") })
+    : i.shipping === 0 ? t("price.freeShip") : t("price.noShip");
   return el("div", { class: "pr" },
     el("div", { class: "eur" }, fmt(i.totalEur, "EUR")),
     el("div", { class: "orig" }, ship),
@@ -254,7 +262,7 @@ function itemRow(i) {
     i.country ? el("span", { class: "cc" }, i.country) : null,
     el("span", {}, i.source),
     i.condition ? el("span", {}, i.condition) : null,
-    i.location && i.location !== i.country ? el("span", {}, "siunčia iš " + i.location) : null);
+    i.location && i.location !== i.country ? el("span", {}, t("item.from", { loc: i.location })) : null);
   return el("a", { class: "item", href: goHref(i.url, i.source), target: "_blank", rel: "noopener nofollow" },
     thumb(i),
     el("div", { class: "ti" },
@@ -277,7 +285,7 @@ function renderSources(d) {
   if (bad.length) {
     kids.push(parts.length ? " · " : "",
       el("span", { class: "bad", title: bad.map((s) => `${s.name}: ${s.error}`).join("\n") },
-        "neatsakė: " + bad.map((s) => s.name).join(", ")));
+        t("src.failed") + bad.map((s) => s.name).join(", ")));
   }
   box.replaceChildren(...kids);
 }
@@ -291,29 +299,28 @@ function renderResults() {
     $("summary").textContent = "";
     $("sources").replaceChildren();
     $("notice").replaceChildren();
-    $("rezultatai").replaceChildren(stateBox("info", "Rinkitės svetainę žemiau",
-      "Bendras kainų sąrašas dar ruošiamas. Kol kas paspauskite svetainę žemiau: ji atsidarys su jūsų paieška, o detalės pavadinimas bus išverstas į tos šalies kalbą.",
-      el("a", { class: "ghost", href: "#links-h" }, "Į svetainių sąrašą")));
+    $("rezultatai").replaceChildren(stateBox("info", t("linksOnly.h"), t("linksOnly.p"),
+      el("a", { class: "ghost", href: "#links-h" }, t("linksOnly.btn"))));
     return;
   }
   const all = Array.isArray(d.items) ? d.items : [];
   let items = all.slice();
 
-  const sources = [...new Set(all.map((i) => i.source))].sort((a, b) => a.localeCompare(b, "lt"));
+  const sources = [...new Set(all.map((i) => i.source))].sort((a, b) => a.localeCompare(b, t.locale));
   let src = $("src").value;
   if (src && !sources.includes(src)) src = "";
-  $("src").replaceChildren(el("option", { value: "" }, "visi"),
+  $("src").replaceChildren(el("option", { value: "" }, t("src.all")),
     ...sources.map((x) => el("option", { value: x, selected: x === src }, x)));
   $("src").value = src;
 
   if (src) items = items.filter((i) => i.source === src);
   if ($("priced").checked) items = items.filter((i) => i.totalEur != null);
   const max = parseFloat(String($("max").value).replace(",", "."));
-  if (Number.isFinite(max) && max > 0) items = items.filter((i) => i.totalEur == null || i.totalEur <= max); // unknown price stays unless "tik su kaina"
+  if (Number.isFinite(max) && max > 0) items = items.filter((i) => i.totalEur == null || i.totalEur <= max); // unknown price stays unless "with price only"
 
   const s = $("sort").value;
   if (s === "price-desc") items.sort((a, b) => (b.totalEur ?? -1) - (a.totalEur ?? -1));
-  else if (s === "source") items.sort((a, b) => a.source.localeCompare(b.source, "lt") || (a.totalEur ?? Infinity) - (b.totalEur ?? Infinity));
+  else if (s === "source") items.sort((a, b) => a.source.localeCompare(b.source, t.locale) || (a.totalEur ?? Infinity) - (b.totalEur ?? Infinity));
   else items.sort((a, b) => (a.totalEur ?? Infinity) - (b.totalEur ?? Infinity));
 
   const priced = items.filter((i) => i.totalEur != null);
@@ -322,22 +329,24 @@ function renderResults() {
   const sum = $("summary");
   if (items.length) {
     sum.replaceChildren(
-      "Rasta ", el("strong", {}, String(items.length)), ` ${plural(items.length, "skelbimas", "skelbimai", "skelbimų")}`,
-      ` iš ${srcCount} ${plural(srcCount, "šaltinio", "šaltinių", "šaltinių")}`,
-      items.length !== all.length ? ` (iš viso ${all.length})` : "",
-      ...(cheapest != null ? [", pigiausias ", el("strong", {}, fmt(cheapest, "EUR")), "."] : ["."])
+      ...tNodes("sum.found", {
+        n: el("strong", {}, String(items.length)), items: t.plural("sum.items", items.length),
+        m: String(srcCount), srcs: t.plural("sum.srcs", srcCount),
+      }),
+      items.length !== all.length ? t("sum.of", { all: all.length }) : "",
+      ...(cheapest != null ? tNodes("sum.cheapest", { p: el("strong", {}, fmt(cheapest, "EUR")) }) : ["."])
     );
   } else {
-    sum.textContent = all.length ? "Pagal filtrus skelbimų nėra." : "Skelbimų nerasta.";
+    sum.textContent = all.length ? t("sum.noneFiltered") : t("sum.none");
   }
 
   $("rezultatai").replaceChildren(...(items.length ? items.map(itemRow) : [emptyState(all.length > 0)]));
   renderSources(d);
 
   const notes = [];
-  if (d.demo) notes.push(el("div", { class: "notice demo" }, "Rodomi pavyzdiniai duomenys: serveris dar neprijungtas prie eBay ir paieškos API. Kainos ir skelbimai nėra tikri."));
-  if (d.rates?.source === "fallback") notes.push(el("div", { class: "notice" }, "Valiutų kursai apytiksliai: nepavyko gauti šios dienos ECB kursų."));
-  if (!Array.isArray(d.sources) && d.errors?.length) notes.push(el("div", { class: "notice" }, "Kai kurie šaltiniai neatsakė: " + d.errors.join("; ")));
+  if (d.demo) notes.push(el("div", { class: "notice demo" }, t("note.demo")));
+  if (d.rates?.source === "fallback") notes.push(el("div", { class: "notice" }, t("note.rates")));
+  if (!Array.isArray(d.sources) && d.errors?.length) notes.push(el("div", { class: "notice" }, t("note.errors") + d.errors.join("; ")));
   $("notice").replaceChildren(...notes);
 }
 
@@ -351,14 +360,14 @@ async function run() {
   $("copy").hidden = q.length < 2;
   if (q.length < 2) {
     st.data = null;
-    $("summary").textContent = q ? "Įrašykite bent 2 simbolius." : "";
+    $("summary").textContent = q ? t("min2") : "";
     $("rezultatai").replaceChildren();
     $("sources").replaceChildren();
     return;
   }
   const id = ++st.req;
   st.lastQ = q;
-  $("summary").textContent = "Ieškoma…";
+  $("summary").textContent = t("searching");
   $("sources").replaceChildren();
   $("rezultatai").setAttribute("aria-busy", "true");
   skeleton();
@@ -367,17 +376,22 @@ async function run() {
     let data = null;
     try { data = await res.json(); } catch { /* non-JSON error page */ }
     if (id !== st.req) return;
-    if (!res.ok || !data) throw new Error(data?.error || `serveris grąžino klaidą ${res.status}`);
+    if (!res.ok || !data) {
+      // Server messages are Lithuanian; other languages map the known statuses.
+      const known = { 400: "min2", 429: "err.rate", 500: "err.server" }[res.status];
+      const fallback = t("err.status", { code: res.status });
+      throw new Error(lang === "lt" ? data?.error || fallback : known ? t(known) : fallback);
+    }
     st.data = data;
     renderResults();
   } catch (e) {
     if (id !== st.req) return;
     st.data = null;
     const offline = e instanceof TypeError;
-    $("summary").textContent = "Paieška nepavyko.";
-    $("rezultatai").replaceChildren(stateBox("error", "Paieška nepavyko",
-      offline ? "Nepavyko susisiekti su serveriu. Patikrinkite interneto ryšį." : e.message,
-      el("button", { type: "button", onclick: run }, "Bandyti dar kartą")));
+    $("summary").textContent = t("err.failed") + ".";
+    $("rezultatai").replaceChildren(stateBox("error", t("err.failed"),
+      offline ? t("err.offline") : e.message,
+      el("button", { type: "button", onclick: run }, t("retry"))));
   } finally {
     if (id === st.req) $("rezultatai").setAttribute("aria-busy", "false");
   }
@@ -387,6 +401,7 @@ $("f").addEventListener("submit", (e) => { e.preventDefault(); run(); });
 for (const id of ["sort", "src", "priced"]) $(id).addEventListener("change", renderResults);
 $("max").addEventListener("input", renderResults);
 $("copy").addEventListener("click", copyLink);
+onSwitch(() => shareUrl($("q").value.trim().slice(0, 120)));
 
 readUrl();
 renderChips();

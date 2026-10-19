@@ -19,46 +19,379 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/style.css">
+<script type="module" src="/i18n.js"></script>
 </head>
-<body>
+<body data-page="about">
 <div class="wrap">
   <header>
     <a class="brand" href="/">Parts-dalys<span>.eu</span></a>
   </header>
 
   <main class="prose">
-    <h1>Apie</h1>
-    <p>Parts-dalys.eu – tai viena paieška per dėvėtų lengvųjų automobilių ir sunkvežimių dalių skelbimus daugiau nei 60 svetainių Europoje ir pasaulyje. Įrašote detalės pavadinimą arba OEM numerį lietuviškai, o mes užklausą išverčiame į kiekvienos svetainės kalbą: „starteris“ Vokietijoje tampa „Anlasser“, Lenkijoje „rozrusznik“.</p>
+    <div data-lang="lt">
+      <h1>Apie</h1>
+      <p>Parts-dalys.eu – tai viena paieška per dėvėtų lengvųjų automobilių ir sunkvežimių dalių skelbimus daugiau nei 60 svetainių Europoje ir pasaulyje. Įrašote detalės pavadinimą arba OEM numerį lietuviškai, o mes užklausą išverčiame į kiekvienos svetainės kalbą: „starteris“ Vokietijoje tampa „Anlasser“, Lenkijoje „rozrusznik“.</p>
 
-    <h2>Kur ieškome</h2>
-    <ul>
-      <li><strong>Ardymo įmonių platformos</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard ir kitos.</li>
-      <li><strong>Skelbimų portalai</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay ir kiti.</li>
-      <li><strong>Sunkvežimių dalys</strong> – Truck1, Autoline, Mascus, TruckScout24 ir kitos.</li>
-    </ul>
-    <p>Paspaudus svetainę, ji atsidaro jau su jūsų paieška. Kainos, prieinamumas ir pristatymas nurodyti pardavėjo puslapyje.</p>
+      <h2>Kur ieškome</h2>
+      <ul>
+        <li><strong>Ardymo įmonių platformos</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard ir kitos.</li>
+        <li><strong>Skelbimų portalai</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay ir kiti.</li>
+        <li><strong>Sunkvežimių dalys</strong> – Truck1, Autoline, Mascus, TruckScout24 ir kitos.</li>
+      </ul>
+      <p>Paspaudus svetainę, ji atsidaro jau su jūsų paieška. Kainos, prieinamumas ir pristatymas nurodyti pardavėjo puslapyje.</p>
 
-    <h2>Kaip vyksta pirkimas</h2>
-    <p>Mes nieko neparduodame ir pinigų nepriimame. Paspaudę skelbimą, atsidursite pardavėjo svetainėje – ten ir vyksta pirkimas, apmokėjimas ir pristatymas pagal tos svetainės taisykles. Prieš pirkdami pasitikrinkite detalės numerį ir suderinamumą su savo automobiliu.</p>
+      <h2>Kaip vyksta pirkimas</h2>
+      <p>Mes nieko neparduodame ir pinigų nepriimame. Paspaudę skelbimą, atsidursite pardavėjo svetainėje – ten ir vyksta pirkimas, apmokėjimas ir pristatymas pagal tos svetainės taisykles. Prieš pirkdami pasitikrinkite detalės numerį ir suderinamumą su savo automobiliu.</p>
 
-    <h2>Kaip išsilaikome</h2>
-    <p>Paieška jums nemokama. Svetainę išlaikome trimis būdais ir nė vienas jų nekeičia jums rodomų kainų:</p>
-    <ul>
-      <li><strong>Partnerių nuorodos.</strong> Kai kurios nuorodos (pvz. į eBay) yra partnerių (angl. <em>affiliate</em>) nuorodos: jei per jas ką nors nusipirksite, gausime nedidelį komisinį atlygį. Jums kaina nesikeičia.</li>
-      <li><strong>Reklama.</strong> Puslapyje gali būti rodoma „Google AdSense“ reklama. Ji visada pažymėta žodžiu „Reklama“.</li>
-      <li><strong>Rekomenduojami pardavėjai.</strong> Ardymo įmonės ir dalių pardavėjai gali susimokėti už vietą bloke virš svetainių sąrašo. Tokios kortelės irgi pažymėtos „Reklama“. Kitų svetainių nuorodų tvarka dėl to nesikeičia. Daugiau – puslapyje <a href="/verslui.html">Verslui</a>.</li>
-    </ul>
-    <p>Paspaudimus į kitas svetaines skaičiuojame be asmens duomenų. Plačiau – <a href="/privatumas.html">Privatumo politikoje</a>.</p>
+      <h2>Kaip išsilaikome</h2>
+      <p>Paieška jums nemokama. Svetainę išlaikome trimis būdais ir nė vienas jų nekeičia jums rodomų kainų:</p>
+      <ul>
+        <li><strong>Partnerių nuorodos.</strong> Kai kurios nuorodos (pvz. į eBay) yra partnerių (angl. <em>affiliate</em>) nuorodos: jei per jas ką nors nusipirksite, gausime nedidelį komisinį atlygį. Jums kaina nesikeičia.</li>
+        <li><strong>Reklama.</strong> Puslapyje gali būti rodoma „Google AdSense“ reklama. Ji visada pažymėta žodžiu „Reklama“.</li>
+        <li><strong>Rekomenduojami pardavėjai.</strong> Ardymo įmonės ir dalių pardavėjai gali susimokėti už vietą bloke virš svetainių sąrašo. Tokios kortelės irgi pažymėtos „Reklama“. Kitų svetainių nuorodų tvarka dėl to nesikeičia. Daugiau – puslapyje <a href="/verslui.html">Verslui</a>.</li>
+      </ul>
+      <p>Paspaudimus į kitas svetaines skaičiuojame be asmens duomenų. Plačiau – <a href="/privatumas.html">Privatumo politikoje</a>.</p>
 
-    <h2 id="kontaktai">Kontaktai</h2>
-    <p>Pastebėjote klaidą, norite pasiūlyti šaltinį ar bendradarbiauti? Rašykite: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+      <h2 id="kontaktai">Kontaktai</h2>
+      <p>Pastebėjote klaidą, norite pasiūlyti šaltinį ar bendradarbiauti? Rašykite: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
 
-    <p><a href="/">← Grįžti į paiešką</a></p>
+      <p><a href="/">← Grįžti į paiešką</a></p>
+    </div>
+
+    <div data-lang="en" lang="en" hidden>
+      <h1>About</h1>
+      <p>Parts-dalys.eu is a single search across used car and truck parts listings on more than 60 websites in Europe and around the world. You enter a part name or OEM number – in English, German, French, Lithuanian, Polish, Italian, Spanish or Dutch – and we translate the query into each site's language: a “starter motor” becomes “Anlasser” in Germany and “rozrusznik” in Poland.</p>
+
+      <h2>Where we search</h2>
+      <ul>
+        <li><strong>Vehicle dismantler platforms</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard and others.</li>
+        <li><strong>Classifieds portals</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay and others.</li>
+        <li><strong>Truck parts</strong> – Truck1, Autoline, Mascus, TruckScout24 and others.</li>
+      </ul>
+      <p>When you click a website, it opens with your search already filled in. Prices, availability and delivery are shown on the seller's page.</p>
+
+      <h2>How buying works</h2>
+      <p>We do not sell anything and do not take payments. When you click a listing, you go to the seller's website – that is where the purchase, payment and delivery take place, under that website's terms. Before buying, please check the part number and compatibility with your vehicle.</p>
+
+      <h2>How we are funded</h2>
+      <p>The search is free for you. We fund the site in three ways, and none of them changes the prices you see:</p>
+      <ul>
+        <li><strong>Affiliate links.</strong> Some links (e.g. to eBay) are affiliate links: if you buy something through them, we receive a small commission. Your price stays the same.</li>
+        <li><strong>Advertising.</strong> The site may show Google AdSense ads. They are always labelled “Advertisement”.</li>
+        <li><strong>Featured sellers.</strong> Vehicle dismantlers and parts sellers can pay for a place in the block above the list of websites. These cards are also labelled “Advertisement”. The order of the other links does not change because of this. More on the <a href="/verslui.html">For business</a> page.</li>
+      </ul>
+      <p>We count clicks to other websites without any personal data. Details are in our <a href="/privatumas.html">Privacy policy</a>.</p>
+
+      <h2>Contact</h2>
+      <p>Spotted a mistake, want to suggest a source or work with us? Write to <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Back to search</a></p>
+    </div>
+
+    <div data-lang="de" lang="de" hidden>
+      <h1>Über uns</h1>
+      <p>Parts-dalys.eu ist eine zentrale Suche nach gebrauchten Pkw- und Lkw-Teilen auf mehr als 60 Websites in Europa und weltweit. Sie geben die Teilebezeichnung oder OE-Nummer ein – auf Deutsch, Englisch, Französisch, Litauisch, Polnisch, Italienisch, Spanisch oder Niederländisch –, und wir übersetzen die Anfrage in die Sprache der jeweiligen Website: Aus „Anlasser“ wird in Frankreich „démarreur“, in Polen „rozrusznik“.</p>
+
+      <h2>Wo wir suchen</h2>
+      <ul>
+        <li><strong>Plattformen von Autoverwertern</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard und weitere.</li>
+        <li><strong>Kleinanzeigenportale</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay und weitere.</li>
+        <li><strong>Lkw-Teile</strong> – Truck1, Autoline, Mascus, TruckScout24 und weitere.</li>
+      </ul>
+      <p>Wenn Sie auf eine Website klicken, öffnet sie sich bereits mit Ihrer Suche. Preise, Verfügbarkeit und Versand finden Sie auf der Seite des Verkäufers.</p>
+
+      <h2>So funktioniert der Kauf</h2>
+      <p>Wir verkaufen nichts und nehmen keine Zahlungen entgegen. Mit einem Klick auf ein Angebot gelangen Sie zur Website des Verkäufers – dort erfolgen Kauf, Bezahlung und Versand nach deren Bedingungen. Bitte prüfen Sie vor dem Kauf die Teilenummer und die Passgenauigkeit für Ihr Fahrzeug.</p>
+
+      <h2>Wie wir uns finanzieren</h2>
+      <p>Die Suche ist für Sie kostenlos. Wir finanzieren die Website auf drei Wegen, und keiner davon verändert die angezeigten Preise:</p>
+      <ul>
+        <li><strong>Partnerlinks.</strong> Einige Links (z. B. zu eBay) sind Partnerlinks (<em>Affiliate-Links</em>): Wenn Sie darüber etwas kaufen, erhalten wir eine kleine Provision. Ihr Preis bleibt gleich.</li>
+        <li><strong>Werbung.</strong> Auf der Website kann Werbung von Google AdSense erscheinen. Sie ist stets mit „Anzeige“ gekennzeichnet.</li>
+        <li><strong>Empfohlene Verkäufer.</strong> Autoverwerter und Teilehändler können für einen Platz im Block über der Liste der Websites bezahlen. Auch diese Karten sind mit „Anzeige“ gekennzeichnet. Die Reihenfolge der übrigen Links ändert sich dadurch nicht. Mehr dazu auf der Seite <a href="/verslui.html">Für Unternehmen</a>.</li>
+      </ul>
+      <p>Klicks auf andere Websites zählen wir ohne personenbezogene Daten. Näheres in der <a href="/privatumas.html">Datenschutzerklärung</a>.</p>
+
+      <h2>Kontakt</h2>
+      <p>Sie haben einen Fehler entdeckt, möchten eine Quelle vorschlagen oder mit uns zusammenarbeiten? Schreiben Sie uns: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Zurück zur Suche</a></p>
+    </div>
+
+    <div data-lang="fr" lang="fr" hidden>
+      <h1>À propos</h1>
+      <p>Parts-dalys.eu est une recherche unique parmi les annonces de pièces auto et poids lourds d'occasion sur plus de 60 sites en Europe et dans le monde. Vous saisissez le nom de la pièce ou sa référence OEM – en français, anglais, allemand, lituanien, polonais, italien, espagnol ou néerlandais – et nous traduisons la requête dans la langue de chaque site : un « démarreur » devient « Anlasser » en Allemagne et « rozrusznik » en Pologne.</p>
+
+      <h2>Où nous cherchons</h2>
+      <ul>
+        <li><strong>Plateformes de casses automobiles</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard et d'autres.</li>
+        <li><strong>Sites de petites annonces</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay et d'autres.</li>
+        <li><strong>Pièces poids lourds</strong> – Truck1, Autoline, Mascus, TruckScout24 et d'autres.</li>
+      </ul>
+      <p>Lorsque vous cliquez sur un site, il s'ouvre directement avec votre recherche. Les prix, la disponibilité et la livraison sont indiqués sur la page du vendeur.</p>
+
+      <h2>Comment se passe l'achat</h2>
+      <p>Nous ne vendons rien et n'encaissons aucun paiement. En cliquant sur une annonce, vous arrivez sur le site du vendeur : c'est là que se déroulent l'achat, le paiement et la livraison, selon les conditions de ce site. Avant d'acheter, vérifiez la référence de la pièce et sa compatibilité avec votre véhicule.</p>
+
+      <h2>Comment nous nous finançons</h2>
+      <p>La recherche est gratuite pour vous. Le site est financé de trois manières, dont aucune ne modifie les prix affichés :</p>
+      <ul>
+        <li><strong>Liens d'affiliation.</strong> Certains liens (par ex. vers eBay) sont des liens d'affiliation : si vous achetez par leur intermédiaire, nous percevons une petite commission. Votre prix reste le même.</li>
+        <li><strong>Publicité.</strong> Le site peut afficher des annonces Google AdSense. Elles sont toujours signalées par la mention « Publicité ».</li>
+        <li><strong>Vendeurs recommandés.</strong> Les casses et vendeurs de pièces peuvent payer pour figurer dans le bloc situé au-dessus de la liste des sites. Ces cartes portent elles aussi la mention « Publicité ». L'ordre des autres liens n'en est pas modifié. Pour en savoir plus, consultez la page <a href="/verslui.html">Professionnels</a>.</li>
+      </ul>
+      <p>Nous comptons les clics vers d'autres sites sans aucune donnée personnelle. Plus d'informations dans notre <a href="/privatumas.html">Politique de confidentialité</a>.</p>
+
+      <h2>Contact</h2>
+      <p>Vous avez repéré une erreur, souhaitez suggérer une source ou collaborer avec nous ? Écrivez-nous : <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Retour à la recherche</a></p>
+    </div>
+
+    <div data-lang="fi" lang="fi" hidden>
+      <h1>Tietoa palvelusta</h1>
+      <p>Parts-dalys.eu on yksi haku, joka kattaa käytettyjen henkilö- ja kuorma-autonosien ilmoitukset yli 60 sivustolla Euroopassa ja muualla maailmassa. Kirjoitat osan nimen tai OEM-numeron – englanniksi, saksaksi, ranskaksi, liettuaksi, puolaksi, italiaksi, espanjaksi tai hollanniksi – ja käännämme haun kunkin sivuston kielelle: englannin ”starter motor” on Saksassa ”Anlasser” ja Puolassa ”rozrusznik”.</p>
+
+      <h2>Mistä haemme</h2>
+      <ul>
+        <li><strong>Autopurkamoiden alustat</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard ja muut.</li>
+        <li><strong>Ilmoitusportaalit</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay ja muut.</li>
+        <li><strong>Kuorma-autonosat</strong> – Truck1, Autoline, Mascus, TruckScout24 ja muut.</li>
+      </ul>
+      <p>Kun napsautat sivustoa, se avautuu valmiiksi hakusi kanssa. Hinnat, saatavuus ja toimitus näkyvät myyjän sivulla.</p>
+
+      <h2>Miten ostaminen toimii</h2>
+      <p>Emme myy mitään emmekä ota vastaan maksuja. Ilmoitusta napsauttamalla siirryt myyjän sivustolle – siellä ostos, maksu ja toimitus hoidetaan kyseisen sivuston ehtojen mukaisesti. Tarkista ennen ostamista osanumero ja sopivuus omaan ajoneuvoosi.</p>
+
+      <h2>Miten palvelu rahoitetaan</h2>
+      <p>Haku on sinulle maksuton. Rahoitamme sivuston kolmella tavalla, eikä mikään niistä vaikuta näkemiisi hintoihin:</p>
+      <ul>
+        <li><strong>Kumppanilinkit.</strong> Osa linkeistä (esim. eBayhin) on kumppanilinkkejä (<em>affiliate</em>): jos ostat jotain niiden kautta, saamme pienen palkkion. Hintasi pysyy samana.</li>
+        <li><strong>Mainonta.</strong> Sivustolla voidaan näyttää Google AdSense -mainoksia. Ne on aina merkitty sanalla ”Mainos”.</li>
+        <li><strong>Suositellut myyjät.</strong> Autopurkamot ja osamyyjät voivat maksaa paikasta sivustoluettelon yläpuolella olevassa lohkossa. Myös nämä kortit on merkitty sanalla ”Mainos”. Muiden linkkien järjestys ei tämän vuoksi muutu. Lisätietoja sivulla <a href="/verslui.html">Yrityksille</a>.</li>
+      </ul>
+      <p>Laskemme napsautukset muille sivustoille ilman henkilötietoja. Lisätietoja <a href="/privatumas.html">tietosuojaselosteessa</a>.</p>
+
+      <h2>Yhteystiedot</h2>
+      <p>Huomasitko virheen, haluatko ehdottaa lähdettä tai tehdä yhteistyötä kanssamme? Kirjoita meille: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Takaisin hakuun</a></p>
+    </div>
+
+    <div data-lang="lv" lang="lv" hidden>
+      <h1>Par mums</h1>
+      <p>Parts-dalys.eu ir viena meklēšana lietotu vieglo un kravas automašīnu rezerves daļu sludinājumos vairāk nekā 60 vietnēs Eiropā un pasaulē. Jūs ievadāt detaļas nosaukumu vai OEM numuru – angļu, vācu, franču, lietuviešu, poļu, itāļu, spāņu vai nīderlandiešu valodā –, un mēs pārtulkojam vaicājumu katras vietnes valodā: angliskais “starter motor” Vācijā kļūst par “Anlasser”, bet Polijā – par “rozrusznik”.</p>
+
+      <h2>Kur mēs meklējam</h2>
+      <ul>
+        <li><strong>Auto demontāžas uzņēmumu platformas</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard un citi.</li>
+        <li><strong>Sludinājumu portāli</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay un citi.</li>
+        <li><strong>Kravas auto daļas</strong> – Truck1, Autoline, Mascus, TruckScout24 un citi.</li>
+      </ul>
+      <p>Noklikšķinot uz vietnes, tā atveras jau ar jūsu meklēšanu. Cenas, pieejamība un piegāde ir norādītas pārdevēja lapā.</p>
+
+      <h2>Kā notiek pirkšana</h2>
+      <p>Mēs neko nepārdodam un nepieņemam maksājumus. Noklikšķinot uz sludinājuma, jūs nonākat pārdevēja vietnē – tur notiek pirkums, apmaksa un piegāde saskaņā ar šīs vietnes noteikumiem. Pirms pirkšanas pārbaudiet detaļas numuru un saderību ar savu automašīnu.</p>
+
+      <h2>Kā mēs uzturam vietni</h2>
+      <p>Meklēšana jums ir bez maksas. Vietni uzturam trīs veidos, un neviens no tiem nemaina jums rādītās cenas:</p>
+      <ul>
+        <li><strong>Partneru saites.</strong> Dažas saites (piem., uz eBay) ir partneru (angl. <em>affiliate</em>) saites: ja caur tām ko iegādāsieties, mēs saņemsim nelielu komisijas maksu. Jūsu cena nemainās.</li>
+        <li><strong>Reklāma.</strong> Vietnē var tikt rādīta Google AdSense reklāma. Tā vienmēr ir apzīmēta ar vārdu “Reklāma”.</li>
+        <li><strong>Ieteicamie pārdevēji.</strong> Auto demontāžas uzņēmumi un daļu pārdevēji var maksāt par vietu blokā virs vietņu saraksta. Arī šīs kartītes ir apzīmētas ar vārdu “Reklāma”. Pārējo saišu secība tādēļ nemainās. Vairāk – lapā <a href="/verslui.html">Uzņēmumiem</a>.</li>
+      </ul>
+      <p>Klikšķus uz citām vietnēm skaitām bez personas datiem. Sīkāk – <a href="/privatumas.html">Privātuma politikā</a>.</p>
+
+      <h2>Kontakti</h2>
+      <p>Pamanījāt kļūdu, vēlaties ieteikt avotu vai sadarboties? Rakstiet: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Atpakaļ uz meklēšanu</a></p>
+    </div>
+
+    <div data-lang="et" lang="et" hidden>
+      <h1>Meist</h1>
+      <p>Parts-dalys.eu on üks otsing kasutatud sõiduautode ja veokite varuosade kuulutuste seast enam kui 60 veebisaidil Euroopas ja mujal maailmas. Sisestate varuosa nimetuse või OEM-numbri – inglise, saksa, prantsuse, leedu, poola, itaalia, hispaania või hollandi keeles – ning me tõlgime päringu iga saidi keelde: näiteks „starter motor“ otsitakse Saksamaal kui „Anlasser“ ja Poolas kui „rozrusznik“.</p>
+
+      <h2>Kus me otsime</h2>
+      <ul>
+        <li><strong>Autolammutuste platvormid</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard jt.</li>
+        <li><strong>Kuulutusportaalid</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay jt.</li>
+        <li><strong>Veokite varuosad</strong> – Truck1, Autoline, Mascus, TruckScout24 jt.</li>
+      </ul>
+      <p>Veebisaidil klõpsates avaneb see kohe teie otsinguga. Hinnad, saadavus ja tarne on märgitud müüja lehel.</p>
+
+      <h2>Kuidas ostmine toimub</h2>
+      <p>Me ei müü midagi ega võta vastu makseid. Kuulutusel klõpsates jõuate müüja veebisaidile – seal toimuvad ost, makse ja tarne selle saidi tingimuste kohaselt. Enne ostmist kontrollige varuosa numbrit ja sobivust oma sõidukiga.</p>
+
+      <h2>Kuidas me end ülal peame</h2>
+      <p>Otsing on teile tasuta. Hoiame veebisaiti üleval kolmel viisil ja ükski neist ei muuda teile näidatavaid hindu:</p>
+      <ul>
+        <li><strong>Partnerlingid.</strong> Mõned lingid (nt eBay-sse) on partnerlingid (ingl <em>affiliate</em>): kui ostate nende kaudu midagi, saame väikese vahendustasu. Teie jaoks hind ei muutu.</li>
+        <li><strong>Reklaam.</strong> Saidil võidakse näidata Google AdSense'i reklaami. See on alati tähistatud sõnaga „Reklaam“.</li>
+        <li><strong>Soovitatud müüjad.</strong> Autolammutused ja varuosamüüjad saavad maksta koha eest veebisaitide loendi kohal asuvas plokis. Ka need kaardid on tähistatud sõnaga „Reklaam“. Teiste linkide järjekord seetõttu ei muutu. Lisateave lehel <a href="/verslui.html">Ettevõtetele</a>.</li>
+      </ul>
+      <p>Klõpse teistele veebisaitidele loendame ilma isikuandmeteta. Täpsemalt <a href="/privatumas.html">privaatsuspoliitikas</a>.</p>
+
+      <h2>Kontakt</h2>
+      <p>Märkasite viga, soovite soovitada allikat või teha koostööd? Kirjutage: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Tagasi otsingusse</a></p>
+    </div>
+
+    <div data-lang="ru" lang="ru" hidden>
+      <h1>О сервисе</h1>
+      <p>Parts-dalys.eu – это единый поиск по объявлениям о б/у запчастях для легковых и грузовых автомобилей на более чем 60 сайтах в Европе и мире. Вы вводите название детали или OEM-номер – на английском, немецком, французском, литовском, польском, итальянском, испанском или нидерландском языке, – а мы переводим запрос на язык каждого сайта: английский «starter motor» в Германии превращается в «Anlasser», а в Польше – в «rozrusznik».</p>
+
+      <h2>Где мы ищем</h2>
+      <ul>
+        <li><strong>Площадки авторазборок</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard и другие.</li>
+        <li><strong>Порталы объявлений</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay и другие.</li>
+        <li><strong>Запчасти для грузовиков</strong> – Truck1, Autoline, Mascus, TruckScout24 и другие.</li>
+      </ul>
+      <p>При нажатии на сайт он открывается уже с вашим запросом. Цены, наличие и условия доставки указаны на странице продавца.</p>
+
+      <h2>Как происходит покупка</h2>
+      <p>Мы ничего не продаём и не принимаем платежи. Нажав на объявление, вы попадаете на сайт продавца – там и происходят покупка, оплата и доставка по правилам этого сайта. Перед покупкой проверьте номер детали и её совместимость с вашим автомобилем.</p>
+
+      <h2>За счёт чего мы работаем</h2>
+      <p>Поиск для вас бесплатен. Сайт финансируется тремя способами, и ни один из них не влияет на показываемые вам цены:</p>
+      <ul>
+        <li><strong>Партнёрские ссылки.</strong> Некоторые ссылки (например, на eBay) являются партнёрскими (англ. <em>affiliate</em>): если вы что-то купите по ним, мы получим небольшое комиссионное вознаграждение. Цена для вас не меняется.</li>
+        <li><strong>Реклама.</strong> На сайте может показываться реклама Google AdSense. Она всегда помечена словом «Реклама».</li>
+        <li><strong>Рекомендуемые продавцы.</strong> Авторазборки и продавцы запчастей могут оплатить место в блоке над списком сайтов. Такие карточки тоже помечены словом «Реклама». Порядок остальных ссылок от этого не меняется. Подробнее – на странице <a href="/verslui.html">Для бизнеса</a>.</li>
+      </ul>
+      <p>Переходы на другие сайты мы подсчитываем без персональных данных. Подробнее – в <a href="/privatumas.html">Политике конфиденциальности</a>.</p>
+
+      <h2>Контакты</h2>
+      <p>Заметили ошибку, хотите предложить источник или сотрудничать? Пишите: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Вернуться к поиску</a></p>
+    </div>
+
+    <div data-lang="uk" lang="uk" hidden>
+      <h1>Про сервіс</h1>
+      <p>Parts-dalys.eu – це єдиний пошук оголошень про вживані запчастини для легкових і вантажних автомобілів на понад 60 сайтах у Європі та світі. Ви вводите назву деталі або OEM-номер – англійською, німецькою, французькою, литовською, польською, італійською, іспанською чи нідерландською мовою, – а ми перекладаємо запит мовою кожного сайту: англійський «starter motor» у Німеччині стає «Anlasser», а в Польщі – «rozrusznik».</p>
+
+      <h2>Де ми шукаємо</h2>
+      <ul>
+        <li><strong>Майданчики авторозборок</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard та інші.</li>
+        <li><strong>Портали оголошень</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay та інші.</li>
+        <li><strong>Запчастини для вантажівок</strong> – Truck1, Autoline, Mascus, TruckScout24 та інші.</li>
+      </ul>
+      <p>Після натискання на сайт він відкривається вже з вашим запитом. Ціни, наявність і доставку вказано на сторінці продавця.</p>
+
+      <h2>Як відбувається купівля</h2>
+      <p>Ми нічого не продаємо й не приймаємо платежів. Натиснувши на оголошення, ви потрапляєте на сайт продавця – саме там відбуваються купівля, оплата й доставка за правилами цього сайту. Перед купівлею перевірте номер деталі та її сумісність із вашим автомобілем.</p>
+
+      <h2>Як ми утримуємо сайт</h2>
+      <p>Пошук для вас безкоштовний. Ми утримуємо сайт трьома способами, і жоден із них не змінює цін, які ви бачите:</p>
+      <ul>
+        <li><strong>Партнерські посилання.</strong> Деякі посилання (наприклад, на eBay) є партнерськими (англ. <em>affiliate</em>): якщо ви щось придбаєте через них, ми отримаємо невелику комісію. Ціна для вас не змінюється.</li>
+        <li><strong>Реклама.</strong> На сайті може показуватися реклама Google AdSense. Вона завжди позначена словом «Реклама».</li>
+        <li><strong>Рекомендовані продавці.</strong> Авторозборки та продавці запчастин можуть оплатити місце в блоці над списком сайтів. Такі картки теж позначено словом «Реклама». Порядок інших посилань через це не змінюється. Докладніше – на сторінці <a href="/verslui.html">Для бізнесу</a>.</li>
+      </ul>
+      <p>Переходи на інші сайти ми рахуємо без персональних даних. Докладніше – у <a href="/privatumas.html">Політиці конфіденційності</a>.</p>
+
+      <h2>Контакти</h2>
+      <p>Помітили помилку, хочете запропонувати джерело чи співпрацювати? Пишіть: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Повернутися до пошуку</a></p>
+    </div>
+
+    <div data-lang="tr" lang="tr" hidden>
+      <h1>Hakkımızda</h1>
+      <p>Parts-dalys.eu, Avrupa'da ve dünyada 60'tan fazla sitedeki ikinci el otomobil ve kamyon parçası ilanlarında tek bir aramayla sonuç bulmanızı sağlar. Parça adını veya OEM numarasını İngilizce, Almanca, Fransızca, Litvanca, Lehçe, İtalyanca, İspanyolca ya da Felemenkçe olarak yazarsınız; biz de sorguyu her sitenin diline çeviririz: İngilizce “starter motor” Almanya'da “Anlasser”, Polonya'da ise “rozrusznik” olur.</p>
+
+      <h2>Nerelerde arıyoruz</h2>
+      <ul>
+        <li><strong>Oto söküm platformları</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard ve diğerleri.</li>
+        <li><strong>İlan portalları</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay ve diğerleri.</li>
+        <li><strong>Kamyon parçaları</strong> – Truck1, Autoline, Mascus, TruckScout24 ve diğerleri.</li>
+      </ul>
+      <p>Bir siteye tıkladığınızda site, aramanız hazır olarak açılır. Fiyat, stok durumu ve teslimat bilgileri satıcının sayfasında yer alır.</p>
+
+      <h2>Satın alma nasıl işler</h2>
+      <p>Biz hiçbir şey satmıyor ve ödeme kabul etmiyoruz. Bir ilana tıkladığınızda satıcının sitesine yönlendirilirsiniz; satın alma, ödeme ve teslimat orada, o sitenin koşullarına göre gerçekleşir. Satın almadan önce parça numarasını ve aracınızla uyumluluğunu kontrol etmenizi öneririz.</p>
+
+      <h2>Nasıl finanse ediliyoruz</h2>
+      <p>Arama sizin için ücretsizdir. Siteyi üç yolla finanse ediyoruz ve bunların hiçbiri size gösterilen fiyatları değiştirmez:</p>
+      <ul>
+        <li><strong>Ortaklık bağlantıları.</strong> Bazı bağlantılar (örneğin eBay'e giden bağlantılar) ortaklık (<em>affiliate</em>) bağlantılarıdır: Bunlar üzerinden bir şey satın alırsanız küçük bir komisyon alırız. Sizin için fiyat değişmez.</li>
+        <li><strong>Reklam.</strong> Sitede Google AdSense reklamları gösterilebilir. Bunlar her zaman “Reklam” ibaresiyle işaretlenir.</li>
+        <li><strong>Önerilen satıcılar.</strong> Oto sökümcüler ve parça satıcıları, site listesinin üstündeki blokta yer almak için ödeme yapabilir. Bu kartlar da “Reklam” ibaresiyle işaretlenir. Diğer bağlantıların sırası bu nedenle değişmez. Ayrıntılar <a href="/verslui.html">Kurumsal</a> sayfasında.</li>
+      </ul>
+      <p>Diğer sitelere yapılan tıklamaları kişisel veri kullanmadan sayarız. Ayrıntılar <a href="/privatumas.html">Gizlilik politikamızda</a>.</p>
+
+      <h2>İletişim</h2>
+      <p>Bir hata mı fark ettiniz, bir kaynak önermek ya da bizimle iş birliği yapmak mı istiyorsunuz? Bize yazın: <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Aramaya dön</a></p>
+    </div>
+
+    <div data-lang="sv" lang="sv" hidden>
+      <h1>Om oss</h1>
+      <p>Parts-dalys.eu är en enda sökning bland annonser för begagnade bil- och lastbilsdelar på fler än 60 webbplatser i Europa och resten av världen. Du skriver delens namn eller OEM-nummer – på engelska, tyska, franska, litauiska, polska, italienska, spanska eller nederländska – och vi översätter sökningen till varje webbplats språk: engelskans ”starter motor” blir ”Anlasser” i Tyskland och ”rozrusznik” i Polen.</p>
+
+      <h2>Var vi söker</h2>
+      <ul>
+        <li><strong>Bildemonteringarnas plattformar</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard med flera.</li>
+        <li><strong>Annonsportaler</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay med flera.</li>
+        <li><strong>Lastbilsdelar</strong> – Truck1, Autoline, Mascus, TruckScout24 med flera.</li>
+      </ul>
+      <p>När du klickar på en webbplats öppnas den direkt med din sökning. Priser, tillgänglighet och leverans anges på säljarens sida.</p>
+
+      <h2>Så går köpet till</h2>
+      <p>Vi säljer ingenting och tar inte emot betalningar. När du klickar på en annons kommer du till säljarens webbplats – där sker köp, betalning och leverans enligt den webbplatsens villkor. Kontrollera artikelnumret och att delen passar ditt fordon innan du köper.</p>
+
+      <h2>Så finansieras vi</h2>
+      <p>Sökningen är gratis för dig. Vi finansierar webbplatsen på tre sätt, och inget av dem påverkar priserna du ser:</p>
+      <ul>
+        <li><strong>Affiliatelänkar.</strong> Vissa länkar (t.ex. till eBay) är affiliatelänkar: om du köper något via dem får vi en liten provision. Ditt pris är detsamma.</li>
+        <li><strong>Annonser.</strong> Webbplatsen kan visa annonser från Google AdSense. De är alltid märkta ”Annons”.</li>
+        <li><strong>Rekommenderade säljare.</strong> Bildemonteringar och delhandlare kan betala för en plats i blocket ovanför listan över webbplatser. Även dessa kort är märkta ”Annons”. Ordningen på övriga länkar påverkas inte av detta. Läs mer på sidan <a href="/verslui.html">För företag</a>.</li>
+      </ul>
+      <p>Vi räknar klick till andra webbplatser utan personuppgifter. Mer information finns i vår <a href="/privatumas.html">integritetspolicy</a>.</p>
+
+      <h2>Kontakt</h2>
+      <p>Har du hittat ett fel, vill du föreslå en källa eller samarbeta med oss? Skriv till <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Tillbaka till sökningen</a></p>
+    </div>
+
+    <div data-lang="no" lang="no" hidden>
+      <h1>Om oss</h1>
+      <p>Parts-dalys.eu er ett samlet søk i annonser for brukte bil- og lastebildeler på over 60 nettsteder i Europa og resten av verden. Du skriver inn delenavnet eller OEM-nummeret – på engelsk, tysk, fransk, litauisk, polsk, italiensk, spansk eller nederlandsk – og vi oversetter søket til språket på hvert nettsted: engelsk «starter motor» blir «Anlasser» i Tyskland og «rozrusznik» i Polen.</p>
+
+      <h2>Hvor vi søker</h2>
+      <ul>
+        <li><strong>Plattformer for bilopphuggerier</strong> – Ovoko, RRR, Opisto, B-Parts, Breakeryard med flere.</li>
+        <li><strong>Annonseportaler</strong> – Allegro, OLX, Kleinanzeigen, Leboncoin, Subito, Marktplaats, Skelbiu.lt, eBay med flere.</li>
+        <li><strong>Lastebildeler</strong> – Truck1, Autoline, Mascus, TruckScout24 med flere.</li>
+      </ul>
+      <p>Når du klikker på et nettsted, åpnes det med søket ditt allerede utfylt. Priser, tilgjengelighet og frakt står på selgerens side.</p>
+
+      <h2>Slik foregår kjøpet</h2>
+      <p>Vi selger ingenting og tar ikke imot betaling. Når du klikker på en annonse, kommer du til selgerens nettsted – der skjer kjøp, betaling og levering etter nettstedets vilkår. Kontroller delenummeret og at delen passer til kjøretøyet ditt før du kjøper.</p>
+
+      <h2>Slik finansieres vi</h2>
+      <p>Søket er gratis for deg. Vi finansierer nettstedet på tre måter, og ingen av dem påvirker prisene du ser:</p>
+      <ul>
+        <li><strong>Tilknyttede lenker.</strong> Noen lenker (f.eks. til eBay) er tilknyttede lenker (<em>affiliate</em>): Hvis du kjøper noe via dem, får vi en liten provisjon. Prisen din er den samme.</li>
+        <li><strong>Annonser.</strong> Nettstedet kan vise annonser fra Google AdSense. De er alltid merket «Annonse».</li>
+        <li><strong>Anbefalte selgere.</strong> Bilopphuggerier og delehandlere kan betale for en plass i blokken over listen med nettsteder. Også disse kortene er merket «Annonse». Rekkefølgen på de øvrige lenkene endres ikke av dette. Les mer på siden <a href="/verslui.html">For bedrifter</a>.</li>
+      </ul>
+      <p>Vi teller klikk til andre nettsteder uten personopplysninger. Mer informasjon finner du i vår <a href="/privatumas.html">personvernerklæring</a>.</p>
+
+      <h2>Kontakt</h2>
+      <p>Har du funnet en feil, vil du foreslå en kilde eller samarbeide med oss? Skriv til <a href="mailto:info@parts-dalys.eu">info@parts-dalys.eu</a>.</p>
+
+      <p><a href="/">← Tilbake til søket</a></p>
+    </div>
   </main>
 
   <footer>
-    <span>© Parts-dalys.eu · kainos orientacinės, pirkimas vyksta pardavėjo svetainėje</span>
-    <nav aria-label="Papildoma"><a href="/apie.html">Apie</a><a href="/verslui.html">Verslui</a><a href="/privatumas.html">Privatumas</a><a href="/dalys">Visos detalės</a></nav>
+    <span data-i18n="foot.note">© Parts-dalys.eu · kainos orientacinės, pirkimas vyksta pardavėjo svetainėje</span>
+    <nav aria-label="Papildoma" data-i18n-attr="aria-label:nav.aria"><a href="/apie.html" data-i18n="nav.about">Apie</a><a href="/verslui.html" data-i18n="nav.business">Verslui</a><a href="/privatumas.html" data-i18n="nav.privacy">Privatumas</a><a href="/dalys" data-i18n="nav.parts">Visos detalės</a></nav>
   </footer>
 </div>
 </body>

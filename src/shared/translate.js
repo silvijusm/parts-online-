@@ -333,6 +333,32 @@ export function inflect(term) {
   return [];
 }
 
+// Plural forms of a dictionary term in another language, so "brake discs", "Bremsscheiben",
+// "disques de frein" or "discos de freno" match as well as the Lithuanian case forms do.
+const PREP = /^(de|d'.*|du|des|a|al|del|di|da|della|dello|per)$/;
+const ROMANCE = {
+  fr: (x) => x + (/(eau|au|eu)$/.test(x) ? "x" : "s"),
+  es: (x) => x + (/[aeiou]$/.test(x) ? "s" : "es"),
+  it: (x) => x.replace(/([cg])o$|([cg])a$|[oe]$|a$/, (m, c1, c2) => c1 ? c1 + "hi" : c2 ? c2 + "he" : m === "a" ? "e" : "i"),
+};
+export function plurals(term, lang) {
+  const w = fold(term).trim().split(/\s+/);
+  if (ROMANCE[lang]) { // nouns and adjectives before the first preposition: "disque de frein" -> "disques de frein"
+    let i = w.findIndex((x) => PREP.test(x));
+    if (i < 0) i = lang === "it" ? 1 : w.length; // Italian part names put the noun first: "pompa carburante"
+    const pl = w.slice(0, i).map((x) => (x.length < 3 || /[sxz]$/.test(x) || !/\p{L}$/u.test(x) ? x : ROMANCE[lang](x)));
+    return [[...pl, ...w.slice(i)].join(" ")];
+  }
+  const head = w.slice(0, -1).map((x) => x + " ").join(""), last = w.at(-1);
+  if (last.length < 3 || !/\p{L}$/u.test(last)) return [];
+  const forms = {
+    en: /s$/.test(last) ? [] : /(x|ch|sh)$/.test(last) ? [last + "es"] : /[^aeiou]y$/.test(last) ? [last.slice(0, -1) + "ies"] : [last + "s"],
+    de: /(e|el|er)$/.test(last) ? [last + "n"] : [last + "e", last + "en", last + "s"],
+    nl: /(e|el|er|en)$/.test(last) ? [last + "s"] : /[^f]f$/.test(last) ? [last.slice(0, -1) + "ven"] : [last + "en", last + "s"],
+  }[lang] || [];
+  return forms.map((f) => head + f);
+}
+
 // Every matchable term → row, longest first so multi-word phrases win.
 const TERMS = (() => {
   const seen = new Map();
@@ -354,6 +380,7 @@ const TERMS = (() => {
     const row = byLt.get(lt);
     if (row) list.forEach((t) => add(t, row));
   }
+  for (const row of DICT) row.forEach((t, i) => { if (i) plurals(t, LANGS[i]).forEach((f) => add(f, row)); });
   return [...seen].map(([t, row]) => ({ t, row })).sort((a, b) => b.t.length - a.t.length);
 })();
 export const TERM_COUNT = TERMS.length;

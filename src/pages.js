@@ -42,8 +42,8 @@ export function renderPartPage(indexHtml, part, base) {
     const v = `value="${escapeHtml(part.name)}"`;
     return /\bvalue="[^"]*"/i.test(tag) ? tag.replace(/\bvalue="[^"]*"/i, () => v) : tag.replace(/\s*\/?>$/, (end) => ` ${v}${end}`);
   });
-  const intro = `\n<h1 class="seo-h1">${escapeHtml(name)} – naudotos detalės paieška</h1>\n`
-    + `<p class="hint seo-intro">Ieškome „${escapeHtml(part.name)}“ (${escapeHtml(part.en)}) Lietuvos, Lenkijos, Vokietijos ir kitų šalių skelbimuose bei ardymo įmonėse. `
+  const intro = `\n<h1 class="seo-h1" lang="lt">${escapeHtml(name)} – naudotos detalės paieška</h1>\n`
+    + `<p class="hint seo-intro" lang="lt">Ieškome „${escapeHtml(part.name)}“ (${escapeHtml(part.en)}) Lietuvos, Lenkijos, Vokietijos ir kitų šalių skelbimuose bei ardymo įmonėse. `
     + `Patikslinkite automobilio markę, modelį arba OEM numerį. <a href="/dalys">Visos detalės</a></p>\n`;
   return h.replace(/<main\b[^>]*>/i, (m) => m + intro);
 }

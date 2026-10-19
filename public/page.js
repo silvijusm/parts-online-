@@ -1,4 +1,6 @@
 // Small helpers for text pages (loaded as a module so it works under a strict CSP).
+import { t } from "/i18n.js";
+
 for (const btn of document.querySelectorAll("[data-copy]")) {
   btn.hidden = false;
   btn.addEventListener("click", async () => {
@@ -16,7 +18,7 @@ for (const btn of document.querySelectorAll("[data-copy]")) {
       ta.remove();
     }
     if (out) {
-      out.textContent = ok ? "Nukopijuota" : "Nepavyko nukopijuoti – pažymėkite adresą ranka";
+      out.textContent = ok ? t("copied") : t("copy.fail");
       clearTimeout(btn._t);
       btn._t = setTimeout(() => (out.textContent = ""), 2500);
     }
