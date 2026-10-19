@@ -146,7 +146,7 @@ export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWind
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const port = Number(process.env.PORT) || 3000;
   const app = createApp();
-  app.listen(port, () => console.log(`Parts-dalis online.eu: http://localhost:${port}`));
+  app.listen(port, () => console.log(`Parts-dalys.eu: http://localhost:${port}`));
   const stop = (sig) => {
     console.log(`${sig}: stabdoma`);
     app.close(() => process.exit(0));
