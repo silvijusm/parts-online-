@@ -1,4 +1,4 @@
-// Page script for Parts online.eu. Loaded as a module so it works under a strict CSP.
+// Page script for Parts-dalys online. Loaded as a module so it works under a strict CSP.
 import { SOURCES, REGIONS, VT } from "/shared/sources.js";
 import { translate, LANGS } from "/shared/translate.js";
 
