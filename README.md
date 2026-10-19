@@ -1,4 +1,4 @@
-# Parts-dalys online
+# Parts-dalis online.eu
 
 Viena paieška per dėvėtų automobilių ir sunkvežimių dalių skelbimus Europoje ir pasaulyje. Serveris vienu metu klausia kelių šaltinių, kainas perskaičiuoja į eurus (ECB kursas) ir surikiuoja nuo pigiausios su pristatymu.
 
