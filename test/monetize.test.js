@@ -229,7 +229,7 @@ test("SEO landing pages, index, sitemap and robots", async (t) => {
   assert.match(robots, /^Sitemap: https:\/\/parts-dalys\.eu\/sitemap\.xml$/m);
 
   const def = (await start(t, {})).base;
-  assert.match(await (await fetch(def + "/robots.txt")).text(), /Sitemap: https:\/\/parts-online\.onrender\.com\/sitemap\.xml/);
+  assert.match(await (await fetch(def + "/robots.txt")).text(), /Sitemap: https:\/\/parts-dalys\.eu\/sitemap\.xml/);
 });
 
 test("landing page HTML-escapes injected values", () => {

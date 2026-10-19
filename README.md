@@ -46,7 +46,7 @@ Visi nustatymai – aplinkos kintamieji; tušti reiškia „išjungta“. Puslap
 | `FEATURED_SOURCES` | mokamos vietos: JSON masyvas `[{"n":"Pavadinimas","url":"https://…","info":"…","cc":"LT","until":"2026-12-31"}]`; pasibaigę (`until` praėjo) ir ne `https` įrašai nerodomi |
 | `ADSENSE_CLIENT`, `ADSENSE_SLOT` | Google AdSense leidėjo ID (`ca-pub-…`) ir reklamos bloko ID. Kai abu nurodyti, į HTML puslapius įterpiamas AdSense skriptas, CSP papildoma Google reklamos domenais, o `/ads.txt` grąžina leidėjo įrašą |
 | `STATS_TOKEN` | slaptažodis statistikai: `/api/stats?token=…` rodo paieškų, puslapių peržiūrų ir paspaudimų skaičius (pagal šaltinį ir dieną) nuo paskutinio paleidimo. Tuščias – statistika išjungta (404) |
-| `SITE_URL` | viešas svetainės adresas kanoninėms nuorodoms, `sitemap.xml` ir `robots.txt` (pagal nutylėjimą `https://parts-online.onrender.com`) |
+| `SITE_URL` | viešas svetainės adresas kanoninėms nuorodoms, `sitemap.xml` ir `robots.txt` (pagal nutylėjimą `https://parts-dalys.eu`) |
 
 Išeinančios nuorodos eina per `/go?u=<adresas>&s=<šaltinis>`: nukreipiama tik `https` adresu į žinomą šaltinio domeną, mokamą vietą arba `www.google.com`, kitaip – 400. Paspaudimai skaičiuojami atmintyje ir rašomi į žurnalą (`click s="…" host=…`).
 

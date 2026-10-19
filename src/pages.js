@@ -5,7 +5,7 @@ export const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&
 
 export const siteUrl = (env = process.env) => {
   const u = String(env.SITE_URL || "").trim().replace(/\/+$/, "");
-  return /^https?:\/\/[^\s"<>]+$/.test(u) ? u : "https://parts-online.onrender.com";
+  return /^https?:\/\/[^\s"<>]+$/.test(u) ? u : "https://parts-dalys.eu";
 };
 
 export function adsenseHead(ads) {

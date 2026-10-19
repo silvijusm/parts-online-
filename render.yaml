@@ -24,7 +24,7 @@ services:
       - key: BRAVE_API_KEY
         sync: false
       - key: SITE_URL
-        value: https://parts-online.onrender.com
+        value: https://parts-dalys.eu
       - key: AFFILIATE_PARAMS
         sync: false
       - key: FEATURED_SOURCES
