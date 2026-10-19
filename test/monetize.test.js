@@ -224,7 +224,9 @@ test("SEO landing pages, index, sitemap and robots", async (t) => {
 
   const robots = await (await fetch(base + "/robots.txt")).text();
   assert.match(robots, /^User-agent: \*$/m);
-  assert.match(robots, /^Disallow: \/go$/m);
+  assert.match(robots, /^Disallow: \/go\$$/m);
+  assert.match(robots, /^Disallow: \/go\?$/m);
+  assert.doesNotMatch(robots, /^Disallow: \/go$/m); // would also block /google*.html
   assert.match(robots, /^Disallow: \/api\/$/m);
   assert.match(robots, /^Sitemap: https:\/\/parts-dalys\.eu\/sitemap\.xml$/m);
 

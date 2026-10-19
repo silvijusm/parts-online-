@@ -100,4 +100,4 @@ ${paths.map((p) => `  <url><loc>${xml(base + p)}</loc></url>`).join("\n")}
 `;
 }
 
-export const renderRobots = (base) => `User-agent: *\nAllow: /\nDisallow: /go\nDisallow: /api/\n\nSitemap: ${base}/sitemap.xml\n`;
+export const renderRobots = (base) => `User-agent: *\nAllow: /\nDisallow: /go$\nDisallow: /go?\nDisallow: /api/\n\nSitemap: ${base}/sitemap.xml\n`;
