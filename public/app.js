@@ -5,7 +5,7 @@ import { translate, LANGS } from "/shared/translate.js";
 const $ = (id) => document.getElementById(id);
 const VT_KEYS = VT.map(([k]) => k);
 const LANG_NAMES = { lt: "lietuviškai", en: "angliškai", de: "vokiškai", pl: "lenkiškai", fr: "prancūziškai", it: "itališkai", es: "ispaniškai", nl: "olandiškai" };
-const st = { vt: "all", data: null, req: 0, lastQ: "" };
+const st = { vt: "all", data: null, req: 0, lastQ: "", pageQ: "", cfg: { affiliate: {}, featured: [], adsense: null } };
 
 const nf = new Map();
 const fmt = (n, c) => {
@@ -36,19 +36,64 @@ function el(tag, attrs = {}, ...kids) {
   return e;
 }
 
+/* ---------- Config and outbound links ---------- */
+
+// Server-side settings: affiliate params per domain, paid (featured) sources, AdSense slot.
+// Any failure just means: no affiliate params, no featured block, no ads.
+async function loadConfig() {
+  try {
+    const res = await fetch("/api/config");
+    if (!res.ok) return;
+    const c = await res.json();
+    st.cfg = {
+      affiliate: c && typeof c.affiliate === "object" && c.affiliate ? c.affiliate : {},
+      featured: Array.isArray(c?.featured) ? c.featured.filter((f) => f && f.n && /^https?:\/\//i.test(f.url || "")) : [],
+      adsense: c?.adsense?.client && c?.adsense?.slot ? c.adsense : null,
+    };
+  } catch { /* keep defaults */ }
+}
+
+// Adds the configured affiliate query string for the URL's domain (exact host or subdomain).
+function withAffiliate(url) {
+  let u;
+  try { u = new URL(url); } catch { return url; }
+  const host = u.hostname.replace(/^www\./, "");
+  const dom = Object.keys(st.cfg.affiliate).find((d) => {
+    const k = d.replace(/^www\./, "").toLowerCase();
+    return host === k || host.endsWith("." + k);
+  });
+  const qs = dom ? String(st.cfg.affiliate[dom] || "").replace(/^[?&]+/, "") : "";
+  if (!qs) return url;
+  const add = new URLSearchParams(qs);
+  if ([...add.keys()].some((k) => u.searchParams.has(k))) return url; // already tagged (e.g. by the eBay API)
+  const [base, hash] = url.split("#");
+  return base + (base.includes("?") ? (/[?&]$/.test(base) ? "" : "&") : "?") + qs + (hash != null ? "#" + hash : "");
+}
+
+// Every outbound marketplace link goes through /go so clicks can be counted.
+function goHref(url, source) {
+  return "/go?u=" + encodeURIComponent(withAffiliate(url)) + "&s=" + encodeURIComponent(source || "");
+}
+
 /* ---------- URL state ---------- */
 
 function readUrl() {
   const p = new URLSearchParams(location.search);
+  // Initial query: ?q= first, then the SEO page's meta tag, then the input's prefilled value.
+  const meta = document.querySelector('meta[name="initial-query"]')?.content?.trim() || "";
+  st.pageQ = (meta || $("q").getAttribute("value") || "").trim().slice(0, 120);
   const q = (p.get("q") || "").trim();
-  if (q) $("q").value = q.slice(0, 120);
+  $("q").value = (q || st.pageQ).slice(0, 120);
   if (VT_KEYS.includes(p.get("vt"))) st.vt = p.get("vt");
 }
 
 function shareUrl(q) {
   const u = new URL(location.href);
   u.search = "";
-  if (q) u.searchParams.set("q", q);
+  u.hash = "";
+  // On a /dalys/<slug> page the path already carries its own query; keep that URL clean.
+  const own = u.pathname.startsWith("/dalys/") && q === st.pageQ;
+  if (q && !own) u.searchParams.set("q", q);
   if (st.vt !== "all") u.searchParams.set("vt", st.vt);
   return u.toString();
 }
@@ -102,6 +147,7 @@ function renderHow(q) {
 
 function renderLinks(q) {
   const term = q || "";
+  st.linksQ = term;
   const ok = (s) => st.vt === "all" || s.t === "both" || s.t === st.vt;
   const groups = REGIONS.map(([key, name]) => {
     const list = SOURCES.filter((s) => s.r === key && ok(s));
@@ -110,11 +156,44 @@ function renderLinks(q) {
       el("h3", {}, name),
       el("div", { class: "grid" }, ...list.map((s) =>
         el("a", {
-          class: "src", href: s.u(translate(term, s.l)), target: "_blank", rel: "noopener",
+          class: "src", href: goHref(s.u(translate(term, s.l)), s.n), target: "_blank", rel: "noopener nofollow",
           title: s.info || s.d,
         }, el("span", { class: "cc" }, s.cc), el("span", {}, s.n)))));
   });
-  $("links").replaceChildren(...groups.filter(Boolean));
+  const list = groups.filter(Boolean);
+  const half = Math.ceil(list.length / 2);
+  // Two containers so the ad slot between them stays put (an AdSense <ins> must not be recreated).
+  $("links").replaceChildren(...list.slice(0, half));
+  $("links-b").replaceChildren(...list.slice(half));
+  renderFeatured(term);
+}
+
+function renderFeatured(q) {
+  const f = st.cfg.featured;
+  $("featured").hidden = !f.length;
+  if (!f.length) return;
+  $("featured-list").replaceChildren(...f.map((x) => {
+    const url = String(x.url).replace(/\{q\}/g, encodeURIComponent(q || ""));
+    return el("a", { class: "fcard", href: goHref(url, x.n), target: "_blank", rel: "noopener sponsored" },
+      el("span", { class: "adlabel" }, "Reklama"),
+      el("span", { class: "fn" }, x.cc ? el("span", { class: "cc" }, String(x.cc)) : null, el("strong", {}, String(x.n))),
+      x.info ? el("span", { class: "fi" }, String(x.info)) : null);
+  }));
+}
+
+function renderAds() {
+  const a = st.cfg.adsense;
+  for (const slot of document.querySelectorAll(".ad-slot")) {
+    slot.hidden = !a;
+    if (!a || slot.dataset.filled) continue;
+    slot.dataset.filled = "1";
+    slot.append(el("ins", {
+      class: "adsbygoogle", style: "display:block",
+      "data-ad-client": a.client, "data-ad-slot": a.slot,
+      "data-ad-format": "auto", "data-full-width-responsive": "true",
+    }));
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch { /* ad blocker */ }
+  }
 }
 
 /* ---------- Results ---------- */
@@ -176,7 +255,7 @@ function itemRow(i) {
     el("span", {}, i.source),
     i.condition ? el("span", {}, i.condition) : null,
     i.location && i.location !== i.country ? el("span", {}, "siunčia iš " + i.location) : null);
-  return el("a", { class: "item", href: i.url, target: "_blank", rel: "noopener nofollow" },
+  return el("a", { class: "item", href: goHref(i.url, i.source), target: "_blank", rel: "noopener nofollow" },
     thumb(i),
     el("div", { class: "ti" },
       el("div", { class: "t" }, i.title),
@@ -312,3 +391,8 @@ $("copy").addEventListener("click", copyLink);
 readUrl();
 renderChips();
 run();
+loadConfig().then(() => {
+  renderLinks(st.linksQ);
+  if (st.data && !st.data.linksOnly) renderResults();
+  renderAds();
+});

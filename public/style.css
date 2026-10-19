@@ -1,3 +1,4 @@
+[hidden]{display:none!important}
 :root{
   --bg:#eef1f2; --surface:#ffffff; --fg:#1b2329; --muted:#5b6770; --line:#d3dade;
   --accent:#0b5cad; --accent-fg:#ffffff; --tag:#f2c230; --tag-fg:#1b2329; --soft:#e2e8ec; --warn:#a15c00; --bad:#b3261e;
@@ -106,10 +107,39 @@ a.src span:last-child{overflow-wrap:anywhere;min-width:0}
 .hint{font-size:.88rem;color:var(--muted);margin:-12px 0 0}
 
 footer{border-top:1px solid var(--line);margin-top:12px;padding-top:16px;font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
-footer nav{display:flex;gap:16px}
+footer nav{display:flex;flex-wrap:wrap;gap:6px 16px}
+
+/* Featured (paid) sources and ad slots: always marked "Reklama" */
+.adlabel{font:500 .7rem var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.featured{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-left:4px solid var(--tag);border-radius:8px;background:var(--soft)}
+.featured h3{font:600 .8rem var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+a.fcard{display:grid;gap:4px;align-content:start;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;color:var(--fg);text-decoration:none;min-width:0}
+a.fcard:hover{border-color:var(--accent)}
+.fcard .fn{display:flex;gap:8px;align-items:center;min-width:0}
+.fcard .fi{font-size:.86rem;color:var(--muted)}
+.ad-slot{display:grid;gap:4px;min-width:0;overflow:hidden}
+.ad-slot[hidden]{display:none}
+.ad-slot ins{min-height:90px}
+
+/* Text pages */
+.lead{font-size:1.1rem;color:var(--muted)}
+.note{padding:10px 14px;border-radius:8px;background:var(--soft);border-left:4px solid var(--tag);font-size:.92rem}
+.offer{list-style:none;padding:0 !important;display:grid;gap:8px}
+.offer li{padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.pkgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0}
+.pkg{padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;display:grid;gap:6px;align-content:start}
+.pkg.hl{border:2px solid var(--accent)}
+.pkg h3{font-family:var(--display);font-size:1.3rem;margin:0}
+.pkg .price{font-family:var(--display);font-weight:700;font-size:1.8rem;line-height:1}
+.pkg .price small{font:500 .9rem var(--body);color:var(--muted)}
+.pkg ul{margin:0;padding-left:1.1em;font-size:.92rem}
+.contact{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.contact code{font:500 1.05rem var(--mono)}
 
 /* Apie page */
 .prose{max-width:70ch}
+.prose.wide{max-width:900px}
 .prose h1{font-family:var(--display);font-size:2rem;margin:0 0 8px}
 .prose h2{margin-top:24px}
 .prose p,.prose li{color:var(--fg)}

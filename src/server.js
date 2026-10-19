@@ -1,4 +1,4 @@
-// HTTP server: serves public/, /shared/ modules and /api/search. No dependencies, Node 20+.
+// HTTP server: serves public/, /shared/ modules, /api/search, SEO pages and outbound /go. No dependencies, Node 20+.
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
@@ -9,6 +9,9 @@ import { createEbayAdapter } from "./adapters/ebay.js";
 import { createWebAdapter } from "./adapters/web.js";
 import { createDemoAdapter } from "./adapters/demo.js";
 import { ratesInfo } from "./currency.js";
+import { createConfig, createStats, checkOutbound, withAffiliate, tokenOk } from "./monetize.js";
+import { adsenseHead, injectHead, renderPartPage, renderPartsIndex, renderSitemap, renderRobots, siteUrl } from "./pages.js";
+import { partBySlug } from "./shared/seo.js";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const PUBLIC_DIR = resolve(ROOT, "public");
@@ -28,17 +31,24 @@ const BASE_HEADERS = {
   "Referrer-Policy": "strict-origin-when-cross-origin",
 };
 
+// Hosts AdSense loads scripts, frames and beacons from (incl. Funding Choices consent message).
+const AD_HOSTS = ["https://pagead2.googlesyndication.com", "https://googleads.g.doubleclick.net", "https://tpc.googlesyndication.com",
+  "https://www.google.com", "https://adservice.google.com", "https://fundingchoicesmessages.google.com", "https://*.adtrafficquality.google"];
+
 // Inline <script> blocks are allowed by hash, so the page works without 'unsafe-inline' for scripts.
-export function csp(html = "") {
+// ads=true opens script/frame/connect sources for AdSense; otherwise the policy is unchanged.
+export function csp(html = "", ads = false) {
   const hashes = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)]
     .map((m) => `'sha256-${createHash("sha256").update(m[1]).digest("base64")}'`);
+  const extra = ads ? AD_HOSTS : [];
   return [
     "default-src 'self'",
-    ["script-src 'self'", ...hashes].join(" "),
+    ["script-src 'self'", ...hashes, ...extra].join(" "),
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' https: data:",
-    "connect-src 'self'",
+    ["connect-src 'self'", ...extra].join(" "),
+    ...(ads ? [["frame-src 'self'", ...extra].join(" ")] : []),
     "manifest-src 'self'",
     "object-src 'none'",
     "base-uri 'self'",
@@ -93,19 +103,28 @@ export function buildAdapters(env = process.env) {
   return adapters;
 }
 
-export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWindowMs = 60e3, log = console.log } = {}) {
+export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWindowMs = 60e3, log = console.log, env = process.env, now = () => new Date() } = {}) {
   const search = createSearch(adapters);
+  const config = createConfig(env, { now });
+  const stats = createStats({ now });
+  const base = siteUrl(env);
+  const adsClient = /^ca-pub-\d{10,20}$/.test(String(env.ADSENSE_CLIENT || "").trim()) ? env.ADSENSE_CLIENT.trim() : "";
   const demo = adapters.length === 1 && adapters[0].name === "Pavyzdžiai";
   const linksOnly = adapters.length === 0;
   const limited = createRateLimiter({ limit: rateLimit, windowMs: rateWindowMs });
 
   return createServer(async (req, res) => {
     const url = new URL(req.url, "http://localhost");
+    const cfg = config();
     const send = (code, body, type = "application/json; charset=utf-8", extra = {}) => {
       const isHtml = type.startsWith("text/html");
+      if (isHtml && code === 200) {
+        if (cfg.adsense) body = injectHead(String(body), adsenseHead(cfg.adsense));
+        if (req.method === "GET") stats.pageview(url.pathname);
+      }
       res.writeHead(code, {
         ...BASE_HEADERS,
-        "Content-Security-Policy": csp(isHtml ? String(body) : ""),
+        "Content-Security-Policy": csp(isHtml ? String(body) : "", isHtml && !!cfg.adsense),
         "Content-Type": type,
         ...extra,
       });
@@ -120,6 +139,7 @@ export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWind
         const q = (url.searchParams.get("q") || "").trim().slice(0, 120);
         const vt = ["car", "truck"].includes(url.searchParams.get("vt")) ? url.searchParams.get("vt") : "all";
         if (q.length < 2) return send(400, { error: "Įrašykite bent 2 simbolius." });
+        stats.search();
         if (linksOnly) return send(200, { q, vehicleType: vt, count: 0, items: [], errors: [], sources: [], linksOnly }, undefined, { "Cache-Control": "no-store" });
         const t0 = performance.now();
         const result = await search(q, { vehicleType: vt });
@@ -128,6 +148,37 @@ export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWind
       }
       if (url.pathname === "/api/status") {
         return send(200, { demo, linksOnly, adapters: adapters.map((a) => a.name), rates: ratesInfo() }, undefined, { "Cache-Control": "no-store" });
+      }
+      if (url.pathname === "/api/config") {
+        const { affiliate, featured, adsense } = cfg;
+        return send(200, { affiliate, featured, adsense }, undefined, { "Cache-Control": "no-cache" });
+      }
+      if (url.pathname === "/api/stats") {
+        if (!tokenOk(url.searchParams.get("token"), env.STATS_TOKEN)) return send(404, "Nerasta", TEXT);
+        return send(200, stats.snapshot(), undefined, { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" });
+      }
+      if (url.pathname === "/go") {
+        const noindex = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" };
+        const target = checkOutbound(url.searchParams.get("u") || "", cfg.hosts);
+        if (!target) return send(400, "Neleistina nuoroda", TEXT, noindex);
+        const source = (url.searchParams.get("s") || target.hostname).replace(/[\x00-\x1f]/g, "").trim().slice(0, 80) || target.hostname;
+        stats.click(source);
+        log(`click s=${JSON.stringify(source)} host=${target.hostname}`);
+        return send(302, "", TEXT, { ...noindex, Location: withAffiliate(target, cfg.affiliate) });
+      }
+      if (url.pathname === "/ads.txt") {
+        if (!adsClient) return send(404, "Nerasta", TEXT);
+        return send(200, `google.com, ${adsClient.slice(3)}, DIRECT, f08c47fec0942fa0\n`, TEXT, { "Cache-Control": "public, max-age=3600" });
+      }
+      if (url.pathname === "/robots.txt") return send(200, renderRobots(base), TEXT, { "Cache-Control": "public, max-age=3600" });
+      if (url.pathname === "/sitemap.xml") return send(200, renderSitemap(base), TYPES[".xml"], { "Cache-Control": "public, max-age=3600" });
+      const dalys = url.pathname.match(/^\/dalys(?:\/([^/]*))?\/?$/);
+      if (dalys) {
+        if (!dalys[1]) return send(200, renderPartsIndex(base), TYPES[".html"], { "Cache-Control": "no-cache" });
+        const part = partBySlug(dalys[1]);
+        if (!part) return send(404, "Nerasta", TEXT);
+        const page = renderPartPage(await readFile(join(PUBLIC_DIR, "index.html"), "utf8"), part, base);
+        return send(200, page, TYPES[".html"], { "Cache-Control": "no-cache" });
       }
       const file = url.pathname.startsWith("/shared/")
         ? safePath(SHARED_DIR, url.pathname.slice("/shared".length))

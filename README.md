@@ -35,17 +35,37 @@ Aplinkos kintamieji (`.env` arba talpinimo nustatymuose):
 
 `/api/search` leidžia 30 užklausų per minutę iš vieno IP (už tarpinio serverio imamas paskutinis `X-Forwarded-For` adresas), virš ribos grąžina 429. Atsakyme `sources` rodo kiekvieno šaltinio rezultatų skaičių, trukmę ir klaidą.
 
+## Uždarbis
+
+Visi nustatymai – aplinkos kintamieji; tušti reiškia „išjungta“. Puslapis juos gauna per `/api/config`.
+
+| Kintamasis | Paskirtis |
+|---|---|
+| `AFFILIATE_PARAMS` | JSON objektas „domenas → parametrai“, pvz. `{"allegro.pl":"aff_id=123"}`; parametrai pridedami prie išeinančių nuorodų į tą domeną (ir jo subdomenus). Neteisingas JSON ignoruojamas su įspėjimu žurnale |
+| `EBAY_CAMPAIGN_ID` | eBay Partner Network kampanija: visoms eBay nuorodoms (com, co.uk, de, at, fr, it, es, nl, com.au) pridedami EPN parametrai (`mkcid`, `mkrid`, `campid`, `toolid`, `mkevt`) |
+| `FEATURED_SOURCES` | mokamos vietos: JSON masyvas `[{"n":"Pavadinimas","url":"https://…","info":"…","cc":"LT","until":"2026-12-31"}]`; pasibaigę (`until` praėjo) ir ne `https` įrašai nerodomi |
+| `ADSENSE_CLIENT`, `ADSENSE_SLOT` | Google AdSense leidėjo ID (`ca-pub-…`) ir reklamos bloko ID. Kai abu nurodyti, į HTML puslapius įterpiamas AdSense skriptas, CSP papildoma Google reklamos domenais, o `/ads.txt` grąžina leidėjo įrašą |
+| `STATS_TOKEN` | slaptažodis statistikai: `/api/stats?token=…` rodo paieškų, puslapių peržiūrų ir paspaudimų skaičius (pagal šaltinį ir dieną) nuo paskutinio paleidimo. Tuščias – statistika išjungta (404) |
+| `SITE_URL` | viešas svetainės adresas kanoninėms nuorodoms, `sitemap.xml` ir `robots.txt` (pagal nutylėjimą `https://parts-online.onrender.com`) |
+
+Išeinančios nuorodos eina per `/go?u=<adresas>&s=<šaltinis>`: nukreipiama tik `https` adresu į žinomą šaltinio domeną, mokamą vietą arba `www.google.com`, kitaip – 400. Paspaudimai skaičiuojami atmintyje ir rašomi į žurnalą (`click s="…" host=…`).
+
+Paieškos sistemoms: `/dalys` – visų detalių sąrašas, `/dalys/<detalė>` (pvz. `/dalys/starteris`, `/dalys/pavaru-deze`) – atskiras puslapis kiekvienai žodyno detalei su savo pavadinimu, aprašymu ir užpildyta paieška, `/sitemap.xml`, `/robots.txt`.
+
 ## Talpinimas (Render)
 
 1. Įkelkite repozitoriją į GitHub; Render → **New → Blueprint** ir pasirinkite ją – `render.yaml` sukurs nemokamą web servisą.
-2. Įrašykite slaptus kintamuosius (`EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET`, `EBAY_CAMPAIGN_ID`, `EBAY_MARKETPLACES`, `BRAVE_API_KEY`); `DELIVERY_COUNTRY=LT` jau nustatytas.
+2. Įrašykite slaptus kintamuosius (`EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET`, `EBAY_CAMPAIGN_ID`, `EBAY_MARKETPLACES`, `BRAVE_API_KEY`, `AFFILIATE_PARAMS`, `FEATURED_SOURCES`, `ADSENSE_CLIENT`, `ADSENSE_SLOT`, `STATS_TOKEN`); `DELIVERY_COUNTRY=LT` ir `SITE_URL` jau nustatyti.
 3. Render tikrina `/healthz`, o stabdydamas siunčia SIGTERM – serveris užbaigia užklausas ir išsijungia.
 
 Nemokamas Render servisas po 15 min. neveiklumo užmiega, pirmas atidarymas užtrunka ~1 min. Kitur galima naudoti `Dockerfile` (`docker build -t parts-online . && docker run -p 3000:3000 --env-file .env parts-online`). GitHub Actions (`.github/workflows/ci.yml`) paleidžia testus su Node 20 ir 22.
 
 ## Struktūra
 
-- `src/server.js` – HTTP serveris: `public/` failai, `/api/search?q=…&vt=all|car|truck`, `/api/status`, `/healthz`, saugumo antraštės (CSP), užklausų ribojimas
+- `src/server.js` – HTTP serveris: `public/` failai, `/api/search?q=…&vt=all|car|truck`, `/api/status`, `/api/config`, `/api/stats`, `/go`, `/dalys`, `/sitemap.xml`, `/robots.txt`, `/ads.txt`, `/healthz`, saugumo antraštės (CSP), užklausų ribojimas
+- `src/monetize.js` – partnerių parametrai, mokamos vietos, AdSense nustatymai, `/go` leidžiami domenai, statistika
+- `src/pages.js` – serverio generuojami SEO puslapiai, `sitemap.xml`, `robots.txt`
+- `src/shared/seo.js` – detalių puslapių adresai (`PARTS`, `slugify`) iš žodyno
 - `src/search.js` – šaltinių sujungimas, dublikatų šalinimas, rikiavimas, 15 min. talpykla
 - `src/adapters/ebay.js`, `src/adapters/web.js`, `src/adapters/demo.js` – šaltiniai
 - `src/currency.js` – ECB valiutų kursai
