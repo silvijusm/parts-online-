@@ -10,7 +10,7 @@ const vars = (s) => [...s.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort().join("
 const PAGES = ["index.html", "apie.html", "verslui.html", "privatumas.html"];
 
 test("every UI string exists and is non-empty in all languages", () => {
-  assert.deepEqual(UI_LANGS, ["lt", "en", "de", "fr", "fi", "lv", "et", "ru", "uk", "tr", "sv", "no"]);
+  assert.deepEqual(UI_LANGS, ["lt", "en", "de", "fr", "fi", "lv", "et", "ru", "uk", "tr", "sv", "no", "pl"]);
   for (const l of UI_LANGS) assert.ok(LOCALES[l] && LANG_LABELS[l], l);
   const keys = Object.keys(STRINGS.lt);
   assert.ok(keys.length > 100, `only ${keys.length} keys`);
@@ -75,6 +75,8 @@ test("language choice, plurals and labels", () => {
   assert.equal(pickLang("pt-BR", "de-AT"), "de");
   assert.equal(pickLang("pt-BR", undefined, ""), "lt");
   assert.equal(pickLang("UK"), "uk");
+  assert.equal(pickLang("pl-PL"), "pl");
+  assert.deepEqual([1, 3, 5, 22].map((n) => makeT("pl").plural("sum.items", n)), ["ogłoszenie", "ogłoszenia", "ogłoszeń", "ogłoszenia"]);
   const lt = makeT("lt"), ru = makeT("ru"), en = makeT("en");
   assert.deepEqual([1, 2, 10, 21].map((n) => lt.plural("sum.items", n)), ["skelbimas", "skelbimai", "skelbimų", "skelbimas"]);
   assert.deepEqual([1, 3, 5, 21].map((n) => ru.plural("sum.items", n)), ["объявление", "объявления", "объявлений", "объявление"]);
