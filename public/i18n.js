@@ -7,8 +7,9 @@ const urlLang = new URLSearchParams(location.search).get("lang");
 const fromUrl = UI_LANGS.includes(urlLang) ? urlLang : "";
 let saved = "";
 try { saved = localStorage.getItem(KEY) || ""; } catch { /* storage blocked */ }
-// SEO part pages are Lithuanian landing pages: only an explicit choice (URL or saved) switches them.
-const seo = location.pathname.startsWith("/dalys/");
+// SEO part pages are Lithuanian landing pages, and crawlers should index the Lithuanian default:
+// for both, only an explicit choice (URL or saved) switches the language.
+const seo = location.pathname.startsWith("/dalys/") || /bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent);
 const browser = seo ? [] : navigator.languages?.length ? navigator.languages : [navigator.language];
 
 export const lang = fromUrl || (UI_LANGS.includes(saved) ? saved : "") || pickLang(...browser);
