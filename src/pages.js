@@ -92,7 +92,7 @@ ${items}
 const xml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" })[c]);
 
 export function renderSitemap(base) {
-  const paths = ["/", "/apie.html", "/verslui.html", "/privatumas.html", "/dalys", ...PARTS.map((p) => `/dalys/${p.slug}`)];
+  const paths = ["/", "/apie.html", "/verslui.html", "/privatumas.html", "/skelbimai/", "/dalys", ...PARTS.map((p) => `/dalys/${p.slug}`)];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${paths.map((p) => `  <url><loc>${xml(base + p)}</loc></url>`).join("\n")}
