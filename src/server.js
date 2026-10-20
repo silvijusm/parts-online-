@@ -172,6 +172,7 @@ export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWind
       }
       if (url.pathname === "/robots.txt") return send(200, renderRobots(base), TEXT, { "Cache-Control": "public, max-age=3600" });
       if (url.pathname === "/sitemap.xml") return send(200, renderSitemap(base), TYPES[".xml"], { "Cache-Control": "public, max-age=3600" });
+      if (url.pathname === "/skelbimai") return send(301, "", TEXT, { Location: "/skelbimai/" });
       const dalys = url.pathname.match(/^\/dalys(?:\/([^/]*))?\/?$/);
       if (dalys) {
         if (!dalys[1]) return send(200, renderPartsIndex(base), TYPES[".html"], { "Cache-Control": "no-cache" });

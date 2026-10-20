@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { createApp, csp } from "../src/server.js";
 import { parseAffiliate, parseFeatured, parseAdsense, checkOutbound, withAffiliate, tokenOk, createStats, createConfig } from "../src/monetize.js";
 import { slugify, PARTS, partBySlug } from "../src/shared/seo.js";
@@ -217,10 +218,10 @@ test("SEO landing pages, index, sitemap and robots", async (t) => {
   r = await fetch(base + "/sitemap.xml");
   assert.equal(r.headers.get("content-type"), "application/xml; charset=utf-8");
   const sm = await r.text();
-  for (const p of ["/", "/apie.html", "/verslui.html", "/privatumas.html", "/dalys", "/dalys/starteris"]) {
+  for (const p of ["/", "/apie.html", "/verslui.html", "/privatumas.html", "/skelbimai/", "/dalys", "/dalys/starteris"]) {
     assert.ok(sm.includes(`<loc>https://parts-dalys.eu${p}</loc>`), p);
   }
-  assert.equal((sm.match(/<url>/g) || []).length, PARTS.length + 5);
+  assert.equal((sm.match(/<url>/g) || []).length, PARTS.length + 6);
 
   const robots = await (await fetch(base + "/robots.txt")).text();
   assert.match(robots, /^User-agent: \*$/m);
@@ -242,4 +243,20 @@ test("landing page HTML-escapes injected values", () => {
   assert.match(page, /<input id="q" type="search" value="a&quot;&lt;b&gt;">/);
   assert.match(page, /<meta name="description" content="A&quot;&lt;b&gt;/);
   assert.match(page, /<link rel="canonical" href="https:\/\/e\.lt\/dalys\/x">/);
+});
+
+test("classifieds catalog is served at /skelbimai/ and its inline script passes the CSP", async (t) => {
+  const { base } = await start(t);
+  let r = await fetch(base + "/skelbimai", { redirect: "manual" });
+  assert.equal(r.status, 301);
+  assert.equal(r.headers.get("location"), "/skelbimai/");
+  r = await fetch(base + "/skelbimai/");
+  assert.equal(r.status, 200);
+  assert.equal(r.headers.get("content-type"), "text/html; charset=utf-8");
+  const html = await r.text();
+  assert.match(html, /<title>Pasaulio skelbimų portalai<\/title>/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/parts-dalys\.eu\/skelbimai\/">/);
+  const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+  const hash = createHash("sha256").update(script).digest("base64");
+  assert.ok(r.headers.get("content-security-policy").includes(`'sha256-${hash}'`));
 });

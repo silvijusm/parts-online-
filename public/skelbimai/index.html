@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Žinomiausių pasaulio skelbimų, pardavimo, auto, nekilnojamojo turto, darbo ir kitų portalų katalogas pagal šalis. 17 kalbų, paieška ir filtrai.">
+<meta property="og:title" content="Pasaulio skelbimų portalai">
+<meta property="og:description" content="Apie 500 skelbimų ir pardavimo svetainių iš 118 šalių vienoje vietoje.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1f47d6">
+<link rel="canonical" href="https://parts-dalys.eu/skelbimai/">
+<meta property="og:url" content="https://parts-dalys.eu/skelbimai/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f47d6'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23ffd84a' stroke-width='5'/%3E%3Cpath d='M15 32h34M32 15c7 8 7 26 0 34M32 15c-7 8-7 26 0 34' fill='none' stroke='%23ffd84a' stroke-width='3'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Pasaulio skelbimų portalai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,750&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an index you scan — sticky filter bar, then countries as compact blocks in a responsive grid */
+:root{
+  --bg:#f3f4f6; --surface:#ffffff; --ink:#15192b; --muted:#5c6378; --line:#dfe2ea;
+  --accent:#1f47d6; --accent-soft:#e3e9ff; --tag:#ffd84a; --tag-ink:#2b2300;
+  --c-B:#1f47d6; --c-P:#8a3fd1; --c-A:#c2410c; --c-N:#0f7a5c; --c-D:#9a6a00; --c-V:#be185d; --c-T:#0369a1; --c-G:#4d7c0f; --c-K:#b91c1c; --c-F:#a21caf; --c-Z:#475569;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1120; --surface:#161a2e; --ink:#e8eaf3; --muted:#9aa1b8; --line:#272c45;
+  --accent:#8ea6ff; --accent-soft:#1f2850; --tag:#ffd84a; --tag-ink:#2b2300;
+  --c-B:#8ea6ff; --c-P:#c79bf2; --c-A:#ff9a5c; --c-N:#4fd1a5; --c-D:#f0c14b; --c-V:#f472b6; --c-T:#5ec8f2; --c-G:#a3d65c; --c-K:#f87171; --c-F:#e879f9; --c-Z:#b6c2d4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1120; --surface:#161a2e; --ink:#e8eaf3; --muted:#9aa1b8; --line:#272c45;
+  --accent:#8ea6ff; --accent-soft:#1f2850; --tag:#ffd84a; --tag-ink:#2b2300;
+  --c-B:#8ea6ff; --c-P:#c79bf2; --c-A:#ff9a5c; --c-N:#4fd1a5; --c-D:#f0c14b; --c-V:#f472b6; --c-T:#5ec8f2; --c-G:#a3d65c; --c-K:#f87171; --c-F:#e879f9; --c-Z:#b6c2d4; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+header{padding-block:40px 20px;display:grid;gap:10px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:750 clamp(32px,5.5vw,56px)/1.02 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 mark{background:var(--tag);color:var(--tag-ink);padding:0 .15em;border-radius:4px;transform:rotate(-1deg);display:inline-block}
+.lead{color:var(--muted);max-width:62ch;margin:0}
+.stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:6px;font-variant-numeric:tabular-nums}
+.stats b{font:750 26px/1 var(--display);display:block}
+.stats span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;display:grid;gap:10px;border-bottom:1px solid var(--line)}
+.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:0 14px}
+.search:focus-within{border-color:var(--accent)}
+.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:500 16px var(--body);padding:12px 0;outline:none}
+.search svg{flex:none;color:var(--muted)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,.site:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--dc,var(--muted));flex:none}
+.count{font:400 13px var(--mono);color:var(--muted);padding-top:16px}
+.grid{columns:300px;column-gap:16px;padding-block:12px 48px}
+.country{break-inside:avoid;background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:16px;overflow:hidden}
+.country h2{font:750 17px/1.2 var(--display);margin:0;padding:12px 14px 10px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+.country h2 .flag{font-size:20px;line-height:1}
+.country h2 small{margin-left:auto;font:400 12px var(--mono);color:var(--muted)}
+.country ul{list-style:none;margin:0;padding:4px 0}
+.site{display:flex;align-items:center;gap:10px;padding:6px 14px;color:var(--ink);text-decoration:none;min-width:0}
+.site:hover{background:var(--accent-soft)}
+.country li{display:flex;align-items:center}
+.country li .site{flex:1;padding-right:6px}
+.star{flex:none;border:0;background:transparent;color:var(--muted);font-size:17px;line-height:1;padding:6px 12px 6px 4px;cursor:pointer;opacity:.45}
+.star:hover,.star:focus-visible{opacity:1;color:var(--ink)}
+.star[aria-pressed="true"]{opacity:1;color:#e0a100}
+.pop{font:600 10px var(--body);letter-spacing:.06em;text-transform:uppercase;background:var(--tag);color:var(--tag-ink);border-radius:4px;padding:1px 5px;flex:none}
+.chip .n{font:400 11px var(--mono);opacity:.7}
+.site .dom{font:500 14px var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.site .cat{font:500 11px var(--body);color:var(--cc);border:1px solid currentColor;border-radius:4px;padding:1px 6px;white-space:nowrap;flex:none}
+.site .note{color:var(--muted);font:400 12px var(--body);white-space:nowrap}
+.empty{padding:40px 0;color:var(--muted)}
+.suggest{border-top:1px solid var(--line);padding-block:28px;display:grid;gap:14px;max-width:760px}
+.suggest h2{font:750 24px/1.15 var(--display);margin:0}
+.suggest p{margin:0;color:var(--muted)}
+.sform{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;align-items:end}
+.sform label{display:grid;gap:4px;font-size:12px;color:var(--muted);min-width:0}
+.sform input,.sform select{width:100%;min-width:0;font:400 15px var(--body);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:8px;padding:9px 10px}
+.sform input:focus,.sform select:focus{outline:none;border-color:var(--accent)}
+.sform .wide{grid-column:1/-1}
+.btn{font:600 15px var(--body);background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:11px 18px;cursor:pointer;justify-self:start}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.totop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.smsg{font-size:14px;min-height:1.2em}
+.smsg.ok{color:var(--c-N)}.smsg.err{color:var(--c-K)}
+.slist h3{font:600 14px var(--body);margin:6px 0}
+.slist ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.slist li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;font-size:13px;color:var(--muted)}
+.slist li b{font:500 14px var(--mono);color:var(--ink);overflow-wrap:anywhere}
+.totop{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:6;font:600 13px var(--body);background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:10px 14px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+footer{border-top:1px solid var(--line);padding-block:20px 40px;color:var(--muted);font-size:13px}
+@media (max-width:480px){.stats{gap:16px}.site .note{display:none}}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.lang{display:inline-flex;align-items:center;gap:6px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0 4px 0 10px}
+.lang:focus-within{border-color:var(--accent)}
+.lang select{border:0;background:transparent;color:var(--ink);font:500 14px var(--body);padding:7px 4px;cursor:pointer;outline:none}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="top">
+      <div class="eyebrow"><span data-t="eyebrow"></span> · <span id="regCount"></span></div>
+      <label class="lang" for="lang">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
+        <select id="lang" aria-label="Language"></select>
+      </label>
+    </div>
+    <h1 id="h1"></h1>
+    <p class="lead" data-t="lead"></p>
+    <div class="stats">
+      <div><b id="sSites">0</b><span data-t="sites"></span></div>
+      <div><b id="sCountries">0</b><span data-t="countries"></span></div>
+    </div>
+  </header>
+
+  <div class="bar">
+    <label class="search" for="q">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" autocomplete="off">
+    </label>
+    <div class="chips" id="regions"></div>
+    <div class="chips" id="cats"></div>
+  </div>
+
+  <div class="count" id="count"></div>
+  <main class="grid" id="grid"></main>
+  <section class="suggest" id="suggest" hidden>
+    <h2 id="sH"></h2>
+    <p id="sLead"></p>
+    <form class="sform" id="sform" novalidate>
+      <label for="sUrl"><span id="lUrl"></span><input id="sUrl" type="text" inputmode="url" placeholder="example.com" maxlength="120" autocomplete="off"></label>
+      <label for="sCountry"><span id="lCountry"></span><select id="sCountry"></select></label>
+      <label for="sType"><span id="lType"></span><select id="sType"></select></label>
+      <label for="sNote" class="wide"><span id="lNote"></span><input id="sNote" type="text" maxlength="200" autocomplete="off"></label>
+      <button class="btn" id="sSend" type="submit"></button>
+    </form>
+    <div class="smsg" id="sMsg" role="status"></div>
+    <div class="slist" id="sList"></div>
+  </section>
+  <footer data-t="footer"></footer>
+</div>
+<button class="totop" id="totop" type="button" hidden></button>
+
+<script>
+const L={
+lt:{name:"Lietuvių",pop:"Populiariausi",s:{"h": "Pasiūlykite portalą", "lead": "Žinote gerą skelbimų svetainę, kurios čia nėra? Parašykite jos adresą, ir ji bus peržiūrėta.", "url": "Adresas", "country": "Šalis", "type": "Tipas", "note": "Pastaba (nebūtina)", "send": "Siųsti pasiūlymą", "sent": "Ačiū! Pasiūlymas gautas.", "mine": "Jūsų pasiūlymai", "all": "Visi pasiūlymai", "none": "Pasiūlymų dar nėra.", "noAccess": "Siūlyti gali tik prisijungę lankytojai, turintys teisę keisti duomenis.", "bad": "Įveskite svetainės adresą, pvz. example.com", "other": "Kita / tarptautinė", "top": "Į viršų"},fav:"Mėgstami",title:"Pasaulio skelbimų portalai",h1:"Pasaulio {m} portalai",m:"skelbimų",eyebrow:"Katalogas",lead:"Žinomiausios skelbimų, pardavimo, automobilių, nekilnojamojo turto ir darbo svetainės pagal šalis. Ieškokite pagal šalį ar adresą, filtruokite pagal regioną ir tipą. Paspaudus adresą, svetainė atsidaro naujame lange.",sites:"svetainių",countries:"šalių",ph:"Ieškoti: šalis arba adresas, pvz. „Vokietija“ ar „olx“",allR:"Visi regionai",allT:"Visi tipai",count:"Rodoma adresų: {n} · šalių: {c}",empty:"Nieko nerasta. Pabandykite kitą žodį arba pasirinkite „Visi regionai“ ir „Visi tipai“.",footer:"Sąrašas sudarytas 2026 m. spalį. Kai kurie portalai gali būti pakeitę adresą ar veiklą. Šis puslapis tik nukreipia į svetaines ir nėra su jomis susijęs.",regs:"regionai",R:["Tarptautiniai","Europa","Rytų Europa ir Kaukazas","Šiaurės Amerika","Lotynų Amerika","Azija","Artimieji Rytai","Afrika","Okeanija"],C:["Skelbimai","Prekyvietė","Auto","Nekilnojamasis turtas","Darbas","Plokštelės","Technika","Gyvūnai","Aukcionai","Drabužiai","Nemokamai"]},
+en:{name:"English",pop:"Most popular",s:{"h": "Suggest a site", "lead": "Know a good classifieds site that is missing? Enter its address and it will be reviewed.", "url": "Address", "country": "Country", "type": "Type", "note": "Note (optional)", "send": "Send suggestion", "sent": "Thanks! Your suggestion was received.", "mine": "Your suggestions", "all": "All suggestions", "none": "No suggestions yet.", "noAccess": "Only signed-in visitors who can edit data may send suggestions.", "bad": "Enter a website address, e.g. example.com", "other": "Other / international", "top": "Back to top"},fav:"Favorites",title:"World Classifieds Sites",h1:"World {m} sites",m:"classifieds",eyebrow:"Directory",lead:"The best-known classifieds, marketplace, car, real estate and job websites, grouped by country. Search by country or address, filter by region and type. Each address opens in a new tab.",sites:"websites",countries:"countries",ph:"Search a country or address, e.g. “Germany” or “olx”",allR:"All regions",allT:"All types",count:"Showing addresses: {n} · countries: {c}",empty:"Nothing found. Try another word or choose “All regions” and “All types”.",footer:"List compiled in October 2026. Some sites may have changed their address or closed. This page only links to the sites and is not affiliated with them.",regs:"regions",R:["International","Europe","Eastern Europe & Caucasus","North America","Latin America","Asia","Middle East","Africa","Oceania"],C:["Classifieds","Marketplace","Cars","Real estate","Jobs","Vinyl","Electronics","Pets","Auctions","Fashion","Free stuff"]},
+ru:{name:"Русский",pop:"Популярные",s:{"h": "Предложите сайт", "lead": "Знаете хороший сайт объявлений, которого здесь нет? Укажите адрес, и мы его проверим.", "url": "Адрес", "country": "Страна", "type": "Тип", "note": "Примечание (необязательно)", "send": "Отправить", "sent": "Спасибо! Предложение получено.", "mine": "Ваши предложения", "all": "Все предложения", "none": "Предложений пока нет.", "noAccess": "Предлагать могут только вошедшие посетители с правом изменять данные.", "bad": "Введите адрес сайта, напр. example.com", "other": "Другая / международный", "top": "Наверх"},fav:"Избранное",title:"Доски объявлений мира",h1:"{m} мира",m:"Доски объявлений",eyebrow:"Каталог",lead:"Самые известные сайты объявлений, маркетплейсы, автомобили, недвижимость и работа по странам. Ищите по стране или адресу, фильтруйте по региону и типу. Адрес открывается в новой вкладке.",sites:"сайтов",countries:"стран",ph:"Поиск: страна или адрес, напр. «Германия» или «olx»",allR:"Все регионы",allT:"Все типы",count:"Адресов: {n} · стран: {c}",empty:"Ничего не найдено. Попробуйте другое слово или выберите «Все регионы» и «Все типы».",footer:"Список составлен в октябре 2026 г. Некоторые сайты могли сменить адрес или закрыться. Эта страница лишь ссылается на сайты и не связана с ними.",regs:"регионов",R:["Международные","Европа","Восточная Европа и Кавказ","Северная Америка","Латинская Америка","Азия","Ближний Восток","Африка","Океания"],C:["Объявления","Маркетплейс","Авто","Недвижимость","Работа","Винил","Техника","Животные","Аукционы","Одежда","Бесплатно"]},
+uk:{name:"Українська",pop:"Популярні",s:{"h": "Запропонуйте сайт", "lead": "Знаєте хороший сайт оголошень, якого тут немає? Вкажіть адресу, і ми його перевіримо.", "url": "Адреса", "country": "Країна", "type": "Тип", "note": "Примітка (необов’язково)", "send": "Надіслати", "sent": "Дякуємо! Пропозицію отримано.", "mine": "Ваші пропозиції", "all": "Усі пропозиції", "none": "Пропозицій ще немає.", "noAccess": "Пропонувати можуть лише відвідувачі, що увійшли й мають право змінювати дані.", "bad": "Введіть адресу сайту, напр. example.com", "other": "Інша / міжнародний", "top": "Догори"},fav:"Обране",title:"Дошки оголошень світу",h1:"{m} світу",m:"Дошки оголошень",eyebrow:"Каталог",lead:"Найвідоміші сайти оголошень, маркетплейси, авто, нерухомість і робота за країнами. Шукайте за країною чи адресою, фільтруйте за регіоном і типом. Адреса відкривається в новій вкладці.",sites:"сайтів",countries:"країн",ph:"Пошук: країна або адреса, напр. «Німеччина» чи «olx»",allR:"Усі регіони",allT:"Усі типи",count:"Адрес: {n} · країн: {c}",empty:"Нічого не знайдено. Спробуйте інше слово або виберіть «Усі регіони» та «Усі типи».",footer:"Список складено в жовтні 2026 р. Деякі сайти могли змінити адресу або закритися. Ця сторінка лише посилається на сайти й не пов’язана з ними.",regs:"регіонів",R:["Міжнародні","Європа","Східна Європа та Кавказ","Північна Америка","Латинська Америка","Азія","Близький Схід","Африка","Океанія"],C:["Оголошення","Маркетплейс","Авто","Нерухомість","Робота","Вініл","Техніка","Тварини","Аукціони","Одяг","Безкоштовно"]},
+pl:{name:"Polski",pop:"Najpopularniejsze",s:{"h": "Zaproponuj serwis", "lead": "Znasz dobry serwis ogłoszeniowy, którego tu brakuje? Podaj adres, a zostanie sprawdzony.", "url": "Adres", "country": "Kraj", "type": "Typ", "note": "Uwagi (opcjonalnie)", "send": "Wyślij propozycję", "sent": "Dziękujemy! Propozycja otrzymana.", "mine": "Twoje propozycje", "all": "Wszystkie propozycje", "none": "Brak propozycji.", "noAccess": "Propozycje mogą wysyłać tylko zalogowani użytkownicy z prawem edycji danych.", "bad": "Wpisz adres strony, np. example.com", "other": "Inny / międzynarodowy", "top": "Do góry"},fav:"Ulubione",title:"Portale ogłoszeniowe świata",h1:"{m} świata",m:"Portale ogłoszeniowe",eyebrow:"Katalog",lead:"Najbardziej znane serwisy ogłoszeniowe, sprzedażowe, motoryzacyjne, nieruchomości i pracy według krajów. Szukaj po kraju lub adresie, filtruj według regionu i typu. Adres otwiera się w nowej karcie.",sites:"serwisów",countries:"krajów",ph:"Szukaj: kraj lub adres, np. „Niemcy” lub „olx”",allR:"Wszystkie regiony",allT:"Wszystkie typy",count:"Adresów: {n} · krajów: {c}",empty:"Nic nie znaleziono. Spróbuj innego słowa lub wybierz „Wszystkie regiony” i „Wszystkie typy”.",footer:"Lista opracowana w październiku 2026 r. Niektóre serwisy mogły zmienić adres lub zakończyć działalność. Ta strona jedynie odsyła do serwisów i nie jest z nimi powiązana.",regs:"regionów",R:["Międzynarodowe","Europa","Europa Wschodnia i Kaukaz","Ameryka Północna","Ameryka Łacińska","Azja","Bliski Wschód","Afryka","Oceania"],C:["Ogłoszenia","Marketplace","Motoryzacja","Nieruchomości","Praca","Winyle","Elektronika","Zwierzęta","Aukcje","Odzież","Za darmo"]},
+lv:{name:"Latviešu",pop:"Populārākie",s:{"h": "Iesakiet vietni", "lead": "Zināt labu sludinājumu vietni, kuras te nav? Ierakstiet adresi, un tā tiks pārbaudīta.", "url": "Adrese", "country": "Valsts", "type": "Veids", "note": "Piezīme (nav obligāta)", "send": "Sūtīt ieteikumu", "sent": "Paldies! Ieteikums saņemts.", "mine": "Jūsu ieteikumi", "all": "Visi ieteikumi", "none": "Ieteikumu vēl nav.", "noAccess": "Ieteikt var tikai pieteikušies apmeklētāji ar tiesībām mainīt datus.", "bad": "Ievadiet vietnes adresi, piem. example.com", "other": "Cita / starptautiska", "top": "Uz augšu"},fav:"Izlase",title:"Pasaules sludinājumu portāli",h1:"Pasaules {m} portāli",m:"sludinājumu",eyebrow:"Katalogs",lead:"Pazīstamākās sludinājumu, tirdzniecības, auto, nekustamā īpašuma un darba vietnes pa valstīm. Meklējiet pēc valsts vai adreses, filtrējiet pēc reģiona un veida. Adrese atveras jaunā cilnē.",sites:"vietņu",countries:"valstu",ph:"Meklēt: valsts vai adrese, piem. „Vācija” vai „olx”",allR:"Visi reģioni",allT:"Visi veidi",count:"Adreses: {n} · valstis: {c}",empty:"Nekas netika atrasts. Mēģiniet citu vārdu vai izvēlieties „Visi reģioni” un „Visi veidi”.",footer:"Saraksts sastādīts 2026. gada oktobrī. Dažas vietnes var būt mainījušas adresi vai darbību. Šī lapa tikai norāda uz vietnēm un nav ar tām saistīta.",regs:"reģioni",R:["Starptautiskie","Eiropa","Austrumeiropa un Kaukāzs","Ziemeļamerika","Latīņamerika","Āzija","Tuvie Austrumi","Āfrika","Okeānija"],C:["Sludinājumi","Tirgus","Auto","Nekustamais īpašums","Darbs","Vinila plates","Tehnika","Dzīvnieki","Izsoles","Apģērbs","Bez maksas"]},
+et:{name:"Eesti",pop:"Populaarseimad",s:{"h": "Soovita portaali", "lead": "Tead head kuulutuseportaali, mida siin pole? Sisesta aadress ja see vaadatakse üle.", "url": "Aadress", "country": "Riik", "type": "Tüüp", "note": "Märkus (vabatahtlik)", "send": "Saada soovitus", "sent": "Aitäh! Soovitus on kätte saadud.", "mine": "Sinu soovitused", "all": "Kõik soovitused", "none": "Soovitusi veel pole.", "noAccess": "Soovitada saavad ainult sisse loginud külastajad, kel on õigus andmeid muuta.", "bad": "Sisesta veebiaadress, nt example.com", "other": "Muu / rahvusvaheline", "top": "Üles"},fav:"Lemmikud",title:"Maailma kuulutuseportaalid",h1:"Maailma {m}",m:"kuulutuseportaalid",eyebrow:"Kataloog",lead:"Tuntuimad kuulutuste-, müügi-, auto-, kinnisvara- ja tööportaalid riikide kaupa. Otsi riigi või aadressi järgi, filtreeri piirkonna ja tüübi järgi. Aadress avaneb uuel vahelehel.",sites:"portaali",countries:"riiki",ph:"Otsi: riik või aadress, nt „Saksamaa” või „olx”",allR:"Kõik piirkonnad",allT:"Kõik tüübid",count:"Aadresse: {n} · riike: {c}",empty:"Midagi ei leitud. Proovi muud sõna või vali „Kõik piirkonnad” ja „Kõik tüübid”.",footer:"Nimekiri koostatud 2026. aasta oktoobris. Mõni portaal võib olla aadressi muutnud või tegevuse lõpetanud. See leht ainult viitab portaalidele ega ole nendega seotud.",regs:"piirkonda",R:["Rahvusvahelised","Euroopa","Ida-Euroopa ja Kaukaasia","Põhja-Ameerika","Ladina-Ameerika","Aasia","Lähis-Ida","Aafrika","Okeaania"],C:["Kuulutused","Turuplats","Auto","Kinnisvara","Töö","Vinüülplaadid","Elektroonika","Loomad","Oksjonid","Rõivad","Tasuta"]},
+fi:{name:"Suomi",pop:"Suosituimmat",s:{"h": "Ehdota sivustoa", "lead": "Tiedätkö hyvän ilmoitussivuston, jota ei ole listalla? Kirjoita osoite, niin se tarkistetaan.", "url": "Osoite", "country": "Maa", "type": "Tyyppi", "note": "Huomautus (valinnainen)", "send": "Lähetä ehdotus", "sent": "Kiitos! Ehdotus vastaanotettu.", "mine": "Omat ehdotuksesi", "all": "Kaikki ehdotukset", "none": "Ei vielä ehdotuksia.", "noAccess": "Ehdottaa voivat vain kirjautuneet kävijät, joilla on oikeus muokata tietoja.", "bad": "Kirjoita sivuston osoite, esim. example.com", "other": "Muu / kansainvälinen", "top": "Ylös"},fav:"Suosikit",title:"Maailman ilmoitusportaalit",h1:"Maailman {m}",m:"ilmoitusportaalit",eyebrow:"Hakemisto",lead:"Tunnetuimmat ilmoitus-, kauppa-, auto-, asunto- ja työpaikkasivustot maittain. Hae maan tai osoitteen mukaan, rajaa alueen ja tyypin mukaan. Osoite avautuu uudessa välilehdessä.",sites:"sivustoa",countries:"maata",ph:"Hae: maa tai osoite, esim. ”Saksa” tai ”olx”",allR:"Kaikki alueet",allT:"Kaikki tyypit",count:"Osoitteita: {n} · maita: {c}",empty:"Mitään ei löytynyt. Kokeile toista sanaa tai valitse ”Kaikki alueet” ja ”Kaikki tyypit”.",footer:"Luettelo koottu lokakuussa 2026. Jotkin sivustot ovat voineet vaihtaa osoitetta tai lopettaa. Tämä sivu vain linkittää sivustoille eikä liity niihin.",regs:"aluetta",R:["Kansainväliset","Eurooppa","Itä-Eurooppa ja Kaukasia","Pohjois-Amerikka","Latinalainen Amerikka","Aasia","Lähi-itä","Afrikka","Oseania"],C:["Ilmoitukset","Kauppapaikka","Autot","Asunnot","Työpaikat","Vinyylit","Elektroniikka","Lemmikit","Huutokaupat","Vaatteet","Ilmaiseksi"]},
+sv:{name:"Svenska",pop:"Populärast",s:{"h": "Föreslå en sajt", "lead": "Känner du till en bra annonssajt som saknas? Skriv adressen så granskas den.", "url": "Adress", "country": "Land", "type": "Typ", "note": "Kommentar (valfritt)", "send": "Skicka förslag", "sent": "Tack! Förslaget har tagits emot.", "mine": "Dina förslag", "all": "Alla förslag", "none": "Inga förslag ännu.", "noAccess": "Endast inloggade besökare med rätt att ändra data kan skicka förslag.", "bad": "Ange en webbadress, t.ex. example.com", "other": "Annat / internationellt", "top": "Till toppen"},fav:"Favoriter",title:"Världens annonssajter",h1:"Världens {m}",m:"annonssajter",eyebrow:"Katalog",lead:"De mest kända annons-, försäljnings-, bil-, bostads- och jobbsajterna per land. Sök på land eller adress, filtrera på region och typ. Adressen öppnas i en ny flik.",sites:"sajter",countries:"länder",ph:"Sök: land eller adress, t.ex. ”Tyskland” eller ”olx”",allR:"Alla regioner",allT:"Alla typer",count:"Adresser: {n} · länder: {c}",empty:"Inget hittades. Prova ett annat ord eller välj ”Alla regioner” och ”Alla typer”.",footer:"Listan sammanställd i oktober 2026. Vissa sajter kan ha bytt adress eller lagts ned. Sidan länkar bara till sajterna och har ingen koppling till dem.",regs:"regioner",R:["Internationella","Europa","Östeuropa och Kaukasus","Nordamerika","Latinamerika","Asien","Mellanöstern","Afrika","Oceanien"],C:["Annonser","Marknadsplats","Bilar","Bostäder","Jobb","Vinyl","Elektronik","Djur","Auktioner","Kläder","Gratis"]},
+de:{name:"Deutsch",pop:"Beliebteste",s:{"h": "Portal vorschlagen", "lead": "Sie kennen ein gutes Anzeigenportal, das hier fehlt? Geben Sie die Adresse ein, sie wird geprüft.", "url": "Adresse", "country": "Land", "type": "Typ", "note": "Hinweis (optional)", "send": "Vorschlag senden", "sent": "Danke! Ihr Vorschlag ist eingegangen.", "mine": "Ihre Vorschläge", "all": "Alle Vorschläge", "none": "Noch keine Vorschläge.", "noAccess": "Vorschläge können nur angemeldete Besucher mit Bearbeitungsrecht senden.", "bad": "Geben Sie eine Webadresse ein, z. B. example.com", "other": "Anderes / international", "top": "Nach oben"},fav:"Favoriten",title:"Anzeigenportale der Welt",h1:"{m} der Welt",m:"Anzeigenportale",eyebrow:"Verzeichnis",lead:"Die bekanntesten Kleinanzeigen-, Marktplatz-, Auto-, Immobilien- und Jobportale nach Ländern. Suchen Sie nach Land oder Adresse, filtern Sie nach Region und Typ. Die Adresse öffnet sich in einem neuen Tab.",sites:"Websites",countries:"Länder",ph:"Suchen: Land oder Adresse, z. B. „Deutschland“ oder „olx“",allR:"Alle Regionen",allT:"Alle Typen",count:"Adressen: {n} · Länder: {c}",empty:"Nichts gefunden. Versuchen Sie ein anderes Wort oder wählen Sie „Alle Regionen“ und „Alle Typen“.",footer:"Liste erstellt im Oktober 2026. Einige Portale haben möglicherweise ihre Adresse geändert oder den Betrieb eingestellt. Diese Seite verlinkt nur auf die Portale und steht in keiner Verbindung zu ihnen.",regs:"Regionen",R:["International","Europa","Osteuropa und Kaukasus","Nordamerika","Lateinamerika","Asien","Naher Osten","Afrika","Ozeanien"],C:["Kleinanzeigen","Marktplatz","Auto","Immobilien","Jobs","Schallplatten","Elektronik","Tiere","Auktionen","Mode","Zu verschenken"]},
+fr:{name:"Français",pop:"Les plus populaires",s:{"h": "Proposer un site", "lead": "Vous connaissez un bon site d’annonces absent de la liste ? Indiquez son adresse, il sera examiné.", "url": "Adresse", "country": "Pays", "type": "Type", "note": "Remarque (facultatif)", "send": "Envoyer", "sent": "Merci ! Votre proposition a été reçue.", "mine": "Vos propositions", "all": "Toutes les propositions", "none": "Aucune proposition pour l’instant.", "noAccess": "Seuls les visiteurs connectés autorisés à modifier les données peuvent proposer.", "bad": "Saisissez une adresse, ex. example.com", "other": "Autre / international", "top": "Haut de page"},fav:"Favoris",title:"Sites d’annonces du monde",h1:"{m} du monde",m:"Sites d’annonces",eyebrow:"Annuaire",lead:"Les sites d’annonces, places de marché, automobile, immobilier et emploi les plus connus, classés par pays. Recherchez par pays ou adresse, filtrez par région et type. L’adresse s’ouvre dans un nouvel onglet.",sites:"sites",countries:"pays",ph:"Rechercher : pays ou adresse, ex. « Allemagne » ou « olx »",allR:"Toutes les régions",allT:"Tous les types",count:"Adresses : {n} · pays : {c}",empty:"Aucun résultat. Essayez un autre mot ou choisissez « Toutes les régions » et « Tous les types ».",footer:"Liste établie en octobre 2026. Certains sites ont pu changer d’adresse ou fermer. Cette page renvoie simplement vers les sites et n’y est pas affiliée.",regs:"régions",R:["International","Europe","Europe de l’Est et Caucase","Amérique du Nord","Amérique latine","Asie","Moyen-Orient","Afrique","Océanie"],C:["Annonces","Marketplace","Auto","Immobilier","Emploi","Vinyles","Électronique","Animaux","Enchères","Mode","Dons"]},
+es:{name:"Español",pop:"Más populares",s:{"h": "Sugiere un sitio", "lead": "¿Conoces un buen portal de anuncios que falta? Escribe su dirección y lo revisaremos.", "url": "Dirección", "country": "País", "type": "Tipo", "note": "Nota (opcional)", "send": "Enviar sugerencia", "sent": "¡Gracias! Sugerencia recibida.", "mine": "Tus sugerencias", "all": "Todas las sugerencias", "none": "Aún no hay sugerencias.", "noAccess": "Solo los visitantes con sesión iniciada y permiso para editar datos pueden sugerir.", "bad": "Escribe una dirección web, p. ej. example.com", "other": "Otro / internacional", "top": "Volver arriba"},fav:"Favoritos",title:"Portales de anuncios del mundo",h1:"{m} del mundo",m:"Portales de anuncios",eyebrow:"Directorio",lead:"Los sitios de anuncios, marketplaces, coches, inmuebles y empleo más conocidos, por países. Busca por país o dirección, filtra por región y tipo. La dirección se abre en una pestaña nueva.",sites:"sitios",countries:"países",ph:"Buscar: país o dirección, p. ej. «Alemania» u «olx»",allR:"Todas las regiones",allT:"Todos los tipos",count:"Direcciones: {n} · países: {c}",empty:"No se encontró nada. Prueba otra palabra o elige «Todas las regiones» y «Todos los tipos».",footer:"Lista elaborada en octubre de 2026. Algunos sitios pueden haber cambiado de dirección o cerrado. Esta página solo enlaza a los sitios y no está afiliada a ellos.",regs:"regiones",R:["Internacionales","Europa","Europa del Este y Cáucaso","Norteamérica","Latinoamérica","Asia","Oriente Medio","África","Oceanía"],C:["Anuncios","Marketplace","Motor","Inmuebles","Empleo","Vinilos","Electrónica","Mascotas","Subastas","Moda","Gratis"]},
+it:{name:"Italiano",pop:"Più popolari",s:{"h": "Suggerisci un sito", "lead": "Conosci un buon sito di annunci che manca? Scrivi l’indirizzo e verrà verificato.", "url": "Indirizzo", "country": "Paese", "type": "Tipo", "note": "Nota (facoltativa)", "send": "Invia suggerimento", "sent": "Grazie! Suggerimento ricevuto.", "mine": "I tuoi suggerimenti", "all": "Tutti i suggerimenti", "none": "Ancora nessun suggerimento.", "noAccess": "Solo i visitatori connessi con permesso di modifica possono inviare suggerimenti.", "bad": "Inserisci un indirizzo web, es. example.com", "other": "Altro / internazionale", "top": "Torna su"},fav:"Preferiti",title:"Portali di annunci del mondo",h1:"{m} del mondo",m:"Portali di annunci",eyebrow:"Elenco",lead:"I siti di annunci, marketplace, auto, immobili e lavoro più noti, divisi per paese. Cerca per paese o indirizzo, filtra per regione e tipo. L’indirizzo si apre in una nuova scheda.",sites:"siti",countries:"paesi",ph:"Cerca: paese o indirizzo, es. «Germania» o «olx»",allR:"Tutte le regioni",allT:"Tutti i tipi",count:"Indirizzi: {n} · paesi: {c}",empty:"Nessun risultato. Prova un’altra parola o scegli «Tutte le regioni» e «Tutti i tipi».",footer:"Elenco compilato a ottobre 2026. Alcuni siti potrebbero aver cambiato indirizzo o chiuso. Questa pagina rimanda soltanto ai siti e non è affiliata a essi.",regs:"regioni",R:["Internazionali","Europa","Europa orientale e Caucaso","America del Nord","America Latina","Asia","Medio Oriente","Africa","Oceania"],C:["Annunci","Marketplace","Auto","Immobili","Lavoro","Vinili","Elettronica","Animali","Aste","Moda","Gratis"]},
+pt:{name:"Português",pop:"Mais populares",s:{"h": "Sugira um site", "lead": "Conhece um bom site de anúncios que falta aqui? Informe o endereço e ele será analisado.", "url": "Endereço", "country": "País", "type": "Tipo", "note": "Observação (opcional)", "send": "Enviar sugestão", "sent": "Obrigado! Sugestão recebida.", "mine": "Suas sugestões", "all": "Todas as sugestões", "none": "Ainda não há sugestões.", "noAccess": "Só visitantes conectados com permissão para editar dados podem sugerir.", "bad": "Digite um endereço, ex. example.com", "other": "Outro / internacional", "top": "Voltar ao topo"},fav:"Favoritos",title:"Portais de anúncios do mundo",h1:"{m} do mundo",m:"Portais de anúncios",eyebrow:"Diretório",lead:"Os sites de anúncios, marketplaces, automóveis, imóveis e emprego mais conhecidos, por país. Pesquise por país ou endereço, filtre por região e tipo. O endereço abre em uma nova aba.",sites:"sites",countries:"países",ph:"Pesquisar: país ou endereço, ex. “Alemanha” ou “olx”",allR:"Todas as regiões",allT:"Todos os tipos",count:"Endereços: {n} · países: {c}",empty:"Nada encontrado. Tente outra palavra ou escolha “Todas as regiões” e “Todos os tipos”.",footer:"Lista elaborada em outubro de 2026. Alguns sites podem ter mudado de endereço ou encerrado. Esta página apenas aponta para os sites e não tem ligação com eles.",regs:"regiões",R:["Internacionais","Europa","Europa Oriental e Cáucaso","América do Norte","América Latina","Ásia","Oriente Médio","África","Oceania"],C:["Classificados","Marketplace","Veículos","Imóveis","Empregos","Vinil","Eletrônicos","Animais","Leilões","Moda","Grátis"]},
+tr:{name:"Türkçe",pop:"En popüler",s:{"h": "Site önerin", "lead": "Burada olmayan iyi bir ilan sitesi biliyor musunuz? Adresini yazın, incelensin.", "url": "Adres", "country": "Ülke", "type": "Tür", "note": "Not (isteğe bağlı)", "send": "Öneriyi gönder", "sent": "Teşekkürler! Öneriniz alındı.", "mine": "Önerileriniz", "all": "Tüm öneriler", "none": "Henüz öneri yok.", "noAccess": "Yalnızca oturum açmış ve veri düzenleme yetkisi olan ziyaretçiler öneri gönderebilir.", "bad": "Bir web adresi girin, ör. example.com", "other": "Diğer / uluslararası", "top": "Başa dön"},fav:"Favoriler",title:"Dünyanın ilan siteleri",h1:"Dünyanın {m}",m:"ilan siteleri",eyebrow:"Dizin",lead:"En bilinen ilan, pazar yeri, otomobil, emlak ve iş siteleri ülkelere göre. Ülke veya adrese göre arayın, bölge ve türe göre filtreleyin. Adres yeni sekmede açılır.",sites:"site",countries:"ülke",ph:"Ara: ülke veya adres, ör. “Almanya” ya da “olx”",allR:"Tüm bölgeler",allT:"Tüm türler",count:"Adres: {n} · ülke: {c}",empty:"Sonuç bulunamadı. Başka bir kelime deneyin veya “Tüm bölgeler” ve “Tüm türler”i seçin.",footer:"Liste Ekim 2026’da hazırlandı. Bazı siteler adresini değiştirmiş veya kapanmış olabilir. Bu sayfa yalnızca sitelere bağlantı verir ve onlarla bağlantılı değildir.",regs:"bölge",R:["Uluslararası","Avrupa","Doğu Avrupa ve Kafkasya","Kuzey Amerika","Latin Amerika","Asya","Orta Doğu","Afrika","Okyanusya"],C:["İlanlar","Pazar yeri","Otomobil","Emlak","İş","Plak","Elektronik","Evcil hayvan","Müzayede","Giyim","Ücretsiz"]},
+zh:{name:"中文",pop:"最热门",s:{"h": "推荐网站", "lead": "知道这里没有收录的好网站吗？填写网址，我们会进行审核。", "url": "网址", "country": "国家/地区", "type": "类型", "note": "备注（可选）", "send": "提交推荐", "sent": "谢谢！已收到您的推荐。", "mine": "您的推荐", "all": "全部推荐", "none": "暂无推荐。", "noAccess": "只有已登录且有权编辑数据的访客才能提交推荐。", "bad": "请输入网址，例如 example.com", "other": "其他 / 国际", "top": "返回顶部"},fav:"收藏",title:"全球分类信息网站",h1:"全球{m}",m:"分类信息网站",eyebrow:"目录",lead:"按国家整理的知名分类信息、电商平台、汽车、房产和招聘网站。可按国家或网址搜索，并按地区和类型筛选。网址会在新标签页中打开。",sites:"个网站",countries:"个国家/地区",ph:"搜索：国家或网址，例如“德国”或“olx”",allR:"所有地区",allT:"所有类型",count:"网址：{n} · 国家/地区：{c}",empty:"未找到结果。请尝试其他关键词，或选择“所有地区”和“所有类型”。",footer:"列表整理于 2026 年 10 月。部分网站可能已更换网址或停止运营。本页仅提供链接，与这些网站无关联。",regs:"个地区",R:["国际","欧洲","东欧和高加索","北美","拉丁美洲","亚洲","中东","非洲","大洋洲"],C:["分类信息","电商平台","汽车","房产","招聘","黑胶唱片","电子产品","宠物","拍卖","服饰","免费赠送"]},
+ja:{name:"日本語",pop:"人気",s:{"h": "サイトを提案", "lead": "掲載されていない良いサイトをご存じですか？アドレスを入力していただければ確認します。", "url": "アドレス", "country": "国・地域", "type": "種類", "note": "メモ（任意）", "send": "提案を送信", "sent": "ありがとうございます。提案を受け付けました。", "mine": "あなたの提案", "all": "すべての提案", "none": "まだ提案はありません。", "noAccess": "提案できるのは、サインインしてデータ編集権限のある訪問者のみです。", "bad": "サイトのアドレスを入力してください（例：example.com）", "other": "その他 / 国際", "top": "トップへ"},fav:"お気に入り",title:"世界のクラシファイドサイト",h1:"世界の{m}",m:"クラシファイドサイト",eyebrow:"ディレクトリ",lead:"国別にまとめた有名な個人売買・マーケットプレイス・自動車・不動産・求人サイト。国名やアドレスで検索し、地域と種類で絞り込めます。アドレスは新しいタブで開きます。",sites:"サイト",countries:"か国・地域",ph:"検索：国名またはアドレス（例：「ドイツ」「olx」）",allR:"すべての地域",allT:"すべての種類",count:"アドレス：{n} · 国・地域：{c}",empty:"見つかりませんでした。別の言葉を試すか、「すべての地域」と「すべての種類」を選んでください。",footer:"2026年10月作成。一部のサイトはアドレス変更や閉鎖の可能性があります。このページはリンクのみを掲載しており、各サイトとは無関係です。",regs:"地域",R:["国際","ヨーロッパ","東ヨーロッパ・コーカサス","北アメリカ","ラテンアメリカ","アジア","中東","アフリカ","オセアニア"],C:["個人売買","マーケット","自動車","不動産","求人","レコード","家電・電子機器","ペット","オークション","ファッション","無料譲渡"]}
+};
+const POP=new Set(["ebay.com", "amazon.com", "facebook.com/marketplace", "craigslist.org", "aliexpress.com", "etsy.com", "vinted.com", "discogs.com", "skelbiu.lt", "autoplius.lt", "aruodas.lt", "ss.com", "okidoki.ee", "auto24.ee", "olx.pl", "allegro.pl", "otomoto.pl", "kleinanzeigen.de", "mobile.de", "willhaben.at", "tutti.ch", "leboncoin.fr", "2dehands.be", "marktplaats.nl", "gumtree.com", "rightmove.co.uk", "autotrader.co.uk", "donedeal.ie", "wallapop.com", "idealista.com", "olx.pt", "subito.it", "xe.gr", "blocket.se", "finn.no", "dba.dk", "tori.fi", "bazos.cz", "bazos.sk", "jofogas.hu", "olx.ro", "olx.bg", "njuskalo.hr", "bolha.com", "kupujemprodajem.com", "olx.ba", "olx.ua", "999.md", "kufar.by", "avito.ru", "list.am", "tap.az", "olx.kz", "sahibinden.com", "offerup.com", "zillow.com", "kijiji.ca", "mercadolibre.com.mx", "olx.com.br", "mercadolivre.com.br", "mercadolibre.com.ar", "yapo.cl", "taobao.com", "goofish.com", "jp.mercari.com", "daangn.com", "carousell.sg", "mudah.my", "tokopedia.com", "kaidee.com", "chotot.com", "olx.in", "olx.com.pk", "bikroy.com", "ikman.lk", "dubizzle.com", "haraj.com.sa", "yad2.co.il", "divar.ir", "jiji.ng", "gumtree.co.za", "avito.ma", "ouedkniss.com", "gumtree.com.au", "trademe.co.nz"]);
+const CK=["B","P","A","N","D","V","T","G","K","F","Z"];
+// [šalies ISO kodas, regionas, "domenas:Tipas[:pastaba]" ...]
+const DATA=[
+["INT",0,"ebay.com:P","amazon.com:P","facebook.com/marketplace:B","craigslist.org:B","olx.com:B","aliexpress.com:P","alibaba.com:P:B2B","etsy.com:P","vinted.com:F","temu.com:P","locanto.com:B","vivastreet.com:B","shpock.com:B","carousell.com:B","opensooq.com:B","jiji.ng:B","coinafrique.com:B","encuentra24.com:B","indeed.com:D","linkedin.com/jobs:D","chrono24.com:P","reverb.com:P","discogs.com:V","cdandlp.com:V","musicstack.com:V","bandcamp.com:V","popsike.com:V","gemm.com:V","vinylmeplease.com:V","catawiki.com:K","backmarket.com:T","webuy.com:T:CeX","liveauctioneers.com:K","invaluable.com:K","vestiairecollective.com:F","freecycle.org:Z","trashnothing.com:Z"],
+["LT",1,"skelbiu.lt:B","alio.lt:B","autoplius.lt:A","autogidas.lt:A","aruodas.lt:N","domoplius.lt:N","cvbankas.lt:D","cv.lt:D","cvonline.lt:D","vinted.lt:F","pigu.lt:P","vilniausaukcionas.lt:K"],
+["LV",1,"ss.com:B","auto24.lv:A","city24.lv:N","cv.lv:D"],
+["EE",1,"okidoki.ee:B","osta.ee:P","auto24.ee:A","kv.ee:N","city24.ee:N","cv.ee:D"],
+["PL",1,"olx.pl:B","allegro.pl:P","gratka.pl:B","sprzedajemy.pl:B","otomoto.pl:A","otodom.pl:N","morizon.pl:N","pracuj.pl:D"],
+["DE",1,"kleinanzeigen.de:B","markt.de:B","quoka.de:B","ebay.de:P","amazon.de:P","mobile.de:A","autoscout24.de:A","immobilienscout24.de:N","immowelt.de:N","stepstone.de:D","hhv.de:V","deejay.de:V","decks.de:V","refurbed.de:T","deine-tierwelt.de:G","tiere.de:G"],
+["AT",1,"willhaben.at:B","shpock.com:B","karriere.at:D","refurbed.at:T","dorotheum.com:K"],
+["CH",1,"tutti.ch:B","ricardo.ch:P","autoscout24.ch:A","homegate.ch:N","jobs.ch:D"],
+["FR",1,"leboncoin.fr:B","paruvendu.fr:B","vivastreet.com:B","cdiscount.com:P","lacentrale.fr:A","seloger.com:N","francetravail.fr:D","cdandlp.com:V","drouot.com:K"],
+["BE",1,"2dehands.be:B","2ememain.be:B","immoweb.be:N"],
+["NL",1,"marktplaats.nl:B","speurders.nl:B","bol.com:P","autotrack.nl:A","funda.nl:N"],
+["LU",1,"athome.lu:N"],
+["GB",1,"gumtree.com:B","preloved.co.uk:B","ebay.co.uk:P","depop.com:F","autotrader.co.uk:A","rightmove.co.uk:N","zoopla.co.uk:N","onthemarket.com:N","reed.co.uk:D","totaljobs.com:D","juno.co.uk:V","roughtrade.com:V","eil.com:V","musicmagpie.co.uk:T","pets4homes.co.uk:G","the-saleroom.com:K","olioapp.com:Z"],
+["IE",1,"donedeal.ie:B","adverts.ie:B","carzone.ie:A","daft.ie:N","myhome.ie:N"],
+["ES",1,"wallapop.com:B","milanuncios.com:B","coches.net:A","idealista.com:N","fotocasa.es:N","habitaclia.com:N","infojobs.net:D"],
+["PT",1,"olx.pt:B","custojusto.pt:B","standvirtual.com:A","imovirtual.com:N","idealista.pt:N","net-empregos.com:D"],
+["IT",1,"subito.it:B","bakeca.it:B","autoscout24.it:A","immobiliare.it:N","idealista.it:N","casa.it:N","infojobs.it:D"],
+["GR",1,"xe.gr:B","skroutz.gr:P","car.gr:A","spitogatos.gr:N"],
+["CY",1,"bazaraki.com:B"],
+["MT",1,"maltapark.com:B"],
+["SE",1,"blocket.se:B","tradera.com:P","hemnet.se:N","booli.se:N","auctionet.com:K","bukowskis.com:K"],
+["NO",1,"finn.no:B"],
+["DK",1,"dba.dk:B","guloggratis.dk:B","bilbasen.dk:A","boligsiden.dk:N","jobindex.dk:D"],
+["FI",1,"tori.fi:B","huuto.net:P","nettiauto.com:A","etuovi.com:N","oikotie.fi:N"],
+["IS",1,"bland.is:B"],
+["CZ",1,"bazos.cz:B","aukro.cz:P","sauto.cz:A","tipcars.com:A","sreality.cz:N","jobs.cz:D"],
+["SK",1,"bazos.sk:B","autobazar.eu:A","nehnutelnosti.sk:N","profesia.sk:D"],
+["HU",1,"jofogas.hu:B","vatera.hu:P","hasznaltauto.hu:A","ingatlan.com:N","profession.hu:D"],
+["RO",1,"olx.ro:B","publi24.ro:B","emag.ro:P","autovit.ro:A","storia.ro:N","imobiliare.ro:N","ejobs.ro:D"],
+["BG",1,"olx.bg:B","bazar.bg:B","mobile.bg:A","imot.bg:N","jobs.bg:D"],
+["HR",1,"njuskalo.hr:B","index.hr/oglasi:B"],
+["SI",1,"bolha.com:B","avto.net:A","nepremicnine.net:N"],
+["RS",1,"kupujemprodajem.com:B","halooglasi.com:B","polovniautomobili.com:A","4zida.rs:N"],
+["BA",1,"olx.ba:B"],
+["MK",1,"pazar3.mk:B"],
+["AL",1,"merrjep.al:B"],
+["XK",1,"merrjep.com:B"],
+["UA",2,"olx.ua:B","prom.ua:P","rozetka.com.ua:P","auto.ria.com:A","dom.ria.com:N","work.ua:D","robota.ua:D"],
+["MD",2,"999.md:B"],
+["BY",2,"kufar.by:B","av.by:A","realt.by:N"],
+["RU",2,"avito.ru:B","youla.ru:B","ozon.ru:P","wildberries.ru:P","auto.ru:A","drom.ru:A","cian.ru:N","hh.ru:D"],
+["GE",2,"ss.ge:B","myauto.ge:A","myhome.ge:N"],
+["AM",2,"list.am:B"],
+["AZ",2,"tap.az:B","turbo.az:A","bina.az:N"],
+["KZ",2,"olx.kz:B","kaspi.kz:P","kolesa.kz:A","krisha.kz:N"],
+["UZ",2,"olx.uz:B"],
+["KG",2,"lalafo.kg:B"],
+["TJ",2,"somon.tj:B"],
+["TR",2,"sahibinden.com:B","letgo.com:B","trendyol.com:P","hepsiburada.com:P","arabam.com:A","hepsiemlak.com:N","kariyer.net:D"],
+["US",3,"craigslist.org:B","offerup.com:B","nextdoor.com:B","hoobly.com:B","classifiedads.com:B","americanlisted.com:B","ebay.com:P","amazon.com:P","mercari.com:P","poshmark.com:F","autotrader.com:A","cars.com:A","cargurus.com:A","zillow.com:N","realtor.com:N","redfin.com:N","trulia.com:N","apartments.com:N","indeed.com:D","amoeba.com:V","swappa.com:T","gazelle.com:T","petfinder.com:G","adoptapet.com:G","shopgoodwill.com:K","govdeals.com:K","proxibid.com:K","bringatrailer.com:K","copart.com:K","iaai.com:K","thredup.com:F","therealreal.com:F","grailed.com:F"],
+["CA",3,"kijiji.ca:B","varagesale.com:B","autotrader.ca:A","realtor.ca:N","jobbank.gc.ca:D"],
+["MX",3,"mercadolibre.com.mx:P","vivanuncios.com.mx:B","seminuevos.com:A","inmuebles24.com:N","occ.com.mx:D"],
+["BR",4,"olx.com.br:B","mercadolivre.com.br:P","enjoei.com.br:P","webmotors.com.br:A","zapimoveis.com.br:N","vivareal.com.br:N","catho.com.br:D"],
+["AR",4,"mercadolibre.com.ar:P","zonaprop.com.ar:N","argenprop.com:N","zonajobs.com.ar:D"],
+["CL",4,"yapo.cl:B","mercadolibre.cl:P","chileautos.cl:A","portalinmobiliario.com:N","laborum.cl:D"],
+["CO",4,"mercadolibre.com.co:P","tucarro.com.co:A","fincaraiz.com.co:N","computrabajo.com.co:D"],
+["PE",4,"mercadolibre.com.pe:P","neoauto.com:A","urbania.pe:N","bumeran.com.pe:D"],
+["EC",4,"patiotuerca.com:A","plusvalia.com:N"],
+["UY",4,"gallito.com.uy:B","mercadolibre.com.uy:P"],
+["VE",4,"mercadolibre.com.ve:P"],
+["PY",4,"clasipar.paraguay.com:B"],
+["BO",4,"ultracasas.com:N"],
+["CR",4,"encuentra24.com:B","crautos.com:A"],
+["NI",4,"encuentra24.com:B"],
+["SV",4,"encuentra24.com:B"],
+["HN",4,"encuentra24.com:B"],
+["GT",4,"encuentra24.com:B"],
+["PA",4,"encuentra24.com:B"],
+["DO",4,"corotos.com.do:B","supercarros.com:A"],
+["PR",4,"clasificadosonline.com:B"],
+["CU",4,"revolico.com:B"],
+["CN",5,"58.com:B","ganji.com:B","goofish.com:B:Xianyu","taobao.com:P","jd.com:P","pinduoduo.com:P","autohome.com.cn:A","anjuke.com:N","lianjia.com:N","zhaopin.com:D"],
+["JP",5,"jmty.jp:B","jp.mercari.com:P","auctions.yahoo.co.jp:P","rakuten.co.jp:P","fril.jp:P:Rakuma","carsensor.net:A","goo-net.com:A","suumo.jp:N","homes.co.jp:N","diskunion.net:V"],
+["KR",5,"daangn.com:B","bunjang.co.kr:B","joongna.com:B","coupang.com:P","encar.com:A","zigbang.com:N","saramin.co.kr:D"],
+["TW",5,"ruten.com.tw:P","shopee.tw:P","591.com.tw:N"],
+["HK",5,"carousell.com.hk:B","28hse.com:N"],
+["SG",5,"carousell.sg:B","sgcarmart.com:A","propertyguru.com.sg:N","99.co:N"],
+["MY",5,"mudah.my:B","carousell.com.my:B","shopee.com.my:P","lazada.com.my:P","carlist.my:A","iproperty.com.my:N"],
+["ID",5,"olx.co.id:B","tokopedia.com:P","shopee.co.id:P","oto.com:A","rumah123.com:N","lamudi.co.id:N"],
+["PH",5,"carousell.ph:B","shopee.ph:P","lazada.com.ph:P","autodeal.com.ph:A","lamudi.com.ph:N"],
+["TH",5,"kaidee.com:B","shopee.co.th:P","lazada.co.th:P","one2car.com:A","ddproperty.com:N"],
+["VN",5,"chotot.com:B","shopee.vn:P","tiki.vn:P","bonbanh.com:A","batdongsan.com.vn:N"],
+["KH",5,"khmer24.com:B"],
+["IN",5,"olx.in:B","quikr.com:B","sulekha.com:B","clickindia.com:B","flipkart.com:P","amazon.in:P","cardekho.com:A","carwale.com:A","99acres.com:N","magicbricks.com:N","housing.com:N","nobroker.in:N","naukri.com:D"],
+["PK",5,"olx.com.pk:B","daraz.pk:P","pakwheels.com:A","zameen.com:N","rozee.pk:D"],
+["BD",5,"bikroy.com:B","daraz.com.bd:P","bproperty.com:N","bdjobs.com:D"],
+["LK",5,"ikman.lk:B","riyasewana.com:A","lankapropertyweb.com:N"],
+["NP",5,"hamrobazaar.com:B"],
+["MN",5,"unegui.mn:B"],
+["AE",6,"dubizzle.com:B","noon.com:P","yallamotor.com:A","bayut.com:N","propertyfinder.ae:N"],
+["SA",6,"haraj.com.sa:B","opensooq.com:B","syarah.com:A","aqar.fm:N"],
+["QA",6,"qatarliving.com:B","qatarsale.com:B"],
+["KW",6,"q84sale.com:B"],
+["JO",6,"opensooq.com:B"],
+["IL",6,"yad2.co.il:B","madlan.co.il:N"],
+["IR",6,"divar.ir:B","sheypoor.com:B","bama.ir:A"],
+["YE",6,"opensooq.com:B"],
+["LY",6,"opensooq.com:B"],
+["LB",6,"opensooq.com:B"],
+["IQ",6,"opensooq.com:B"],
+["OM",6,"opensooq.com:B"],
+["BH",6,"opensooq.com:B"],
+["EG",7,"dubizzle.com.eg:B","hatla2ee.com:A","aqarmap.com.eg:N","wuzzuf.net:D"],
+["NG",7,"jiji.ng:B","jumia.com.ng:P","cars45.com:A","propertypro.ng:N","jobberman.com:D"],
+["GH",7,"jiji.com.gh:B","tonaton.com:B","jumia.com.gh:P"],
+["KE",7,"jiji.co.ke:B","pigiame.co.ke:B","jumia.co.ke:P","buyrentkenya.com:N","brightermonday.co.ke:D"],
+["ZA",7,"gumtree.co.za:B","takealot.com:P","bobshop.co.za:P","autotrader.co.za:A","cars.co.za:A","property24.com:N","privateproperty.co.za:N","pnet.co.za:D"],
+["MA",7,"avito.ma:B","jumia.ma:P","moteur.ma:A","mubawab.ma:N"],
+["DZ",7,"ouedkniss.com:B"],
+["TN",7,"tayara.tn:B"],
+["ET",7,"jiji.com.et:B"],
+["TZ",7,"jiji.co.tz:B"],
+["UG",7,"jiji.ug:B"],
+["SN",7,"expat-dakar.com:B","coinafrique.com:B"],
+["CM",7,"coinafrique.com:B"],
+["CI",7,"coinafrique.com:B"],
+["ZW",7,"classifieds.co.zw:B"],
+["AU",8,"gumtree.com.au:B","tradingpost.com.au:B","ebay.com.au:P","carsales.com.au:A","realestate.com.au:N","domain.com.au:N","seek.com.au:D","petrescue.com.au:G","grays.com:K"],
+["NZ",8,"trademe.co.nz:B","driven.co.nz:A","realestate.co.nz:N","seek.co.nz:D"]
+];
+
+const flagOf=c=>c==="INT"?"🌐":String.fromCodePoint(...[...c].map(ch=>0x1F1E6+ch.charCodeAt(0)-65));
+const countries=DATA.map(([code,r,...s])=>({code,r,flag:flagOf(code),sites:s.map(x=>{const[d,c,n]=x.split(":");return{d,c,n:n||""}})}));
+const fold=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const nameCache={};
+function cname(code,lang){
+  if(code==="INT")return L[lang].R[0];
+  const k=lang+code;if(k in nameCache)return nameCache[k];
+  let n=code;try{n=new Intl.DisplayNames([lang],{type:"region"}).of(code)||code}catch(e){}
+  return nameCache[k]=n;
+}
+document.getElementById("sSites").textContent=new Set(countries.flatMap(c=>c.sites.map(s=>s.d))).size;
+document.getElementById("sCountries").textContent=countries.filter(c=>c.r>0).length;
+
+function pickLang(){
+  try{const s=localStorage.getItem("skelbimai-lang");if(s&&L[s])return s}catch(e){}
+  for(const l of navigator.languages||[navigator.language||""]){const k=(l||"").slice(0,2).toLowerCase();if(L[k])return k}
+  return "lt";
+}
+let state={q:"",r:-1,c:"",lang:pickLang()};
+let favs=new Set();try{favs=new Set(JSON.parse(localStorage.getItem("skelbimai-fav")||"[]"))}catch(e){}
+function toggleFav(d){favs.has(d)?favs.delete(d):favs.add(d);try{localStorage.setItem("skelbimai-fav",JSON.stringify([...favs]))}catch(e){}render()}
+try{const saved=JSON.parse(localStorage.getItem("skelbimai-f")||"null");if(saved)state={...state,r:saved.r??-1,c:saved.c??""}}catch(e){}
+readHash();addEventListener("hashchange",()=>{readHash();render()});
+
+const sel=document.getElementById("lang");
+for(const[k,v]of Object.entries(L)){const o=document.createElement("option");o.value=k;o.textContent=v.name;sel.append(o)}
+sel.onchange=()=>{state.lang=sel.value;try{localStorage.setItem("skelbimai-lang",sel.value)}catch(e){}applyLang()};
+
+function applyLang(){
+  const t=L[state.lang];sel.value=state.lang;
+  document.documentElement.lang=state.lang;document.title=t.title;
+  document.querySelectorAll("[data-t]").forEach(el=>el.textContent=t[el.dataset.t]);
+  const [a,b]=t.h1.split("{m}");const h=document.getElementById("h1");h.replaceChildren(a,Object.assign(document.createElement("mark"),{textContent:t.m}),b);
+  document.getElementById("regCount").textContent=(t.R.length-1)+" "+t.regs;
+  document.getElementById("q").placeholder=t.ph;
+  render();
+}
+function chip(label,pressed,on,color,num){const b=document.createElement("button");b.className="chip";b.type="button";b.setAttribute("aria-pressed",pressed);
+  if(color){const d=document.createElement("span");d.className="dot";d.style.setProperty("--dc",color);b.append(d)}
+  b.append(label);if(num!=null){const n=document.createElement("span");n.className="n";n.textContent=num;b.append(" ",n)}b.onclick=on;return b}
+function renderChips(cnt={}){
+  const t=L[state.lang];
+  document.getElementById("regions").replaceChildren(chip(t.allR,state.r===-1,()=>set({r:-1})),...t.R.map((n,i)=>chip(n,state.r===i,()=>set({r:i}))));
+  document.getElementById("cats").replaceChildren(chip(t.allT,state.c==="",()=>set({c:""}),null,cnt.all||0),chip("▲ "+t.pop,state.c==="TOP",()=>set({c:"TOP"}),null,cnt.TOP||0),chip("★ "+t.fav,state.c==="FAV",()=>set({c:"FAV"}),null,cnt.FAV||0),...CK.filter(k=>cnt[k]||state.c===k).map(k=>chip(t.C[CK.indexOf(k)],state.c===k,()=>set({c:k}),`var(--c-${k})`,cnt[k]||0)));
+}
+function set(p){state={...state,...p};try{localStorage.setItem("skelbimai-f",JSON.stringify({r:state.r,c:state.c}))}catch(e){}writeHash();render()}
+function writeHash(){const h=[state.r>=0?"r"+state.r:"",state.c&&state.c!=="FAV"?"t"+state.c:""].filter(Boolean).join("-");try{history.replaceState(null,"",h?"#"+h:location.pathname+location.search)}catch(e){}}
+function readHash(){const h=(location.hash||"").slice(1);if(!h)return;const p={r:-1,c:""};for(const part of h.split("-")){if(/^r\d$/.test(part)&&+part[1]<9)p.r=+part[1];else if(/^t(TOP|[A-Z])$/.test(part)&&(part.slice(1)==="TOP"||CK.includes(part.slice(1))))p.c=part.slice(1)}state={...state,...p}}
+function render(){
+  const t=L[state.lang],q=fold(state.q.trim()),grid=document.getElementById("grid");grid.replaceChildren();let n=0,cn=0;const cnt={all:0,FAV:0};
+  for(const c of countries){
+    if(state.r!==-1&&c.r!==state.r)continue;
+    const name=cname(c.code,state.lang);
+    const cm=q&&fold([name,cname(c.code,"lt"),cname(c.code,"en"),cname(c.code,"ru"),c.code,t.R[c.r]].join(" ")).includes(q);
+    const pre=c.sites.filter(s=>!q||cm||fold(s.d+" "+s.n).includes(q));
+    for(const s of pre){cnt.all++;cnt[s.c]=(cnt[s.c]||0)+1;if(favs.has(s.d))cnt.FAV++;if(POP.has(s.d))cnt.TOP=(cnt.TOP||0)+1}
+    const sites=pre.filter(s=>!state.c||(state.c==="FAV"?favs.has(s.d):state.c==="TOP"?POP.has(s.d):s.c===state.c)).sort((a,b)=>POP.has(b.d)-POP.has(a.d));
+    if(!sites.length)continue;n+=sites.length;cn++;
+    const sec=document.createElement("section");sec.className="country";
+    const h=document.createElement("h2");h.innerHTML=`<span class="flag" aria-hidden="true"></span><span></span><small></small>`;
+    h.children[0].textContent=c.flag;h.children[1].textContent=name;h.children[2].textContent=sites.length;
+    const ul=document.createElement("ul");
+    for(const s of sites){const li=document.createElement("li");const a=document.createElement("a");a.className="site";a.href="https://"+s.d;a.target="_blank";a.rel="noopener noreferrer";
+      a.innerHTML=`<span class="dom"></span><span class="note"></span><span class="cat"></span>`;
+      a.children[0].textContent=s.d;a.children[1].textContent=s.n;a.children[2].textContent=t.C[CK.indexOf(s.c)];a.children[2].style.setProperty("--cc",`var(--c-${s.c})`);if(POP.has(s.d)){const pb=document.createElement("span");pb.className="pop";pb.textContent="TOP";pb.title=t.pop;a.children[1].after(pb)}
+      const st=document.createElement("button");st.type="button";st.className="star";st.setAttribute("aria-pressed",favs.has(s.d));st.title=t.fav;st.setAttribute("aria-label",t.fav+": "+s.d);st.textContent=favs.has(s.d)?"★":"☆";st.onclick=()=>toggleFav(s.d);
+      li.append(a,st);ul.append(li)}
+    sec.append(h,ul);grid.append(sec);
+  }
+  document.getElementById("count").textContent=n?t.count.replace("{n}",n).replace("{c}",cn):"";
+  if(!n){const e=document.createElement("p");e.className="empty";e.textContent=t.empty;grid.append(e)}
+  renderChips(cnt);
+}
+document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value;render()});
+const sug={db:null,uid:null,owner:false,mine:[],all:null,msg:"",ok:false};
+function sugText(){
+  const t=L[state.lang],x=t.s;
+  document.getElementById("totop").textContent="↑ "+x.top;
+  for(const[id,k]of[["sH","h"],["sLead","lead"],["lUrl","url"],["lCountry","country"],["lType","type"],["lNote","note"],["sSend","send"]])document.getElementById(id).textContent=x[k];
+  const cs=document.getElementById("sCountry"),cv=cs.value;
+  const opts=countries.filter(c=>c.r>0).map(c=>[c.code,cname(c.code,state.lang)]).sort((a,b)=>a[1].localeCompare(b[1],state.lang));
+  cs.replaceChildren(new Option(x.other,"INT"),...opts.map(([c,n])=>new Option(n,c)));if(cv)cs.value=cv;else{const d=(navigator.language||"").slice(-2).toUpperCase();if(opts.some(o=>o[0]===d))cs.value=d}
+  const ts=document.getElementById("sType"),tv=ts.value;ts.replaceChildren(...CK.map((k,i)=>new Option(t.C[i],k)));if(tv)ts.value=tv;
+  renderSug();
+}
+function renderSug(){
+  const x=L[state.lang].s,m=document.getElementById("sMsg");m.textContent=sug.msg?x[sug.msg]:"";m.className="smsg "+(sug.ok?"ok":sug.msg?"err":"");
+  const box=document.getElementById("sList");box.replaceChildren();
+  const list=(title,items)=>{const h=document.createElement("h3");h.textContent=title;const ul=document.createElement("ul");
+    if(!items.length){const li=document.createElement("li");li.textContent=x.none;ul.append(li)}
+    for(const it of items.slice().sort((a,b)=>(b.at||0)-(a.at||0))){const li=document.createElement("li");const b=document.createElement("b");b.textContent=it.url;
+      const meta=document.createElement("span");meta.textContent=[cname(it.country||"INT",state.lang),L[state.lang].C[CK.indexOf(it.type)]||"",it.note||""].filter(Boolean).join(" · ");li.append(b,meta);ul.append(li)}
+    box.append(h,ul)};
+  if(sug.owner&&sug.all)list(x.all,sug.all);else if(sug.uid&&sug.mine.length)list(x.mine,sug.mine);
+}
+async function initSug(){
+  const db=window.claude?.use?await window.claude.use("db").catch(()=>null):null;if(!db)return;
+  const user=await window.claude.use("user").catch(()=>null);
+  sug.db=db;sug.uid=user?await user.id().catch(()=>null):null;sug.owner=user?await user.isOwner().catch(()=>false):false;
+  document.getElementById("suggest").hidden=false;sugText();
+  const canW=user?await user.can("data.write").catch(()=>null):null;
+  if(!sug.uid||canW===false){document.getElementById("sSend").disabled=true;sug.msg="noAccess";renderSug()}
+  if(sug.uid){try{const d=await db.doc("suggestions/"+sug.uid).get();sug.mine=(d.data()?.items)||[]}catch(e){}}
+  if(sug.owner){db.collection("suggestions").onSnapshot(q=>{sug.all=q.docs.flatMap(d=>d.data()?.items||[]);renderSug()},()=>{})}
+  renderSug();
+}
+document.getElementById("sform").addEventListener("submit",async e=>{
+  e.preventDefault();if(!sug.db||!sug.uid)return;
+  let url=document.getElementById("sUrl").value.trim().replace(/^https?:\/\//i,"").replace(/^www\./i,"").replace(/\/$/,"");
+  if(!/^[^\s\/]+\.[a-z]{2,}(\/\S*)?$/i.test(url)){sug.msg="bad";sug.ok=false;renderSug();return}
+  const item={url,country:document.getElementById("sCountry").value,type:document.getElementById("sType").value,note:document.getElementById("sNote").value.trim().slice(0,200),at:Date.now()};
+  const btn=document.getElementById("sSend");btn.disabled=true;
+  try{const items=[...sug.mine,item].slice(-50);await sug.db.doc("suggestions/"+sug.uid).set({items});sug.mine=items;sug.msg="sent";sug.ok=true;document.getElementById("sUrl").value="";document.getElementById("sNote").value=""}
+  catch(err){sug.ok=false;sug.msg=err&&err.code==="invalid_argument"?"noAccess":"bad";if(sug.msg==="noAccess"){renderSug();return}}
+  btn.disabled=false;renderSug();
+});
+const toTop=document.getElementById("totop");toTop.onclick=()=>window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+addEventListener("scroll",()=>{toTop.hidden=scrollY<900},{passive:true});
+addEventListener("keydown",e=>{if(e.key==="/"&&!/INPUT|SELECT|TEXTAREA/.test(document.activeElement?.tagName||"")){e.preventDefault();document.getElementById("q").focus()}});
+const _applyLang=applyLang;applyLang=function(){_applyLang();if(sug.db)sugText();else document.getElementById("totop").textContent="↑ "+L[state.lang].s.top};
+applyLang();initSug();
+</script>
+
+</body>
+</html>
