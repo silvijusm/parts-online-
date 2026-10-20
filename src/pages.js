@@ -69,7 +69,7 @@ ${body}
   </main>
   <footer>
     <span>© Parts-dalys.eu</span>
-    <nav aria-label="Papildoma"><a href="/">Paieška</a><a href="/apie.html">Apie</a></nav>
+    <nav aria-label="Papildoma"><a href="/">Paieška</a><a href="/apie.html">Apie</a><a href="/skelbimai/">Skelbimų portalai</a></nav>
   </footer>
 </div>
 </body>
