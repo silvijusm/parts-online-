@@ -256,7 +256,24 @@ test("classifieds catalog is served at /skelbimai/ and its inline script passes 
   const html = await r.text();
   assert.match(html, /<title>Pasaulio skelbimų portalai<\/title>/);
   assert.match(html, /<link rel="canonical" href="https:\/\/parts-dalys\.eu\/skelbimai\/">/);
-  const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+  const script = html.match(/<script type="module">([\s\S]*?)<\/script>/)[1];
   const hash = createHash("sha256").update(script).digest("base64");
   assert.ok(r.headers.get("content-security-policy").includes(`'sha256-${hash}'`));
+});
+
+test("catalog data loads from /shared/ and every catalog link is an allowed /go target", async (t) => {
+  const { base } = await start(t, { EBAY_CAMPAIGN_ID: "5338000000" });
+  const r = await fetch(base + "/shared/classifieds.js");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("content-type"), /javascript/);
+  const { CLASSIFIEDS, CLASSIFIEDS_POP } = await import("../src/shared/classifieds.js");
+  const domains = CLASSIFIEDS.flatMap(([, , ...s]) => s.map((x) => x.split(":")[0]));
+  assert.ok(domains.length > 400);
+  for (const d of CLASSIFIEDS_POP) assert.ok(domains.includes(d), d);
+  const hosts = createConfig({ EBAY_CAMPAIGN_ID: "5338000000" }, { warn: () => {} })().hosts;
+  for (const d of domains) assert.ok(checkOutbound("https://" + d, hosts), d);
+  let go = await fetch(base + "/go?u=" + encodeURIComponent("https://avito.ru") + "&s=avito.ru", { redirect: "manual" });
+  assert.equal(go.status, 302);
+  go = await fetch(base + "/go?u=" + encodeURIComponent("https://ebay.com") + "&s=ebay.com", { redirect: "manual" });
+  assert.match(go.headers.get("location"), /campid=5338000000/);
 });

@@ -2,6 +2,7 @@
 // allow-list and in-memory stats. No dependencies.
 import { createHash, timingSafeEqual } from "node:crypto";
 import { SOURCES } from "./shared/sources.js";
+import { classifiedHosts } from "./shared/classifieds.js";
 
 // eBay Partner Network rotation ids (mkrid) per marketplace domain.
 export const EBAY_ROTATION = {
@@ -76,7 +77,7 @@ export function createConfig(env = process.env, { now = () => new Date(), warn =
       const featured = parseFeatured(env, d, warn);
       cfg = {
         affiliate: parseAffiliate(env, warn), featured, adsense: parseAdsense(env),
-        hosts: [...new Set([...SOURCES.map((s) => s.d), ...featured.map((f) => new URL(f.url).hostname), "www.google.com"])],
+        hosts: [...new Set([...SOURCES.map((s) => s.d), ...classifiedHosts(), ...featured.map((f) => new URL(f.url).hostname), "www.google.com"])],
       };
       warn = () => {}; // warn once per process
     }
