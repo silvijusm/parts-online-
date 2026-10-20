@@ -50,6 +50,8 @@ Visi nustatymai – aplinkos kintamieji; tušti reiškia „išjungta“. Puslap
 
 Išeinančios nuorodos eina per `/go?u=<adresas>&s=<šaltinis>`: nukreipiama tik `https` adresu į žinomą šaltinio domeną, mokamą vietą arba `www.google.com`, kitaip – 400. Paspaudimai skaičiuojami atmintyje ir rašomi į žurnalą (`click s="…" host=…`).
 
+Skelbimų katalogas `/skelbimai/` (duomenys `src/shared/classifieds.js`): visos jo nuorodos taip pat eina per `/go`, todėl joms galioja `AFFILIATE_PARAMS`, `EBAY_CAMPAIGN_ID` ir paspaudimų statistika, o su `ADSENSE_CLIENT` ir `ADSENSE_SLOT` kataloge rodomi du reklamos blokai.
+
 Paieškos sistemoms: `/dalys` – visų detalių sąrašas, `/dalys/<detalė>` (pvz. `/dalys/starteris`, `/dalys/pavaru-deze`) – atskiras puslapis kiekvienai žodyno detalei su savo pavadinimu, aprašymu ir užpildyta paieška, `/sitemap.xml`, `/robots.txt`.
 
 ## Talpinimas (Render)
