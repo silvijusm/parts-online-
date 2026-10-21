@@ -10,8 +10,9 @@ import { createWebAdapter } from "./adapters/web.js";
 import { createDemoAdapter } from "./adapters/demo.js";
 import { ratesInfo } from "./currency.js";
 import { createConfig, createStats, checkOutbound, withAffiliate, tokenOk } from "./monetize.js";
-import { adsenseHead, injectHead, renderPartPage, renderPartsIndex, renderSitemap, renderRobots, siteUrl } from "./pages.js";
+import { adsenseHead, injectHead, renderClassifiedsPage, renderPartPage, renderPartsIndex, renderSitemap, renderRobots, siteUrl } from "./pages.js";
 import { partBySlug } from "./shared/seo.js";
+import { CLASSIFIEDS_LANGS } from "./shared/classifieds.js";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const PUBLIC_DIR = resolve(ROOT, "public");
@@ -173,6 +174,11 @@ export function createApp(adapters = buildAdapters(), { rateLimit = 30, rateWind
       if (url.pathname === "/robots.txt") return send(200, renderRobots(base), TEXT, { "Cache-Control": "public, max-age=3600" });
       if (url.pathname === "/sitemap.xml") return send(200, renderSitemap(base), TYPES[".xml"], { "Cache-Control": "public, max-age=3600" });
       if (url.pathname === "/skelbimai") return send(301, "", TEXT, { Location: "/skelbimai/" });
+      if (url.pathname === "/skelbimai/") {
+        const lang = url.searchParams.get("lang");
+        const html = await readFile(join(PUBLIC_DIR, "skelbimai", "index.html"), "utf8");
+        return send(200, renderClassifiedsPage(html, CLASSIFIEDS_LANGS.includes(lang) ? lang : null, base), TYPES[".html"], { "Cache-Control": "no-cache" });
+      }
       const dalys = url.pathname.match(/^\/dalys(?:\/([^/]*))?\/?$/);
       if (dalys) {
         if (!dalys[1]) return send(200, renderPartsIndex(base), TYPES[".html"], { "Cache-Control": "no-cache" });

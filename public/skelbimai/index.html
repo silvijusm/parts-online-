@@ -100,6 +100,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .adlabel{font:500 11px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 footer{border-top:1px solid var(--line);padding-block:20px 40px;color:var(--muted);font-size:13px}
 @media (max-width:480px){.stats{gap:16px}.site .note{display:none}}
+.langs{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.quick{font:600 13px var(--body);background:var(--tag);color:var(--tag-ink);border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+.quick:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .lang{display:inline-flex;align-items:center;gap:6px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0 4px 0 10px}
 .lang:focus-within{border-color:var(--accent)}
@@ -113,10 +116,11 @@ footer{border-top:1px solid var(--line);padding-block:20px 40px;color:var(--mute
   <header>
     <div class="top">
       <div class="eyebrow"><span data-t="eyebrow"></span> · <span id="regCount"></span></div>
+      <div class="langs"><button class="quick" id="quickLang" type="button"></button>
       <label class="lang" for="lang">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>
         <select id="lang" aria-label="Language"></select>
-      </label>
+      </label></div>
     </div>
     <h1 id="h1"></h1>
     <p class="lead" data-t="lead"></p>
@@ -194,11 +198,16 @@ function cname(code,lang){
 document.getElementById("sSites").textContent=new Set(countries.flatMap(c=>c.sites.map(s=>s.d))).size;
 document.getElementById("sCountries").textContent=countries.filter(c=>c.r>0).length;
 
+const urlLang=(()=>{try{const l=new URLSearchParams(location.search).get("lang");return l&&L[l]?l:""}catch(e){return ""}})();
 function pickLang(){
+  if(urlLang)return urlLang;
   try{const s=localStorage.getItem("skelbimai-lang");if(s&&L[s])return s}catch(e){}
   for(const l of navigator.languages||[navigator.language||""]){const k=(l||"").slice(0,2).toLowerCase();if(L[k])return k}
-  return "lt";
+  return "en";
 }
+function setLang(l){state.lang=l;try{localStorage.setItem("skelbimai-lang",l)}catch(e){}
+  try{const u=new URL(location.href);u.searchParams.set("lang",l);history.replaceState(null,"",u.pathname+u.search+u.hash)}catch(e){}
+  applyLang()}
 let state={q:"",r:-1,c:"",lang:pickLang()};
 let favs=new Set();try{favs=new Set(JSON.parse(localStorage.getItem("skelbimai-fav")||"[]"))}catch(e){}
 function toggleFav(d){favs.has(d)?favs.delete(d):favs.add(d);try{localStorage.setItem("skelbimai-fav",JSON.stringify([...favs]))}catch(e){}render()}
@@ -207,11 +216,13 @@ readHash();addEventListener("hashchange",()=>{readHash();render()});
 
 const sel=document.getElementById("lang");
 for(const[k,v]of Object.entries(L)){const o=document.createElement("option");o.value=k;o.textContent=v.name;sel.append(o)}
-sel.onchange=()=>{state.lang=sel.value;try{localStorage.setItem("skelbimai-lang",sel.value)}catch(e){}applyLang()};
+sel.onchange=()=>setLang(sel.value);
+const quick=document.getElementById("quickLang");quick.onclick=()=>setLang(state.lang==="en"?"lt":"en");
 
 function applyLang(){
   const t=L[state.lang];sel.value=state.lang;
   document.documentElement.lang=state.lang;document.title=t.title;
+  quick.textContent=state.lang==="en"?"LT versija":"EN version";quick.lang=state.lang==="en"?"lt":"en";
   document.querySelectorAll("[data-t]").forEach(el=>el.textContent=t[el.dataset.t]);
   const [a,b]=t.h1.split("{m}");const h=document.getElementById("h1");h.replaceChildren(a,Object.assign(document.createElement("mark"),{textContent:t.m}),b);
   document.getElementById("regCount").textContent=(t.R.length-1)+" "+t.regs;
