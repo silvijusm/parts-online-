@@ -129,3 +129,76 @@ export const CLASSIFIEDS_POP=["ebay.com", "amazon.com", "facebook.com/marketplac
 
 // Bare hostnames (no path) of every catalog entry.
 export const classifiedHosts=()=>[...new Set(CLASSIFIEDS.flatMap(([,, ...s])=>s.map(x=>x.split(":")[0].split("/")[0])))];
+
+// Per-language title and description for /skelbimai/?lang=xx (server-rendered head, hreflang).
+export const CLASSIFIEDS_SEO={
+"lt": {
+"title": "Pasaulio skelbimų portalai",
+"desc": "Žinomiausios skelbimų, pardavimo, automobilių, nekilnojamojo turto ir darbo svetainės pagal šalis. Ieškokite pagal šalį ar adresą, filtruokite pagal regioną ir tipą. Paspaudus adresą, svetainė atsidaro naujame lange."
+},
+"en": {
+"title": "World Classifieds Sites",
+"desc": "The best-known classifieds, marketplace, car, real estate and job websites, grouped by country. Search by country or address, filter by region and type. Each address opens in a new tab."
+},
+"ru": {
+"title": "Доски объявлений мира",
+"desc": "Самые известные сайты объявлений, маркетплейсы, автомобили, недвижимость и работа по странам. Ищите по стране или адресу, фильтруйте по региону и типу. Адрес открывается в новой вкладке."
+},
+"uk": {
+"title": "Дошки оголошень світу",
+"desc": "Найвідоміші сайти оголошень, маркетплейси, авто, нерухомість і робота за країнами. Шукайте за країною чи адресою, фільтруйте за регіоном і типом. Адреса відкривається в новій вкладці."
+},
+"pl": {
+"title": "Portale ogłoszeniowe świata",
+"desc": "Najbardziej znane serwisy ogłoszeniowe, sprzedażowe, motoryzacyjne, nieruchomości i pracy według krajów. Szukaj po kraju lub adresie, filtruj według regionu i typu. Adres otwiera się w nowej karcie."
+},
+"lv": {
+"title": "Pasaules sludinājumu portāli",
+"desc": "Pazīstamākās sludinājumu, tirdzniecības, auto, nekustamā īpašuma un darba vietnes pa valstīm. Meklējiet pēc valsts vai adreses, filtrējiet pēc reģiona un veida. Adrese atveras jaunā cilnē."
+},
+"et": {
+"title": "Maailma kuulutuseportaalid",
+"desc": "Tuntuimad kuulutuste-, müügi-, auto-, kinnisvara- ja tööportaalid riikide kaupa. Otsi riigi või aadressi järgi, filtreeri piirkonna ja tüübi järgi. Aadress avaneb uuel vahelehel."
+},
+"fi": {
+"title": "Maailman ilmoitusportaalit",
+"desc": "Tunnetuimmat ilmoitus-, kauppa-, auto-, asunto- ja työpaikkasivustot maittain. Hae maan tai osoitteen mukaan, rajaa alueen ja tyypin mukaan. Osoite avautuu uudessa välilehdessä."
+},
+"sv": {
+"title": "Världens annonssajter",
+"desc": "De mest kända annons-, försäljnings-, bil-, bostads- och jobbsajterna per land. Sök på land eller adress, filtrera på region och typ. Adressen öppnas i en ny flik."
+},
+"de": {
+"title": "Anzeigenportale der Welt",
+"desc": "Die bekanntesten Kleinanzeigen-, Marktplatz-, Auto-, Immobilien- und Jobportale nach Ländern. Suchen Sie nach Land oder Adresse, filtern Sie nach Region und Typ. Die Adresse öffnet sich in einem neuen Tab."
+},
+"fr": {
+"title": "Sites d’annonces du monde",
+"desc": "Les sites d’annonces, places de marché, automobile, immobilier et emploi les plus connus, classés par pays. Recherchez par pays ou adresse, filtrez par région et type. L’adresse s’ouvre dans un nouvel onglet."
+},
+"es": {
+"title": "Portales de anuncios del mundo",
+"desc": "Los sitios de anuncios, marketplaces, coches, inmuebles y empleo más conocidos, por países. Busca por país o dirección, filtra por región y tipo. La dirección se abre en una pestaña nueva."
+},
+"it": {
+"title": "Portali di annunci del mondo",
+"desc": "I siti di annunci, marketplace, auto, immobili e lavoro più noti, divisi per paese. Cerca per paese o indirizzo, filtra per regione e tipo. L’indirizzo si apre in una nuova scheda."
+},
+"pt": {
+"title": "Portais de anúncios do mundo",
+"desc": "Os sites de anúncios, marketplaces, automóveis, imóveis e emprego mais conhecidos, por país. Pesquise por país ou endereço, filtre por região e tipo. O endereço abre em uma nova aba."
+},
+"tr": {
+"title": "Dünyanın ilan siteleri",
+"desc": "En bilinen ilan, pazar yeri, otomobil, emlak ve iş siteleri ülkelere göre. Ülke veya adrese göre arayın, bölge ve türe göre filtreleyin. Adres yeni sekmede açılır."
+},
+"zh": {
+"title": "全球分类信息网站",
+"desc": "按国家整理的知名分类信息、电商平台、汽车、房产和招聘网站。可按国家或网址搜索，并按地区和类型筛选。网址会在新标签页中打开。"
+},
+"ja": {
+"title": "世界のクラシファイドサイト",
+"desc": "国別にまとめた有名な個人売買・マーケットプレイス・自動車・不動産・求人サイト。国名やアドレスで検索し、地域と種類で絞り込めます。アドレスは新しいタブで開きます。"
+}
+};
+export const CLASSIFIEDS_LANGS=Object.keys(CLASSIFIEDS_SEO);

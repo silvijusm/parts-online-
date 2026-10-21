@@ -221,7 +221,8 @@ test("SEO landing pages, index, sitemap and robots", async (t) => {
   for (const p of ["/", "/apie.html", "/verslui.html", "/privatumas.html", "/skelbimai/", "/dalys", "/dalys/starteris"]) {
     assert.ok(sm.includes(`<loc>https://parts-dalys.eu${p}</loc>`), p);
   }
-  assert.equal((sm.match(/<url>/g) || []).length, PARTS.length + 6);
+  assert.equal((sm.match(/<url>/g) || []).length, PARTS.length + 6 + 17);
+  assert.ok(sm.includes("<loc>https://parts-dalys.eu/skelbimai/?lang=en</loc>"));
 
   const robots = await (await fetch(base + "/robots.txt")).text();
   assert.match(robots, /^User-agent: \*$/m);
@@ -276,4 +277,19 @@ test("catalog data loads from /shared/ and every catalog link is an allowed /go 
   assert.equal(go.status, 302);
   go = await fetch(base + "/go?u=" + encodeURIComponent("https://ebay.com") + "&s=ebay.com", { redirect: "manual" });
   assert.match(go.headers.get("location"), /campid=5338000000/);
+});
+
+test("catalog head is rendered per ?lang with hreflang alternates", async (t) => {
+  const { base } = await start(t, { SITE_URL: "https://parts-dalys.eu" });
+  let html = await (await fetch(base + "/skelbimai/?lang=en")).text();
+  assert.match(html, /<html lang="en">/);
+  assert.match(html, /<title>World Classifieds Sites<\/title>/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/parts-dalys\.eu\/skelbimai\/\?lang=en">/);
+  assert.equal((html.match(/hreflang=/g) || []).length, 18);
+  assert.match(html, /hreflang="x-default" href="https:\/\/parts-dalys\.eu\/skelbimai\/"/);
+  assert.equal((html.match(/<title>/g) || []).length, 1);
+  assert.equal((html.match(/name="description"/g) || []).length, 1);
+  html = await (await fetch(base + "/skelbimai/?lang=xx")).text();
+  assert.match(html, /<link rel="canonical" href="https:\/\/parts-dalys\.eu\/skelbimai\/">/);
+  assert.match(html, /<html lang="lt">/);
 });

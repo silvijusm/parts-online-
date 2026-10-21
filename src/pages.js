@@ -1,5 +1,6 @@
 // Server-rendered HTML bits: AdSense tag, SEO landing pages, /dalys index, sitemap, robots.
 import { PARTS, capitalise } from "./shared/seo.js";
+import { CLASSIFIEDS_SEO, CLASSIFIEDS_LANGS } from "./shared/classifieds.js";
 
 export const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
@@ -89,10 +90,28 @@ ${items}
     `${base}/dalys`, body, head);
 }
 
+// /skelbimai/ head for one language (?lang=xx), or the auto-detecting x-default page (lang null):
+// html lang, title, description, canonical and hreflang alternates for every language.
+export function renderClassifiedsPage(html, lang, base) {
+  const root = `${base}/skelbimai/`;
+  const url = lang ? `${root}?lang=${lang}` : root;
+  const m = CLASSIFIEDS_SEO[lang || "lt"];
+  let h = html.replace(/<html lang="[^"]*">/i, `<html lang="${lang || "lt"}">`)
+    .replace(/<title>[\s\S]*?<\/title>/i, () => `<title>${escapeHtml(m.title)}</title>`);
+  h = setTag(h, "meta", "name", "description", "content", m.desc);
+  h = setTag(h, "meta", "property", "og:title", "content", m.title);
+  h = setTag(h, "meta", "property", "og:description", "content", m.desc);
+  h = setTag(h, "meta", "property", "og:url", "content", url);
+  h = setTag(h, "link", "rel", "canonical", "href", url);
+  const alt = CLASSIFIEDS_LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${root}?lang=${l}">`)
+    .concat(`<link rel="alternate" hreflang="x-default" href="${root}">`).join("\n");
+  return injectHead(h, alt + "\n");
+}
+
 const xml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" })[c]);
 
 export function renderSitemap(base) {
-  const paths = ["/", "/apie.html", "/verslui.html", "/privatumas.html", "/skelbimai/", "/dalys", ...PARTS.map((p) => `/dalys/${p.slug}`)];
+  const paths = ["/", "/apie.html", "/verslui.html", "/privatumas.html", "/skelbimai/", ...CLASSIFIEDS_LANGS.map((l) => `/skelbimai/?lang=${l}`), "/dalys", ...PARTS.map((p) => `/dalys/${p.slug}`)];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${paths.map((p) => `  <url><loc>${xml(base + p)}</loc></url>`).join("\n")}
